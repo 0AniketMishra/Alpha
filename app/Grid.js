@@ -12,7 +12,7 @@ const Grid = () => {
             {items.map(item => {
               return(
                 
-                <Link href={ '/items/' + item.id } className="lg:w-1/4 md:w-1/2 p-2 w-full hover:scale-[1.05] transition-all duration-150 ease-out" bis_skin_checked="1">
+                <Link key={id} href={ '/items/' + item.id } className="lg:w-1/4 md:w-1/2 p-2 w-full hover:scale-[1.05] transition-all duration-150 ease-out" bis_skin_checked="1">
                     
                       <img alt="ecommerce" className="object-cover object-center w-full rounded-lg " src="https://dummyimage.com/420x260" />
                  
