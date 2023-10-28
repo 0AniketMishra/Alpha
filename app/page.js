@@ -14,7 +14,7 @@ export default function Home() {
       </Link> */}
       <Header/>
       
-        <div className='container mx-auto px-4 py-4 flex '>
+        <div className='container mx-auto px-4 lg:px-2 py-4 flex '>
 <Sidebar/>
 <Grid/>
       </div>

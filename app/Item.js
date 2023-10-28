@@ -103,12 +103,12 @@ const Item = () => {
                                
                               </div>
                               <div className='flex-row items-center'>
-                              <button class="group relative h-12 w-48 overflow-hidden rounded-xl bg-green-500 text-lg font-bold text-white">
+                              <button class="group relative h-10 w-40 overflow-hidden rounded-xl bg-green-500 text-lg font-bold text-white">
                                   Buy Now
                                   <div class="absolute inset-0 h-full w-full scale-0 rounded-xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                               </button>
                               
-                              <button class="group relative ml-4 h-12 w-48 overflow-hidden rounded-xl bg-yellow-500 text-lg font-bold text-white">
+                              <button class="group relative ml-4 h-10 w-40 overflow-hidden rounded-xl bg-yellow-500 text-lg font-bold text-white">
                                   Add to Cart
                                   <div class="absolute inset-0 h-full w-full scale-0 rounded-xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                               </button>
