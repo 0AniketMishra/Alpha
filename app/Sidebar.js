@@ -2,7 +2,7 @@ import React from 'react'
 
 const Sidebar = () => {
   return (
-      <div className="relative flex flex-col bg-clip-border  bg-transparent text-gray-700  w-[60%] max-w-[14rem] pr-0 pl-2 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
+      <div className="relative hidden lg:flex xl:flex 2xl:flex  flex-col bg-clip-border  bg-transparent text-gray-700  w-[60%] max-w-[14rem] pr-0 pl-2 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
           <div className="mb-2 p-4">
               <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">Shop By Category</h5>
           </div>
