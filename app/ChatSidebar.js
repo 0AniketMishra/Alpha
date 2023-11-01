@@ -2,7 +2,7 @@ import React from 'react'
 
 const ChatSidebar = () => {
   return (
-    <div className='hidden lg:flex 2xl:flex'>
+    <div className='hidden lg:flex 2xl:flex '>
           <div className="h-screen py-4 overflow-y-auto bg-transparent   sm:w-64 w-60 ">
               <h1 className="text-xl font-medium text-gray-800 dark:text-white">Chats</h1>
 
