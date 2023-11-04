@@ -5,9 +5,9 @@ import Chat from '../Chat'
 import Link from "next/link"
 const page = () => {
   return (
-    <div>
+    <div className='scrollbar-hide'>
         <Header/>
-        <div className='container flex mx-auto px-4 lg:px-2 py-4 '>
+        <div className='container flex mx-auto md:px-2 lg:px-4 py-4 '>
             <ChatSidebar/>
             <Chat/>
       </div>

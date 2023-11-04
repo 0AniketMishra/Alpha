@@ -7,7 +7,7 @@ import Grid from './Grid'
 
 export default function Home() {
   return (
-    <main className="h-[100vh]">
+    <main className="">
      <div>
       {/* <Link href="/items">
        Go to items
