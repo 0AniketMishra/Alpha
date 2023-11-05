@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 
-const Item = () => {
-    const des = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa eget egestas purus viverra accumsan in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Turpis massa sed elementum tempus egestas sed sed risus pretium. Dignissim enim sit amet venenatis urna cursus. Habitant morbi tristique senectus et netus et malesuada fames. Viverra adipiscing at in tellus integer feugiat. Vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet. Odio pellentesque diam volutpat commodo sed. Et magnis dis parturient montes nascetur ridiculus mus mauris vitae. Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna. Sed viverra ipsum nunc aliquet bibendum enim. Justo eget magna fermentum iaculis eu non. Adipiscing commodo elit at imperdiet dui accumsan."
+const Item = ({info}) => {
+    
     const [show,setShow] = useState(false)
   return (
     <div>
           <section className="text-white body-font "> 
               <div className="container py-4 px-4 mx-auto" bis_skin_checked="1">
                   <div className="  flex flex-wrap" bis_skin_checked="1">
-                      <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src="https://dummyimage.com/400x400"/>
+                      <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={info.image}/>
                           <div className="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" bis_skin_checked="1">
                               <h2 className="text-sm title-font text-gray-200 tracking-widest">BRAND NAME</h2>
-                          <h1 className="text-white text-3xl title-font font-medium mb-1">Glock 19: Semi-automatic pistol with preinstalled suppresor</h1>
+                          <h1 className="text-white text-3xl title-font font-medium mb-1">{info.title}</h1>
                               <div className="flex mb-4" bis_skin_checked="1">
                                   <span className="flex items-center">
                                       <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
@@ -29,7 +29,7 @@ const Item = () => {
                                       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
                                           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                                       </svg>
-                                      <span className="text-gray-200 ml-3">4 Reviews</span>
+                                      <span className="text-gray-200 ml-3">{info.reviews} Reviews</span>
                                   </span>
                                   <span className="flex ml-4 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                                       <a className="text-white">
@@ -63,13 +63,13 @@ const Item = () => {
                               <div>
                               {show==false &&(
                                 <div>
-                                      <p className="leading-relaxed max-h-40 line-clamp-4 ">{des}</p>
+                                      <p className="leading-relaxed max-h-40 line-clamp-4 ">{info.description}</p>
                                       <p onClick={() => setShow(true)} className="leading-relaxed max-h-40 text-blue-400 ">Read More.</p>
                                 </div>
                               )}
                               {show==true &&(
                                 <div>
-                                      <p className="leading-relaxed ">{des}</p>
+                                      <p className="leading-relaxed ">{info.description}</p>
                                       <p onClick={() => setShow(false)} className="leading-relaxed text-blue-400 ">Read Less.</p>
                                 </div>
                               )}

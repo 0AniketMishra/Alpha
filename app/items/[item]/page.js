@@ -6,12 +6,14 @@ import Reviews from '@/app/Reviews'
 import Seller from '@/app/Seller'
 import React from 'react'
 
-const page = ({params}) => {
-  
+
+const page = ({params, searchParams}) => {
+
+
     return (
     <div>
-        <Header/>
-        <Item/>
+        <Header/>  
+        <Item info={searchParams}/>
         <About/>
         <Seller/>
         <Reviews/>
