@@ -1,6 +1,5 @@
 "use client"
-
-
+import { BeakerIcon, MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 
@@ -9,6 +8,8 @@ const Page = () => {
 
     const [items, setItemss] = useState([{ id: 1, quantity: 1,price: 10 }, { id: 2, quantity: 1, price: 20 }])
     const [price, setPrice] = useState(0)
+    const [discount, setDiscount] = useState(10)
+    const [total, setTotal] = useState()
 
     const increaseQuantity = (id) => {
         setItemss(prev => prev.map(i =>
@@ -26,7 +27,11 @@ const Page = () => {
           sum = sum+item.quantity*item.price
      })
      setPrice(sum)
+
+
     }, [items]);
+
+    
 
     return (
         <div >
@@ -60,17 +65,15 @@ const Page = () => {
                                                         <p class="text-base dark:text-white xl:text-lg leading-6 ">$36.00 <span class="text-red-300 line-through"> $45.00</span></p>
 
                                                         <div onClick={() => increaseQuantity(item.id)}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-
-                                                            </svg>
+                                                            <PlusCircleIcon className='w-6 h-6' />
                                                         </div>
 
                                                         <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{item.quantity}</p>
                                                         <div onClick={() => decreaseQuantity(item.id)}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                            </svg>
+                                                          
+                                                   
+                                                        <MinusCircleIcon className='w-6 h-6'/>
+
                                                         </div>
 
 
@@ -94,7 +97,7 @@ const Page = () => {
                                     </div>
                                     <div class="flex justify-between items-center w-full">
                                         <p class="text-base dark:text-white leading-4 text-gray-800">Discount <span class="bg-gray-200 p-1 text-xs font-medium dark:bg-white dark:text-gray-800 leading-3 text-gray-800">STUDENT</span></p>
-                                        <p class="text-base dark:text-gray-300 leading-4 text-gray-600">-$28.00 (50%)</p>
+                                        <p class="text-base dark:text-gray-300 leading-4 text-gray-600">~{price/100*discount}$ {discount}%</p>
                                     </div>
                                     <div class="flex justify-between items-center w-full ">
                                         <p class="text-base dark:text-white leading-4 text-gray-800">Shipping</p>
@@ -103,7 +106,7 @@ const Page = () => {
                                 </div>
                                 <div class="flex justify-between items-center w-full">
                                     <p class="text-base dark:text-white font-semibold leading-4 text-gray-800">Total</p>
-                                    <p class="text-base dark:text-gray-300 font-semibold leading-4 text-gray-600">10$</p>
+                                    <p class="text-base dark:text-gray-300 font-semibold leading-4 text-gray-600">{price - (price / 100 * discount) + 8}$</p>
                                 </div>
                             </div>
                             <div class="flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full  bg-gray-900 space-y-6 rounded-lg">

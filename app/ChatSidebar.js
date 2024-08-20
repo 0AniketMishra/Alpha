@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 
 const ChatSidebar = () => {
@@ -7,9 +8,7 @@ const ChatSidebar = () => {
                 <div className="flex  items-center">
                     <h1 className="text-xl font-medium  dark:text-white">Chats</h1>
                     <h1 className="w-full"></h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6 ">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
+                    <PlusIcon className='w-7 h-7'/>
 
                 </div>
 
