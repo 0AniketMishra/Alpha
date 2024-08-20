@@ -1,28 +1,53 @@
 import React from 'react'
 
 const ChatSidebar = () => {
-  return (
-    <div className='hidden lg:flex 2xl:flex '>
-          <div className="h-screen py-4 overflow-y-auto bg-transparent   sm:w-64 w-60 ">
-              <h1 className="text-xl font-medium text-gray-800 dark:text-white">Chats</h1>
+    return (
+        <div className='hidden lg:flex 2xl:flex bg-gray-900 h-[calc(100vh-9rem)] p-5 rounded-xl'>
+            <div className="h-screen py-2 overflow-y-auto bg-transparent   sm:w-64 w-60 ">
+                <div className="flex  items-center">
+                    <h1 className="text-xl font-medium  dark:text-white">Chats</h1>
+                    <h1 className="w-full"></h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6 ">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
 
-              <div className="mt-4 space-y-4">
-                  <button className="flex items-center w-full pr-1 pl-1 pt-3 pb-3 hover:bg-gray-600 rounded-md transition-colors duration-200  gap-x-2  focus:outline-none">
-                      <img className="object-cover w-12 h-12 rounded-full" src="https://www.wired.com/images_blogs/underwire/2011/05/dread_pirate_roberts_0.jpg" alt=""/>
+                </div>
 
-                          <div className="text-left rtl:text-right">
-                              <h1 className="text-md font-medium  capitalize text-white">Mr. Dread Pirate Roberts</h1>
+                <div className="mt-4 space-y-3">
+                    <button className="flex items-center w-full   pt-3 pb-3  transition-colors duration-200  gap-x-2  focus:outline-none">
+                        <img className="object-cover w-12 h-12 rounded-full" src="https://th.bing.com/th/id/OIP.FiJdvPQph0OnVlNf8AdKOwAAAA?rs=1&pid=ImgDetMain" alt="" />
 
-                              <p className="text-xs text-gray-500 dark:text-gray-400">The Owner</p>
-                          </div>
-                  </button>
+                        <div className="text-left rtl:text-right">
+                            <h1 className="text-md font-medium  capitalize text-white">Mr. Dread Pirate Roberts</h1>
 
-                 
-              </div>
-          </div>
-    </div>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">The Owner</p>
+                        </div>
+                    </button>
+                    <button className="flex items-center w-full pr-1  pt-3 pb-3 rounded-lg transition-colors duration-200  gap-x-2  focus:outline-none">
+                        <img className="object-cover w-12 h-12 rounded-full" src="https://th.bing.com/th/id/OIP.FiJdvPQph0OnVlNf8AdKOwAAAA?rs=1&pid=ImgDetMain" alt="" />
 
-  )
+                        <div className="text-left rtl:text-right">
+                            <h1 className="text-md font-medium  capitalize text-white">Cartel Dealer</h1>
+
+                            <p className="text-xs text-gray-500 dark:text-gray-400">Seller</p>
+                        </div>
+                    </button>
+                    <button className="flex items-center w-full pr-1  pt-3 pb-3  rounded-lg transition-colors duration-200  gap-x-2  focus:outline-none">
+                        <img className="object-cover w-12 h-12 rounded-full" src="https://th.bing.com/th/id/OIP.FiJdvPQph0OnVlNf8AdKOwAAAA?rs=1&pid=ImgDetMain" alt="" />
+
+                        <div className="text-left rtl:text-right">
+                            <h1 className="text-md font-medium  capitalize text-white">Shadow Trade Support</h1>
+
+                            <p className="text-xs text-gray-500 dark:text-gray-400">Support Team.</p>
+                        </div>
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+
+    )
 }
 
 export default ChatSidebar
