@@ -5,7 +5,10 @@ import Sidebar from './Sidebar'
 import Grid from './Grid'
 
 
+
 export default function Home() {
+
+  
   return (
     <main className="">
      <div>
@@ -13,7 +16,7 @@ export default function Home() {
        Go to items
       </Link> */}
       <Header/>
-      
+           
         <div className='container mx-auto px-4 lg:px-2 py-4 flex '>
 <Sidebar/>
 <Grid/>

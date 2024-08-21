@@ -4,36 +4,23 @@ const Chat = () => {
     const sents = [{ id: 1, message: "Hey, I had a query about the cocaine that you are selling. I hope you people are not running any kind of scam! Though I trust this website but still " }, { id: 2, message: "Is it columbian?" }]
     return (
         <div className='scrollbar-hide'>
-
             <div className='w-full my-4 rounded-xl lg:ml-10 ' >
                 <div className='   mt-6 mx-auto rounded-xl xl:w-[98%] w-[96%] '>
-
                     <div>
-
-
-
                         <div className='flex  p-2  items-center'>
-
                             <div className="flex justify-between w-full ">
-
                                 <div className='flex items-center space-x-2'>
                                     <img src="https://th.bing.com/th/id/OIP.FiJdvPQph0OnVlNf8AdKOwAAAA?rs=1&pid=ImgDetMain" className="w-12 h-12 rounded-full" />
-
                                     <div className=''>
                                         <h1 className=' font-bold '>Mr. Dread Pirate Roberts</h1>
                                         <h1 className=' font-semibold text-sm text-gray-500'>The Owner</h1>
                                     </div>
 
                                 </div>
-
-
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
                                 </svg>
-
                             </div>
-
-
                         </div>
 
                         <div className=" overflow-y-scroll scroll-auto h-[calc(100vh-17rem)] scrollbar-hide ">
