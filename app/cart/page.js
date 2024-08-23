@@ -1,15 +1,18 @@
 "use client"
 import { BeakerIcon, MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/solid'
 import React, { useEffect, useState } from 'react'
-import Header from '../Header'
+import Header from '../components/Header'
+import withAuth from '../protectedRoutes'
+
 
 
 const Page = () => {
-
+    
     const [items, setItemss] = useState([{ id: 1, quantity: 1,price: 10 }, { id: 2, quantity: 1, price: 20 }])
     const [price, setPrice] = useState(0)
     const [discount, setDiscount] = useState(10)
     const [total, setTotal] = useState()
+
 
     const increaseQuantity = (id) => {
         setItemss(prev => prev.map(i =>
@@ -31,7 +34,7 @@ const Page = () => {
 
     }, [items]);
 
-    
+   
 
     return (
         <div >

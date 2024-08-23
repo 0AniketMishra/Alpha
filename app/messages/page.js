@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../Header'
-import ChatSidebar from '../ChatSidebar'
-import Chat from '../Chat'
+import Header from '../components/Header'
+import ChatSidebar from '../components/ChatSidebar'
+import Chat from '../components/Chat'
 import Link from "next/link"
 const page = () => {
   return (

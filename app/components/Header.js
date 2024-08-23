@@ -1,7 +1,16 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Router } from 'next/navigation';
+import { auth } from '@/firebaseConfig';
 
 const Header = () => {
+ 
+
+
+
     return (
         <div>
             <div className="container mx-auto px-4 lg:px-0  py-5 flex items-center">

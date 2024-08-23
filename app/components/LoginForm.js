@@ -3,17 +3,20 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { db, auth } from '@/firebaseConfig';
+import { useRouter } from 'next/navigation';
 
 
 
 function LoginForm() {
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const router = useRouter()
 
     async function login(email,password) {
         try {
             await signInWithEmailAndPassword(auth,email, password)
             console.log("User LoggedIN Successfully")
+            router.push("/")
             return (true)
         } catch (error) {
             console.error(error);

@@ -1,9 +1,9 @@
 "use client"
-import About from '@/app/About'
-import Header from '@/app/Header'
-import Item from '@/app/Item'
-import Reviews from '@/app/Reviews'
-import Seller from '@/app/Seller'
+import About from '@/app/components/About'
+import Header from '@/app/components/Header'
+import Item from '@/app/components/Item'
+import Reviews from '@/app/components/Reviews'
+import Seller from '@/app/components/Seller'
 import React from 'react'
 
 
