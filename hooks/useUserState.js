@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-const useFetch = () => {
+const Fetch = () => {
  
     const [user, loading] = useAuthState(auth);
     const router = useRouter();
@@ -26,4 +26,4 @@ const useFetch = () => {
     return {approval};
 };
 
-export default useFetch;
+export default Fetch;

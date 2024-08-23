@@ -9,11 +9,11 @@ import { auth } from '@/firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useEffect } from 'react'
 
-import useFetch from '../hooks/useUserState'
+import Fetch from '../hooks/useUserState'
 
 export default function Home() {
 
-const approval = useFetch();
+const approval = Fetch();
   
   return (
 
