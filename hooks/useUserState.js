@@ -24,6 +24,6 @@ const Fetch = () => {
 
 
     return {approval};
-};
+};  
 
 export default Fetch;
