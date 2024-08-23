@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useEffect } from 'react'
-import approval from "../hooks/useUserState"
+
 import useFetch from '../hooks/useUserState'
 
 export default function Home() {
