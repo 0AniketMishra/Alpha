@@ -2,6 +2,19 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 
 const ChatSidebar = () => {
+
+    async function logout() {
+        try {
+            await signInWithEmailAndPassword(auth, email, password)
+
+            console.log("User LoggedOUT Successfully")
+            router.push("/login")
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     return (
         <div className='hidden lg:flex 2xl:flex bg-gray-900 h-[calc(100vh-9rem)] p-5 rounded-xl'>
             <div className="h-screen py-2 overflow-y-auto bg-transparent   sm:w-64 w-60 ">

@@ -47,11 +47,11 @@ function SignupForm() {
 
             <div className="mx-auto max-w-screen-xl px-4 py-[15vh] sm:px-6 lg:px-4 flex h-full  w-full" >
 
-                <div className="w-1/2 ">
+                <div className="hidden lg:w-1/2 lg:flex mx-8">
                     <img alt="ecommerce" layout="fill" className=" object-fill w-full h-[30rem] rounded-lg" src="https://quotefancy.com/media/wallpaper/3840x2160/1246546-Colleen-Houck-Quote-Bad-things-sometimes-happen-to-good-people-the.jpg" />
 
                 </div>
-                <div className='mx-16'>
+                <div className='mx-auto'>
 
 
                     <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
@@ -170,7 +170,7 @@ function SignupForm() {
 
                         <div className="flex items-center justify-between">
                             
-                                <Link href="/login" className="mr-auto md:w-48 flex-shrink-0">
+                                <Link href="/login" className="mr-auto w-1/2 flex-shrink-0">
 
                                 <h1 className="underline text-sm text-gray-500">Already Have an account? Login</h1>
                                 </Link>

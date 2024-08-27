@@ -7,33 +7,36 @@ import Grid from './components/Grid'
 import { useRouter } from 'next/navigation'
 import { auth } from '@/firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useEffect } from 'react'
+import LoginForm from './components/LoginForm'
 
-import Fetch from '../hooks/useUserState'
 
-export default function Home() {
 
-const approval = Fetch();
+const Home = () => {
+
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+
+  
+  if (!user && !loading) 
+    router.push("/login")
   
   return (
 
-    
-    <div>
-
-   {approval ==2 ? (
-      <div>
+<div>
+      {!loading && user? (
+        <div>
           <Header />
 
           <div className='container mx-auto px-4 lg:px-2 py-4 flex '>
             <Sidebar />
             <Grid />
           </div>
-      </div>
-   ):(
-    <h1>Loading....</h1>
-   )}
-    </div>
- 
-   
+        </div>
+      ):(
+      <div>loading...</div>
+)}
+</div>
   )
 }
+
+export default Home

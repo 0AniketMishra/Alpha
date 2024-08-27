@@ -1,7 +1,12 @@
 import React from 'react'
+import { db, auth } from '@/firebaseConfig';
+import { signOut } from 'firebase/auth';
 
 const Sidebar = () => {
-    return (
+    async function logout() {
+   await  signOut(auth)
+    }
+     return (
         <div className="relative hidden lg:flex xl:flex 2xl:flex  flex-col bg-clip-border  text-gray-700  w-[60%] max-w-[16rem] pr-0 pl-1 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
             <div className="mb-2 p-2">
                 <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">Shop By Category</h5>
@@ -48,7 +53,7 @@ const Sidebar = () => {
 
                     </div>Settings
                 </div>
-                <div role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
+                <div onClick={() => logout()} role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
                     <div className="grid place-items-center mr-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

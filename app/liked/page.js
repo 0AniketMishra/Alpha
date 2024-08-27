@@ -2,18 +2,26 @@
 import React from 'react'
 import Header from '../components/Header'
 import Link from 'next/link'
-import Fetch from '@/hooks/useUserState'
+
+import { useRouter } from 'next/navigation'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '@/firebaseConfig'
 
 
 const page = () => {
   const items = [{ id: 1 }, { id: 2 }, { id: 3 }]
 
-  const approval = Fetch();
+  const [user, loading] = useAuthStatee(auth);
+  const router = useRouter();
+
+
+  if (!user && !loading)
+    router.push("/login")
   
   return (
     
    <div>
-    {approval == 2?(
+    {!loading && user?(
         <div>
           <Header />
           <div className="container px-5 pt-3 mx-auto" bis_skin_checked="1">
