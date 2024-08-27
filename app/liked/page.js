@@ -11,7 +11,7 @@ import { auth } from '@/firebaseConfig'
 const page = () => {
   const items = [{ id: 1 }, { id: 2 }, { id: 3 }]
 
-  const [user, loading] = useAuthStatee(auth);
+  const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
 
