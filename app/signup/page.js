@@ -5,6 +5,7 @@ import SignupForm from '../components/SignupForm'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebaseConfig';
 import { useRouter } from 'next/navigation';
+import Loading from '../components/Loading';
 
 function Page() {
   const [user, loading] = useAuthState(auth);
@@ -21,7 +22,7 @@ function Page() {
             <Header />
             <SignupForm />
           </div>
-        ) : (<div>Loading....</div>)}
+        ) : (<Loading/>)}
     </div>
   )
 }

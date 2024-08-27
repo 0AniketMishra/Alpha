@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebaseConfig'
+import Loading from '../components/Loading'
 
 
 const Page = () => {
@@ -50,7 +51,7 @@ const Page = () => {
           </div>
         </div>
     ):(
-      <div>Loading...</div>
+      <Loading/>
     )}
    </div>
   )

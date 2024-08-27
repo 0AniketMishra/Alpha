@@ -5,6 +5,7 @@ import LoginForm from '../components/LoginForm'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebaseConfig';
 import { useRouter } from 'next/navigation';
+import Loading from '../components/Loading';
 
 
 function Page() {
@@ -23,7 +24,7 @@ function Page() {
         <Header />
         <LoginForm/>
         </div>
-      ):(<div>Loading....</div>)}
+      ):(<Loading/>)}
     </div>
   )
 }

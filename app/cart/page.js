@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import { useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebaseConfig'
+import Loading from '../components/Loading'
 
 
 
@@ -186,7 +187,7 @@ const Page = () => {
                     </div>
                 </div>
         ):(
-<div>Loading...</div>
+    <Loading/>
         )}
        </div>
     )

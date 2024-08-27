@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginForm from './components/LoginForm'
+import Loading from './components/Loading'
 
 
 
@@ -33,7 +34,7 @@ const Home = () => {
           </div>
         </div>
       ):(
-      <div>loading...</div>
+          <Loading/>
 )}
 </div>
   )
