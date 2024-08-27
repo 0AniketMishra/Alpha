@@ -6,7 +6,7 @@ const Item = ({info}) => {
   return (
     <div>
           <section className="text-white body-font "> 
-              <div className="container py-4 px-4 mx-auto" bis_skin_checked="1">
+              <div className="container py-10 px-4 mx-auto" bis_skin_checked="1">
                   <div className="  flex flex-wrap" bis_skin_checked="1">
                       <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={info.image}/>
                           <div className="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" bis_skin_checked="1">
@@ -103,9 +103,9 @@ const Item = ({info}) => {
                                
                               </div>
                               <div className='flex-row items-center'>
-                              <button class="group relative h-10 w-40 overflow-hidden rounded-xl bg-green-500 text-lg font-bold text-white">
+                              <button class="group relative h-10 w-40 overflow-hidden rounded-lg bg-green-500 text-lg font-bold text-white">
                                   Buy Now
-                                  <div class="absolute inset-0 h-full w-full scale-0 rounded-xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
+                                  <div class="absolute inset-0 h-full w-full scale-0 rounded-lg transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30"></div>
                               </button>
                               
                               <button class="group relative ml-4 h-10 w-40 overflow-hidden rounded-xl bg-yellow-500 text-lg font-bold text-white">
