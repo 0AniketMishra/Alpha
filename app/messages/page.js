@@ -9,7 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebaseConfig'
 
 
-const page = () => {
+const Page = () => {
   
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
@@ -36,4 +36,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
