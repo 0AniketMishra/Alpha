@@ -50,7 +50,7 @@ const Page = () => {
         {!loading && user ?(
                 <div >
                     <Header />
-                    <div className='container mx-auto px-5 lg:px-2 py-4 flex'>
+                    <div className='container mx-auto max-w-custom px-5 lg:px-2 py-16 flex'>
 
                         <div class="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                             <div class="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">

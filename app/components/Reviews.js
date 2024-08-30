@@ -6,7 +6,7 @@ const Reviews = () => {
     <div>
           <section className="text-gray-600 body-font overflow-hidden">
              
-              <div className="container px-5 py-10 mx-auto" bis_skin_checked="1">
+              <div className="container px-5 py-10 max-w-custom mx-auto" bis_skin_checked="1">
                   <div className="flex flex-col  w-full mb-10" bis_skin_checked="1">
                       <h2 className="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">ROOF PARTY POLAROID</h2>
                       <h1 className="sm:text-3xl text-2xl font-medium title-font text-white">Reviews By Customers</h1>

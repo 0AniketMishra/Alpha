@@ -7,9 +7,10 @@ module.exports = {
   ],
  
   theme: {
+    
     extend: {
-      aspectRatio: {
-        '16/9': '16 / 9', // Customize your aspect ratios here
+      maxWidth: {
+        'custom': '110rem', // Example custom width
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

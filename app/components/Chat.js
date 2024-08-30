@@ -3,8 +3,8 @@ import React from 'react'
 const Chat = () => {
     const sents = [{ id: 1, message: "Hey, I had a query about the cocaine that you are selling. I hope you people are not running any kind of scam! Though I trust this website but still " }, { id: 2, message: "Is it columbian?" }]
     return (
-        <div className='scrollbar-hide'>
-            <div className='w-full my-4 rounded-xl lg:ml-10 ' >
+        <div className='scrollbar-hide w-full'>
+            <div className=' mt-4 rounded-xl lg:ml-10 ' >
                 <div className='   mt-6 mx-auto rounded-xl xl:w-[98%] w-[96%] '>
                     <div>
                         <div className='flex  p-2  items-center'>

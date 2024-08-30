@@ -6,7 +6,7 @@ const Item = ({info}) => {
   return (
     <div>
           <section className="text-white body-font "> 
-              <div className="container py-10 px-4 mx-auto" bis_skin_checked="1">
+              <div className="container max-w-custom pt-32 px-4 mx-auto" bis_skin_checked="1">
                   <div className="  flex flex-wrap" bis_skin_checked="1">
                       <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={info.image}/>
                           <div className="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" bis_skin_checked="1">

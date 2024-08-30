@@ -12,6 +12,7 @@ import Loading from './components/Loading'
 
 
 
+
 const Home = () => {
 
   const [user, loading] = useAuthState(auth);
@@ -28,8 +29,8 @@ const Home = () => {
         <div>
           <Header />
 
-          <div className='container mx-auto px-4 lg:px-2 py-4 flex '>
-            <Sidebar />
+          <div className='container mx-auto max-w-custom px-4 lg:px-2 py-8 flex '>
+            <Sidebar/>
             <Grid />
           </div>
         </div>

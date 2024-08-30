@@ -12,8 +12,8 @@ const Header = () => {
 
 
     return (
-        <div>
-            <div className="container mx-auto px-4 lg:px-0  py-5 flex items-center">
+        <div className='mr-3 z-10 fixed w-full bg-black py-4'>
+            <div className="container mx-auto max-w-custom   px-4 lg:px-0   flex items-center">
 
 
                 <Link href="/" className="mr-auto md:w-48 flex-shrink-0">
@@ -68,13 +68,13 @@ const Header = () => {
                 </nav>
 
 
-                <Link href="/cart" className="ml-4 hidden sm:flex flex-col font-bold">
+                <Link href="/cart" className="ml-4 mr-4 hidden sm:flex flex-col font-bold">
                     <span className="text-xs text-gray-400">Your Cart</span>
                     <span>$2,650,59</span>
                 </Link>
             </div>
-            <div className="mx-auto w-[92%] flex 2xl:max-w-2xl bg-gray-900 rounded-md lg:hidden 2xl:hidden md:hidden items-center">
-                <select className="bg-transparent  uppercase font-bold text-sm p-3 mr-2 text-white" name="" id="">
+            <div className="mx-auto mt-4 w-[92%] flex 2xl:max-w-2xl bg-gray-900 rounded-md lg:hidden 2xl:hidden md:hidden items-center">
+                <select className="bg-transparent w-[30%] uppercase font-bold text-sm p-3 mr-2 text-white" name="" id="">
                     <option >all</option>
                     <option >narcotics</option>
                 </select>

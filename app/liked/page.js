@@ -25,7 +25,7 @@ const Page = () => {
     {!loading && user?(
         <div>
           <Header />
-          <div className="container px-5 pt-3 mx-auto" bis_skin_checked="1">
+          <div className="container px-5 pt-3 mx-auto max-w-custom" bis_skin_checked="1">
             <h1 className='text-white text-xl uppercase font-bold mb-6 mr-4' >Liked Items</h1>
             <div className="flex flex-wrap -m-4" bis_skin_checked="1">
               {items.map(item => {

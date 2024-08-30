@@ -4,7 +4,7 @@ const Seller = () => {
   return (
     <div>
           <section className="text-gray-600 body-font">
-              <div className="container px-5 py-10 mx-auto" bis_skin_checked="1">
+              <div className="container max-w-custom px-5 py-10 mx-auto" bis_skin_checked="1">
                   <div className=" mb-10" bis_skin_checked="1">
                     <div className='flex items-center mb-2'>
                           <h1 className="sm:text-3xl text-2xl font-medium  title-font text-white ">Sold By</h1>
