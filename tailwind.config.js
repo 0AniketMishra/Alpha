@@ -9,6 +9,20 @@ module.exports = {
   theme: {
     
     extend: {
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideOut: {
+          '100%': { transform: 'translateX(-100%)' },
+          '0%': { transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        slideIn: 'slideIn 0.2s ease-out forwards',
+        slideOut: 'slideOut 0.2s ease-out forwards',
+      },
       maxWidth: {
         'custom': '110rem', // Example custom width
       },
