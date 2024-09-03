@@ -12,10 +12,10 @@ function LoginForm() {
     const [email, setEmail] = useState("")
     const router = useRouter()
 
-    async function login(email,password) {
+    async function login(email, password) {
         try {
-            await signInWithEmailAndPassword(auth,email, password)
-             
+            await signInWithEmailAndPassword(auth, email, password)
+
             console.log("User LoggedIN Successfully")
             router.push("/")
             return (true)
@@ -26,9 +26,9 @@ function LoginForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const added = await login(email,password)
+        const added = await login(email, password)
         if (added) {
-        
+
             setPassword("")
             setEmail("")
         }
@@ -37,17 +37,15 @@ function LoginForm() {
 
 
     return (
-       <div>
-       
+        <div>
+
 
             <div className="mx-auto max-w-screen-xl px-4 py-[15vh] sm:px-6 lg:px-4 flex h-full  w-full" >
-                       
                 <div className="hidden lg:w-1/2 lg:flex mx-8">
                     <img alt="ecommerce" layout="fill" className=" object-fill w-full h-[30rem] rounded-lg" src="https://quotefancy.com/media/wallpaper/3840x2160/1246546-Colleen-Houck-Quote-Bad-things-sometimes-happen-to-good-people-the.jpg" />
-
-</div>
+                </div>
                 <div className=' mx-auto' >
-                  
+
 
                     <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
                         <div className="  max-w-lg ">
@@ -127,13 +125,13 @@ function LoginForm() {
                         </div>
 
                         <div className="flex items-center justify-between">
-                           
-                                
-                                <Link href="/signup" className="mr-auto md:w-48 flex-shrink-0">
-                                   
+
+
+                            <Link href="/signup" className="mr-auto md:w-48 flex-shrink-0">
+
                                 <h1 className="underline text-sm text-gray-500">No account?Sign Up</h1>
-                                </Link>
-                            
+                            </Link>
+
 
                             <button
                                 type="submit"
@@ -146,7 +144,7 @@ function LoginForm() {
                     </form>
                 </div>
             </div>
-       </div>
+        </div>
     )
 }
 

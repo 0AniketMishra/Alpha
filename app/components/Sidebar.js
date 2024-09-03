@@ -8,7 +8,7 @@ const Sidebar = () => {
    await  signOut(auth)
     }
      return (
-        <div className="fixed bg-black top-20 h-full hidden lg:flex xl:flex 2xl:flex  flex-col bg-clip-border  text-gray-700  w-[60%] max-w-[18rem] pr-0 pl-1 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
+        <div className="fixed bg-black  top-20 h-full hidden lg:flex xl:flex 2xl:flex  flex-col bg-clip-border  text-gray-700  w-[60%] max-w-[18rem] pr-0 pl-1 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
             <div className="mb-2 p-2">
                 {/* <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">Shop By Category</h5> */}
             </div>
