@@ -18,7 +18,7 @@ function BecomeSeller() {
 
                           
                     
-                      <p className="mb-8 leading-relaxed">Join our vibrant marketplace and turn your passion into profit. Whether you're a seasoned entrepreneur or just starting out, we provide the tools, support, and community you need to grow your business. Start selling today and reach a global audience eager to discover what you have to offer!</p>
+                      <p className="mb-8 leading-relaxed">Join our vibrant marketplace and turn your passion into profit. Whether you are a seasoned entrepreneur or just starting out, we provide the tools, support, and community you need to grow your business. Start selling today and reach a global audience eager to discover what you have to offer!</p>
                       <div className="" bis_skin_checked="1">
                           <button class="group relative h-10 px-5 overflow-hidden rounded-lg bg-green-600 text-lg font-bold text-white">
                               Become a seller
