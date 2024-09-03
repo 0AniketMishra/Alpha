@@ -1,28 +1,39 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Router } from 'next/navigation';
 import { auth } from '@/firebaseConfig';
+import Sidebar from './Sidebar';
+import Sidebarsm from './Sidebarsm';
 
 const Header = () => {
  
 
-
+const [sidebar,setSidebar] = useState(false)
 
     return (
         <div className='mr-3 z-10 fixed w-full bg-black py-4'>
             <div className="container mx-auto max-w-custom   px-4 lg:px-0   flex items-center">
 
 
-                <Link href="/" className="mr-auto md:w-48 flex-shrink-0">
+                <div className="mr-auto md:w-48 flex-shrink-0">
                     <div class="flex title-font font-medium items-center text-gray-900 mb-0 ">
-                       
-                        <span class="ml-3 text-xl text-white">Shadow Trade</span>
-                    </div>
-                </Link>
+                        <div onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} className='lg:hidden'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
 
+                        </div>
+                        <span class="ml-3 text-xl text-white">Shadow Trade</span>
+                        
+                    </div>
+                </div>
+
+              {sidebar &&(
+                    <Sidebarsm/>
+              )}
 
                 <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-gray-900 rounded-md hidden md:flex xl:flex items-center">
                     <select className="bg-transparent  uppercase font-bold text-sm p-3 mr-2 text-white" name="" id="">
