@@ -16,8 +16,8 @@ const ChatSidebar = () => {
 
 
     return (
-        <div className='hidden w-[25%] lg:flex 2xl:flex bg-gray-900 h-[calc(100vh-9rem)] p-5  rounded-xl'>
-            <div className="  h-screen py-2 overflow-y-auto bg-transparent w-full ">
+        <div className='hidden w-[25%] lg:flex 2xl:flex bg-gray-900  p-5  rounded-xl'>
+            <div className="  py-2 overflow-y-auto bg-transparent w-full ">
                 <div className="flex  items-center">
                     <h1 className="text-xl font-medium  dark:text-white">Chats</h1>
                     <h1 className="w-full"></h1>

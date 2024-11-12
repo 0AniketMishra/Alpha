@@ -1,25 +1,85 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image';
+import ProductCard from './ProductCard';
 
 
 
 const Grid = () => {
     const dummy = "This is dummy Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa eget egestas purus viverra accumsan in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Turpis massa sed elementum tempus egestas sed sed risus pretium. Dignissim enim sit amet venenatis urna cursus. Habitant morbi tristique senectus et netus et malesuada fames. Viverra adipiscing at in tellus integer feugiat. Vestibulum morbi blandit cursus risus at ultrices mi tempus imperdiet."
 
-    const items = [
-        { id: 1, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://picsum.photos/300/200', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "Arms and Ammunation" },
-        // { id: 2, title: "Account Based Hacking Services: Google,Facebook,Instagram etc(Only Username Required)", category: "SErvices", image: 'https://wallpaperaccess.com/full/5673721.jpg', price: "$240", reviews: 5, sellerName: 'The Hackers', sellerId: 'None', description: "" },
-        // { id: 1, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://images.unsplash.com/photo-1544473244-f6895e69ad8b', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        // { id: 2, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://images.unsplash.com/photo-1544473244-f6895e69ad8b', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        { id: 4, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://picsum.photos/300/200', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        { id: 3, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://picsum.photos/300/200', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        { id: 5, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://picsum.photos/300/200', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        { id: 6, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://picsum.photos/300/200', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        { id: 7, title: "Glock 19: Semi-automatic pistol with preinstalled suppresor", image: 'https://picsum.photos/300/200', price: "$400", reviews: 5, sellerName: 'The Smuglers', sellerId: 'None', description: dummy, category: "DUMMY" },
-        
+  
 
-    ]
+
+
+    const featuredProducts = [
+        {
+            id: 1,
+            title: "Premium Wireless Headphones",
+            price: 299.99,
+            sellerId: "@Assasin123",
+            sellerName: "The Assasin",
+            rating: 4,
+            reviews: 128,
+            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+            description: "High-quality wireless headphones with noise cancellation and premium sound quality.",
+            stock: 8,
+            badge: "limited"
+        },
+        {
+            id: 6,
+            title: "Premium Wireless Headphones",
+            price: 299.99,
+            sellerId: "@Assasin123",
+            sellerName: "The Assasin",
+            rating: 4,
+            reviews: 128,
+            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+            description: "High-quality wireless headphones with noise cancellation and premium sound quality.",
+            stock: 8,
+            badge: "limited"
+        },
+
+        {
+            id: 2,
+            title: "Smart Watch Series 5",
+            price: 399.99,
+            sellerId: "@Assasin123",
+            sellerName: "The Assasin",
+            rating: 5,
+            reviews: 256,
+            image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
+            description: "Latest smartwatch with advanced health monitoring and fitness tracking features.",
+            stock: 15,
+            badge: "new"
+        },
+        {
+            id: 3,
+            title: "Designer Backpack",
+            price: 79.99,
+            sellerId: "@Assasin123",
+            sellerName: "The Assasin",
+            rating: 4,
+            reviews: 89,
+            image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+            description: "Stylish and durable backpack perfect for everyday use and travel.",
+            stock: 20,
+            badge: "sale"
+        },
+        {
+            id: 4,
+            title: "Premium Sunglasses",
+            price: 159.99,
+            rating: 5,
+            reviews: 167,
+            sellerId: "@Assasin123",
+            sellerName: "The Assasin",
+            image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+            description: "Designer sunglasses with UV protection and polarized lenses.",
+            stock: 12,
+            badge: "new"
+        }
+    ];
     return (
         <div>
             <section className="text-gray-600 body-font pt-2 pb-4 lg:ml-[18rem] mt-24 lg:mt-16 2xl:mt-16 " >
@@ -27,39 +87,28 @@ const Grid = () => {
                     <h1 className='text-white text-xl uppercase font-bold mb-8 mr-0 ml-0'>Available Items</h1>
                     <div className="flex flex-wrap -m-2" bis_skin_checked="1">
 
-                        {items.map(item => {
-                            return (
+                       
 
-                                <Link key={item.id} href={{ pathname: '/items/' + item.id, query: { title: item.title, id: item.id, image: item.image, price: item.price, reviews: item.reviews, sellerName: item.sellerName, sellerId: item.sellerId, description: item.description, } }}
-                                    className="lg:w-1/4   rounded-lg md:w-1/2 p-2 w-full hover:scale-[1.01] transition-all duration-150 ease-out" bis_skin_checked="1">
+                                
 
                                     
-                                    <Image
-                                        src={item.image}
-                                        alt="Description"
-                                        width={450}
-                                        height={300}
-                                        className="rounded-lg"
-                                    />
+                            {featuredProducts.map((product) => (
+                                    <div className='lg:w-1/4   rounded-lg md:w-1/2 p-2 w-full '>
+                                    <Link href={{ pathname: '/items/' + product.id, query: { title: product.title, id: product.id, image: product.image, price: product.price, reviews: product.reviews, sellerName: product.sellerName, sellerId: product.sellerId, description: product.description, } }} >
 
-                                    <div className="mt-4" bis_skin_checked="1">
-                                        {/* <h3 className="text-gray-200 text-xs uppercase tracking-widest title-font mb-1">{item.category}</h3> */}
-                                        <div className="flex items-baseline mb-2">
-                                            <span className="inline-block bg-teal-200 text-teal-800 py-1 px-2 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-                                            <div className="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-                                                3 beds &bull; 2 baths
-                                            </div>
-                                        </div>
-                                        <h2 className="text-white title-font text-md font-medium mb-1 ">{item.title}</h2>
-                                 
-                                        <span className='text-blue-400'>{item.price}</span>
+                                        <ProductCard
+                                            key={product.id}
+                                            {...product}
+                                        />
+                                    </Link>
+
                                     </div>
+                            ))}
 
                                   
-                                </Link>
-                            )
-                        })}
-
+                                
+                    
+                    
 
 
                     </div>

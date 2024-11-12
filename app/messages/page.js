@@ -23,7 +23,7 @@ const Page = () => {
   return (
    <div>
     {!loading && user ? (
-      <div className='scrollbar-hide'>
+      <div className='scrollbar-hide h-screen'>
         <Header />
           <div className='container mx-auto max-w-custom flex md:px-2 lg:px-4 pt-24'>
           <ChatSidebar />

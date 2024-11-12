@@ -9,6 +9,7 @@ import { auth } from '@/firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginForm from './components/LoginForm'
 import Loading from './components/Loading'
+import Hero from './components/Hero'
 
 
 
@@ -25,18 +26,9 @@ const Home = () => {
   return (
 
 <div>
-      {!loading && user? (
-        <div>
-          <Header />
 
-          <div className='container mx-auto max-w-custom px-4 lg:px-2 py-8 flex '>
-            <Sidebar/>
-            <Grid />
-          </div>
-        </div>
-      ):(
-          <Loading/>
-)}
+    <Header/>
+<Hero/>
 </div>
   )
 }

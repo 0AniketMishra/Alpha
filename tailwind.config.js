@@ -31,6 +31,9 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      aspectRatio: {
+        '16/10': '16 / 11',
+      },
     },
   },
   plugins: [
