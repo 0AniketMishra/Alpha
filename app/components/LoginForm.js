@@ -28,7 +28,7 @@ function LoginForm() {
 
     async function login(username, password) {
         try {
-            const response = await fetch('https://alpha-backend-v7bb.vercel.app//login', {
+            const response = await fetch('https://alpha-backend-v7bb.vercel.app/login', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
                  credentials: 'include' 
