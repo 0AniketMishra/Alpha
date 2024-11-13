@@ -1,7 +1,6 @@
 "use client"
-import { signInWithEmailAndPassword } from 'firebase/auth'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { db, auth } from '@/firebaseConfig';
 import { useRouter } from 'next/navigation';
 
@@ -9,28 +8,47 @@ import { useRouter } from 'next/navigation';
 
 function LoginForm() {
     const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
+    const [username, setusername] = useState("")
     const router = useRouter()
 
-    async function login(email, password) {
+
+    const [token, setToken] = useState(null);
+
+
+
+
+
+  
+    
+
+
+  
+
+
+
+    async function login(username, password) {
         try {
-            await signInWithEmailAndPassword(auth, email, password)
-
-            console.log("User LoggedIN Successfully")
-            router.push("/")
-            return (true)
-        } catch (error) {
-            console.error(error);
+            const response = await fetch('https://alpha-backend-v7bb.vercel.app//login', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+                 credentials: 'include' 
+                });
+            console.log('Login successful:', response.data);
+                  const data = await response.json();
+                   console.log('Login successful:', data); 
+             } catch (error) {
+                 console.error('Error:', error);
+         }
         }
-    }
-
+    
+    
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const added = await login(email, password)
+        const added = await login(username, password)
         if (added) {
-
             setPassword("")
-            setEmail("")
+            setusername("")
         }
     }
 
@@ -57,15 +75,15 @@ function LoginForm() {
                             </p>
                         </div>
                         <div>
-                            <label htmlFor="email" className="sr-only">Email</label>
+                            <label  className="sr-only">Username</label>
 
                             <div className="relative">
                                 <input
-                                    type="email"
+                                    type="username"
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-black outline-none shadow-sm"
-                                    placeholder="Enter email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Enter username"
+                                    value={username}
+                                    onChange={(e) => setusername(e.target.value)}
                                 />
 
                                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">

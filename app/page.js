@@ -10,18 +10,23 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginForm from './components/LoginForm'
 import Loading from './components/Loading'
 import Hero from './components/Hero'
+import { useEffect, useState } from 'react'
 
 
 
 
 const Home = () => {
 
-  const [user, loading] = useAuthState(auth);
+  
   const router = useRouter();
 
-  
-  if (!user && !loading) 
-    router.push("/login")
+  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(null)
+
+
+
+
+
   
   return (
 

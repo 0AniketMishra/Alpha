@@ -16,11 +16,32 @@ const Page = () => {
     const [price, setPrice] = useState(0)
     const [discount, setDiscount] = useState(10)
     const [total, setTotal] = useState()
-    const [user, loading] = useAuthState(auth);
+    
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(null)
 
 
-    if (!user && !loading)
+    useEffect(() => { // Function to get JWT from cookies 
+
+        const getTokenFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const jwtCookie = cookies.find(cookie =>
+                cookie.startsWith('jwt='));
+            if (jwtCookie) {
+                return jwtCookie.split('=')[1];
+            } return null;
+        };
+        const jwtToken = getTokenFromCookie();
+        setToken(jwtToken)
+       
+        setLoading(false)
+    },[]);
+
+
+
+
+    if (!token && !loading)
         router.push("/login")
 
     const increaseQuantity = (id) => {
@@ -47,7 +68,7 @@ const Page = () => {
 
     return (
        <div>
-        {!loading && user ?(
+        {!loading && token ?(
                 <div >
                     <Header />
                     <div className='container mx-auto max-w-custom px-5 lg:px-2 py-16 flex'>

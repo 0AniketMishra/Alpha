@@ -11,21 +11,42 @@ import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import Grid from '../components/Grid'
 import Loading from '../components/Loading'
+import { useEffect, useState } from 'react'
 
 function page() {
 
-    const [user, loading] = useAuthState(auth);
+ 
     const router = useRouter();
 
+    const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState(null)
 
-    if (!user && !loading)
+
+    useEffect(() => { // Function to get JWT from cookies 
+
+        const getTokenFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const jwtCookie = cookies.find(cookie =>
+                cookie.startsWith('jwt='));
+            if (jwtCookie) {
+                return jwtCookie.split('=')[1];
+            } return null;
+        };
+        const jwtToken = getTokenFromCookie();
+        setToken(jwtToken)
+        setLoading(false);
+    
+    });
+
+
+    if (!token && !loading)
         router.push("/login")
 
 
   return (
     <div>
           <div>
-              {!loading && user ? (
+              {!loading && token ? (
                   <div>
                       <Header />
 

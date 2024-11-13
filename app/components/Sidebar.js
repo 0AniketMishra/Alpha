@@ -4,8 +4,8 @@ import { signOut } from 'firebase/auth';
 import Link from 'next/link';
 
 const Sidebar = () => {
-    async function logout() {
-   await  signOut(auth)
+    function logout() {
+         document.cookie = 'jwt=; Max-Age=0; path=/'; 
     }
      return (
         <div className="fixed bg-black  top-20 h-full hidden lg:flex xl:flex 2xl:flex  flex-col bg-clip-border  text-gray-700  w-[60%] max-w-[18rem] pr-0 pl-1 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
