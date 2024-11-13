@@ -13,7 +13,7 @@ import Grid from '../components/Grid'
 import Loading from '../components/Loading'
 import { useEffect, useState } from 'react'
 
-function page() {
+function Page() {
 
  
     const router = useRouter();
@@ -64,4 +64,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
