@@ -1,5 +1,5 @@
 "use client"
-import { BeakerIcon, MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/solid'
+
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { useRouter } from 'next/navigation'
@@ -15,12 +15,14 @@ const Page = () => {
     const [items, setItemss] = useState([{ id: 1, quantity: 1,price: 10 }, { id: 2, quantity: 1, price: 20 }])
     const [price, setPrice] = useState(0)
     const [discount, setDiscount] = useState(10)
-    const [total, setTotal] = useState()
+    
     
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null)
 
+
+   
 
     useEffect(() => { // Function to get JWT from cookies 
 
@@ -65,146 +67,283 @@ const Page = () => {
     }, [items]);
 
    
+    const cartItems = [
+        {
+            id: 1,
+            title: "Premium Wireless Headphones",
+            price: 299.99,
+            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+            quantity: 1,
+            color: "Black",
+            size: "Standard"
+        },
+        {
+            id: 2,
+            title: "Smart Watch Series 5",
+            price: 399.99,
+            image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
+            quantity: 1,
+            color: "Silver",
+            size: "44mm"
+        }
+    ];
+
+    const userDetails = {
+        name: "John Doe",
+        email: "john.doe@example.com",
+        phone: "+1 (555) 123-4567",
+        address: {
+            street: "123 Main St",
+            city: "San Francisco",
+            state: "CA",
+            zip: "94105",
+            country: "United States"
+        },
+        purchaseHistory: {
+            totalOrders: 15,
+            totalSpent: 2499.99,
+            memberSince: "January 2023",
+            status: "Gold Member"
+        }
+    };
+
+    const deliveryOptions = [
+        {
+            id: 'standard',
+            name: 'Standard Delivery',
+            price: 9.99,
+            duration: '3-5 business days',
+            description: 'Delivered by our trusted shipping partners'
+        },
+        {
+            id: 'express',
+            name: 'Express Delivery',
+            price: 19.99,
+            duration: '1-2 business days',
+            description: 'Fast delivery for urgent orders'
+        },
+        {
+            id: 'same-day',
+            name: 'Same Day Delivery',
+            price: 29.99,
+            duration: 'Today',
+            description: 'Available for select locations'
+        }
+    ];
+
+
+    const [selectedDelivery, setSelectedDelivery] = useState(deliveryOptions[0]);
+    const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const tax = subtotal * 0.1;
+    const total = subtotal + selectedDelivery.price + tax;
+
+    const estimatedDelivery = new Date();
+    estimatedDelivery.setDate(estimatedDelivery.getDate() + 3);
+
 
     return (
        <div>
         {!loading && token ?(
-                <div >
+                <div>
                     <Header />
-                    <div className='container mx-auto max-w-custom px-5 lg:px-2 py-16 flex'>
+                    <div className="pt-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                        <div className="flex items-center justify-between mb-8">
+                            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shopping Cart</h1>
+                            <div className="text-sm text-gray-500">
+                                <span className="font-medium text-indigo-600">{cartItems.length} items</span> in your cart
+                            </div>
+                        </div>
 
-                        <div class="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
-                            <div class="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
-                                <div class="flex flex-col justify-start items-start bg-gray-900  px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full rounded-lg">
-                                    <p class="text-lg md:text-xl dark:text-white font-semibold leading-6 xl:leading-5 text-gray-800">Customer’s Cart</p>
+                        <div className="flex flex-col lg:flex-row gap-8">
+                            <div className="flex-1 space-y-8">
+                                {/* Cart Items */}
+                                <div className="bg-white dark:bg-def rounded-lg shadow">
+                                    <div className="p-6 space-y-6">
+                                        {cartItems.map(item => (
+                                           <div>
+                                             <div key={item.id} className="flex items-center gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.title}
+                                                    className="w-24 h-24 object-cover rounded-lg"
+                                                />
 
-                                    {items.map(item => {
-                                        return (
-                                            <div key={item.id}>
-                                                {item.quantity > 0 && (
-                                                    <div key={item.id} class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
-                                                        <div class="pb-4 md:pb-8">
-                                                            <img class="w-60 h-30 rounded-lg" src="https://images.unsplash.com/photo-1544473244-f6895e69ad8b" alt="dress" />
-
-                                                        </div>
-                                                        <div class="md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
-                                                            <div class="w-full flex flex-col justify-start items-start space-y-8">
-                                                                <h3 class="text-xl dark:text-white xl:text-2xl font-semibold leading-6 text-gray-800">Glock 19: Semi-automatic pistol with preinstalled suppresor</h3>
-                                                                <div class="flex justify-start items-start flex-col space-y-2">
-                                                                    <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Style: </span> Italic Minimal Design</p>
-                                                                    <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Size: </span> Small</p>
-                                                                    <p class="text-sm dark:text-white leading-none text-gray-800"><span class="dark:text-gray-400 text-gray-300">Color: </span> Light Blue</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex justify-start lg:justify-end space-x-4  w-full">
-                                                                <p class="text-base dark:text-white xl:text-lg leading-6 ">$36.00 <span class="text-red-300 line-through"> $45.00</span></p>
-
-                                                                <div onClick={() => increaseQuantity(item.id)}>
-                                                                    <PlusCircleIcon className='w-6 h-6' />
-                                                                </div>
-
-                                                                <p class="text-base dark:text-white xl:text-lg leading-6 text-gray-800">{item.quantity}</p>
-                                                                <div onClick={() => decreaseQuantity(item.id)}>
-
-
-                                                                    <MinusCircleIcon className='w-6 h-6' />
-
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
+                                                <div className="flex-1">
+                                                    <h3 className="font-medium text-gray-900 dark:text-white">{item.title}</h3>
+                                                    <div className="mt-1 text-sm text-gray-500 space-y-1">
+                                                        <p>Color: {item.color}</p>
+                                                        <p>Size: {item.size}</p>
                                                     </div>
-                                                )}
+
+                                                    <div className="mt-4 flex items-center gap-4">
+                                                        <div className="flex items-center border rounded-lg">
+                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-l-lg">
+
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                                                </svg>
+
+                                                            </button>
+                                                            <span className="w-12 text-center">{item.quantity}</span>
+                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-lg">
+
+
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                                </svg>
+
+                                                            </button>
+                                                        </div>
+                                                        <button className="text-red-500 hover:text-red-600 dark:hover:text-red-400">
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                            </svg>
+
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                    <div className="text-right mr-4">
+                                                        <p className="lg:text-lg md:text-md sm:text-sm  font-medium text-gray-900 dark:text-white">
+                                                            ${(item.price * item.quantity).toFixed(2)}
+                                                        </p>
+                                                        <p className="text-sm md:text-xm sm:text-xm text-gray-500">${item.price} each</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        )
-                                    })}
-
-
+                                            
+                                        ))}
+                                    </div>
                                 </div>
-                                <div class="flex justify-center flex-col md:flex-row  items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8 ">
-                                    <div class="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full  bg-gray-900 space-y-6 rounded-lg">
-                                        <h3 class="text-xl dark:text-white font-semibold leading-5 text-gray-800">Summary</h3>
-                                        <div class="flex justify-center items-center w-full space-y-4 flex-col border-gray-200  pb-4">
-                                            <div class="flex justify-between w-full">
-                                                <p class="text-base dark:text-white leading-4 text-gray-800">Subtotal</p>
-                                                <p class="text-base dark:text-gray-300 leading-4 text-gray-600">$ {price}</p>
-                                            </div>
-                                            <div class="flex justify-between items-center w-full">
-                                                <p class="text-base dark:text-white leading-4 text-gray-800">Discount <span class="bg-gray-200 p-1 text-xs font-medium dark:bg-white dark:text-gray-800 leading-3 text-gray-800">STUDENT</span></p>
-                                                <p class="text-base dark:text-gray-300 leading-4 text-gray-600">~{price / 100 * discount}$ {discount}%</p>
-                                            </div>
-                                            <div class="flex justify-between items-center w-full ">
-                                                <p class="text-base dark:text-white leading-4 text-gray-800">Shipping</p>
-                                                <p class="text-base dark:text-gray-300 leading-4 text-gray-600">$8.00</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex justify-between items-center w-full">
-                                            <p class="text-base dark:text-white font-semibold leading-4 text-gray-800">Total</p>
-                                            <p class="text-base dark:text-gray-300 font-semibold leading-4 text-gray-600">{price - (price / 100 * discount) + 8}$</p>
+
+                                {/* Delivery Options */}
+                                <div className="bg-white dark:bg-def rounded-lg shadow">
+                                    <div className="p-6">
+                                        <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                                            Choose Delivery Method
+                                        </h2>
+                                        <div className="space-y-4">
+                                            {deliveryOptions.map((option) => (
+                                                <label
+                                                    key={option.id}
+                                                    className={`flex items-center p-4 border rounded-lg cursor-pointer ${selectedDelivery.id === option.id
+                                                        ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20'
+                                                        : 'border-gray-200 dark:border-gray-700'
+                                                        }`}
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        name="delivery"
+                                                        value={option.id}
+                                                        checked={selectedDelivery.id === option.id}
+                                                        onChange={() => setSelectedDelivery(option)}
+                                                        className="h-4 w-4 text-indigo-600"
+                                                    />
+                                                    <div className="ml-4 flex-1">
+                                                        <div className="flex items-center justify-between">
+                                                            <p className="font-medium text-gray-900 dark:text-white">{option.name}</p>
+                                                            <p className="text-gray-900 dark:text-white">${option.price}</p>
+                                                        </div>
+                                                        <p className="text-sm text-gray-500">{option.description}</p>
+                                                        <p className="text-sm text-gray-500">Estimated delivery: {option.duration}</p>
+                                                    </div>
+                                                </label>
+                                            ))}
                                         </div>
                                     </div>
-                                    <div class="flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full  bg-gray-900 space-y-6 rounded-lg">
-                                        <h3 class="text-xl dark:text-white font-semibold leading-5 text-gray-800">Shipping</h3>
-                                        <div class="flex justify-between items-start w-full">
-                                            <div class="flex justify-center items-center space-x-4">
-                                                <div class="w-8 h-8">
-                                                    <img class="w-full h-full" alt="logo" src="https://i.ibb.co/L8KSdNQ/image-3.png" />
+                                </div>
+
+                                {/* User Details */}
+                                <div className="bg-white dark:bg-def rounded-lg shadow mb-24">
+                                    <div className="p-6">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h2 className="text-lg font-medium text-gray-900 dark:text-white">Shipping Address</h2>
+                                            <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                                                Edit
+                                            </button>
+                                        </div>
+
+                                        <div className="space-y-4">
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <p className="font-medium text-gray-900 dark:text-white">{userDetails.name}</p>
+                                                    <p className="text-gray-500">{userDetails.phone}</p>
                                                 </div>
-                                                <div class="flex flex-col justify-start items-center">
-                                                    <p class="text-lg leading-6 dark:text-white font-semibold text-gray-800">DPD Delivery<br /><span class="font-normal">Delivery with 24 Hours</span></p>
+                                                <div className="text-right">
+                                                    <p className="text-sm text-gray-500">{userDetails.purchaseHistory.status}</p>
+                                                    <p className="text-sm text-gray-500">{userDetails.purchaseHistory.totalOrders} orders</p>
                                                 </div>
                                             </div>
-                                            <p class="text-lg font-semibold leading-6 dark:text-white text-gray-800">$8.00</p>
-                                        </div>
-                                        <div class="w-full flex justify-center items-center">
-                                            <button class="hover:bg-black dark:bg-white dark:text-gray-800 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-5 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white">View Carrier Details</button>
+
+                                            <div className="border-t dark:border-gray-700 pt-4">
+                                                <p className="text-gray-700 dark:text-gray-300">{userDetails.address.street}</p>
+                                                <p className="text-gray-700 dark:text-gray-300">
+                                                    {userDetails.address.city}, {userDetails.address.state} {userDetails.address.zip}
+                                                </p>
+                                                <p className="text-gray-700 dark:text-gray-300">{userDetails.address.country}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class=" bg-gray-900 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col rounded-lg">
-                                <h3 class="text-xl dark:text-white font-semibold leading-5 text-gray-800">Customer</h3>
-                                <div class="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
-                                    <div class="flex flex-col justify-start items-start flex-shrink-0">
-                                        <div class="flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200">
-                                            <img src="https://i.ibb.co/5TSg7f6/Rectangle-18.png" alt="avatar" />
-                                            <div class="flex justify-start items-start flex-col space-y-2">
-                                                <p class="text-base dark:text-white font-semibold leading-4 text-left text-gray-800">David Kent</p>
-                                                <p class="text-sm dark:text-gray-300 leading-5 text-gray-600">10 Previous Orders</p>
+
+                            {/* Order Summary */}
+                            <div className="w-full lg:w-96">
+                                <div className="bg-white dark:bg-def rounded-lg shadow p-6 sticky top-24">
+                                    <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Order Summary</h2>
+
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
+                                            <span className="text-gray-900 dark:text-white">${subtotal.toFixed(2)}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-gray-600 dark:text-gray-400">Shipping</span>
+                                            <span className="text-gray-900 dark:text-white">${selectedDelivery.price}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-gray-600 dark:text-gray-400">Tax</span>
+                                            <span className="text-gray-900 dark:text-white">${tax.toFixed(2)}</span>
+                                        </div>
+                                        <div className="border-t dark:border-gray-700 pt-4">
+                                            <div className="flex justify-between">
+                                                <span className="text-base font-medium text-gray-900 dark:text-white">Total</span>
+                                                <span className="text-base font-medium text-gray-900 dark:text-white">
+                                                    ${total.toFixed(2)}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-6 space-y-4">
+                                        <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                            <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 mr-2">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                                </svg>
+
+                                                <span>Estimated delivery by {estimatedDelivery.toLocaleDateString()}</span>
                                             </div>
                                         </div>
 
-                                        <div class="flex justify-center text-gray-800 dark:text-white md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                        <button className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 flex items-center justify-center">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 mr-2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                                             </svg>
-                                            <p class="cursor-pointer text-sm leading-5 ">david89@gmail.com</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-                                        <div class="flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row items-center md:items-start">
-                                            <div class="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
-                                                <p class="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Shipping Address</p>
-                                                <p class="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">180 North King Street, Northhampton MA 1060</p>
-                                            </div>
-                                            <div class="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4">
-                                                <p class="text-base dark:text-white font-semibold leading-4 text-center md:text-left text-gray-800">Billing Address</p>
-                                                <p class="w-48 lg:w-full dark:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">180 North King Street, Northhampton MA 1060</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex w-full justify-center items-center md:justify-start md:items-start">
-                                            <button class="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800">Edit Details</button>
-                                        </div>
+
+                                            Proceed to Checkout
+                                        </button>
+
+                                        <p className="text-xs text-center text-gray-500">
+                                            By proceeding, you agree to our Terms of Service and Privacy Policy
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
         ):(

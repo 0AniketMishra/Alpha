@@ -8,7 +8,7 @@ const Sidebarsm = () => {
         await signOut(auth)
     }
     return (
-        <div className="fixed bg-gray-900 z-1 top-20  h-full animate-slideIn  w-full max-w-[20rem] pr-0 pl-4 pt-2 pb-2  ">
+        <div className="fixed bg-def z-1 top-16  h-full animate-slideIn  w-full max-w-[20rem] pr-0 pl-4 pt-2 pb-2  ">
             <div className="mb-2 p-2 mt-8">
                 {/* <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">Shop By Category</h5> */}
             </div>

@@ -62,7 +62,7 @@ export default function Hero() {
 
 
     return (
-        <div className='bg-gray-900'>
+        <div className='bg-def'>
             <div className="relative pt-16">
                 <div className="absolute inset-0">
                     <img
@@ -178,7 +178,7 @@ export default function Hero() {
             {/* Footer */}
 
 
-            <footer className="bg-gray-900 dark:bg-gray-800">
+            <footer className="bg-gray-900 dark:bg-def">
                 <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div>
