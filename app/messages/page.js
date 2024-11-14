@@ -544,7 +544,7 @@ const Page = () => {
                       onClick={() => setShowInfo(false)}
                       className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
                     >
-                      <MoreVertical className="h-5 w-5" />
+                      
                     </button>
                   </div>
                   <div className="p-4">

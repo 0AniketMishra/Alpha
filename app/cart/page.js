@@ -160,8 +160,8 @@ const Page = () => {
                                 <div className="bg-white dark:bg-def rounded-lg shadow">
                                     <div className="p-6 space-y-6">
                                         {cartItems.map(item => (
-                                           <div>
-                                             <div key={item.id} className="flex items-center gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
+                                            <div key={item.id}>
+                                             <div  className="flex items-center gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
                                                 <img
                                                     src={item.image}
                                                     alt={item.title}
