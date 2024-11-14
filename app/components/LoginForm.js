@@ -13,16 +13,12 @@ function LoginForm() {
 
 
     const [token, setToken] = useState(null);
+    const [err,setErr] = useState(false)
+    const [processing,setProcessing] = useState(false); 
 
 
 
-
-
-  
     
-
-
-  
 
 
 
@@ -33,17 +29,32 @@ function LoginForm() {
                 body: JSON.stringify({ username, password }),
                  credentials: 'include' 
                 });
-            console.log('Login successful:', response.data);
-                  const data = await response.json();
-                   console.log('Login successful:', data); 
-             } catch (error) {
-                 console.error('Error:', error);
+                
+                  const data = await response
+
+                  console.log(data)
+                   const status = response.status
+                
+                      document.cookie = `jwt=${data.token}; path=/`;
+
+            if (status == 200){
+                router.push('/shop')
+            }else{
+                setErr(true)
+            }
+                } catch (error) {
+                 
          }
+
+         setProcessing(false)
+        if(token!=null)
+            router.push("/")
         }
     
     
     
     const handleSubmit = async (e) => {
+        setProcessing(true)
         e.preventDefault();
         const added = await login(username, password)
         if (added) {
@@ -52,6 +63,8 @@ function LoginForm() {
         }
     }
 
+
+  
 
 
     return (
@@ -153,12 +166,25 @@ function LoginForm() {
 
                             <button
                                 type="submit"
-                                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+                                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white w-[25%]"
                                 onClick={handleSubmit}
                             >
-                                Login
+                                
+
+                                {processing ? (
+                                    <div className='inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white'>
+                                        <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>asdf</span>
+                                    </div>
+                                ): (
+                                      <h1>Login</h1>
+                                )}
                             </button>
+
                         </div>
+{err &&(
+                            <h1 className='text-red-900 '>Incorrect Username or Password</h1>
+
+)}
                     </form>
                 </div>
             </div>

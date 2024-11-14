@@ -4,6 +4,7 @@ import { db,auth } from '@/firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 
@@ -11,30 +12,34 @@ function SignupForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const [processing, setProcessing] = useState(false); 
 
-    async function addNewUser(username,password, email){
+    const router = useRouter()
+
+
+    async function addNewUser(username,password){
+        setProcessing(true)
         try{
-            const userCredential = await createUserWithEmailAndPassword(
-                 auth,
-                 email, 
-                 password,
-                
-            )
-            const docRef = await addDoc(collection(db,"users"),{
-                username: username, 
-                password: password,
-                email: email,
-            }) 
-              console.log("User Registered Successfully")
-              return(true)
+            const response = await fetch('https://alpha-backend-v7bb.vercel.app/register', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+                credentials: 'include'
+            });
+            const data = await response
+            console.log(data)
+            if(response.status==201)
+                router.push('/login');
+
+
         } catch (error) {
             console.error(error);
         }
+        setProcessing(false)
     }
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-    const added = await addNewUser(username, password, email)
+    const added = await addNewUser(username, password)
     if(added){
       setUsername("")
       setPassword("")
@@ -182,7 +187,13 @@ function SignupForm() {
                                 className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
                                 onClick={handleSubmit}
                             >
-                                Create an Account
+                                {processing ? (
+                                    <div className='inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white'>
+                                        <span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>asdf</span>
+                                    </div>
+                                ) : (
+                                    <h1>Signup</h1>
+                                )}
                             </button>
                         </div>
                     </form>
