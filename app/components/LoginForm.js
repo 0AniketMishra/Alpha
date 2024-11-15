@@ -30,7 +30,7 @@ function LoginForm() {
                  credentials: 'include' 
                 });
                 
-                  const data = await response
+                  const data = await response.json()
 
                   console.log(data)
                    const status = response.status
