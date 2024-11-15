@@ -93,7 +93,7 @@ const Grid = () => {
 
                                     
                             {featuredProducts.map((product) => (
-                                <div key={product.id} className='lg:w-1/4   rounded-lg md:w-1/2 p-2 w-full '>
+                                <div key={product.id} className='2xl:w-1/4 xl:w-1/3 lg:w-1/3  rounded-lg md:w-1/2 p-2 w-full '>
                                     <Link href={{ pathname: '/items/' + product.id, query: { title: product.title, id: product.id, image: product.image, price: product.price, reviews: product.reviews, sellerName: product.sellerName, sellerId: product.sellerId, description: product.description, } }} >
 
                                         <ProductCard
