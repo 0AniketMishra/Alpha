@@ -82,9 +82,9 @@ const Grid = () => {
     ];
     return (
         <div>
-            <section className="text-gray-600 body-font pt-2 pb-4 lg:ml-[18rem] mt-24 lg:mt-16 2xl:mt-16 " >
+            <section className="text-gray-600 body-font pt-2 pb-4     " >
                 <div className="container px-2 pt-3 mx-auto" bis_skin_checked="1">
-                    <h1 className='text-white text-xl uppercase font-bold mb-8 mr-0 ml-0'>Available Items</h1>
+                    
                     <div className="flex flex-wrap -m-2" bis_skin_checked="1">
 
                        
@@ -104,12 +104,6 @@ const Grid = () => {
 
                                     </div>
                             ))}
-
-                                  
-                                
-                    
-                    
-
 
                     </div>
                 </div>

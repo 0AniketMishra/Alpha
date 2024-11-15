@@ -10,7 +10,7 @@ export default function ProductCard({
     reviews
 }) {
     return (
-        <div className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-lg  transition-all hover:shadow-xl">
+        <div className="group relative bg-white dark:bg-def rounded-xl shadow-lg  transition-all hover:shadow-xl">
             <div className="aspect-16/10 w-full overflow-hidden rounded-t-xl bg-gray-200 ">
                 <img
                     src={image}

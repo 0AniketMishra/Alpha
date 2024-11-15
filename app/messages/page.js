@@ -150,8 +150,8 @@ const Page = () => {
     {!loading && token ? (
       <div>
         <Header/>
-        <div className="pt-20 h-screen  ">
-          <div className="lg:max-w-custom mx-auto px-2   lg:px-8 h-full">
+        <div className="pt-20">
+          <div className="lg:max-w-custom mx-auto px-2 lg:px-8 ">
             <div className="  rounded-lg  shadow-lg h-[calc(100vh-6rem)] flex">
               {/* Sidebar */}
                 <div className="mx-auto lg:flex hidden lg:w-96 w-[97%] lg:border-r border-gray-600 lg:rounded-l-xl dark:bg-def">
@@ -227,7 +227,7 @@ const Page = () => {
 
               {/* Chat Area */}
               {activeChat ? (
-                  <div className="hidden flex-1 lg:rounded-r-xl dark:bg-def  lg:flex flex-col">
+                  <div className="hidden flex-1 lg:rounded-r-xl dark:bg-def   lg:flex flex-col">
                     <div className="p-4 border-b dark:border-gray-700 flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <img
@@ -348,7 +348,7 @@ const Page = () => {
 
 
 {activeChat ? (
-                  <div className="lg:hidden rounded-lg dark:bg-def mx-auto">
+                  <div className="lg:hidden rounded-lg dark:bg-def">
                     <div className="p-2 border-b dark:border-gray-700 flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <svg onClick={() => setActiveChat(null)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -385,7 +385,7 @@ const Page = () => {
                       </div>
                     </div>
 
-                    <div className="h-[75vh] p-4 space-y-4">
+                    <div className="h-[80vh] p-4 space-y-4 overflow-y-auto ">
                       {conversations[activeChat]?.map((message) => (
                         <div
                           key={message.id}
@@ -410,7 +410,7 @@ const Page = () => {
                                 <img
                                   src={message.media}
                                   alt="Shared media"
-                                  className="mt-2 rounded-lg  max-w-64 "
+                                  className="mt-2 rounded-lg  max-w-48 "
                                 />
                               )}
                               <div className="flex items-center mt-1 space-x-2">
@@ -428,7 +428,7 @@ const Page = () => {
                     </div>
 
                     <div className="p-4 border-t dark:border-gray-700">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex  items-center fixed bottom-0 p-2 left-0 right-0 bg-def space-x-2">
                         <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
 
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -494,7 +494,7 @@ const Page = () => {
                           </div>
                         </div>
 
-                        <div className="overflow-y-auto h-[calc(100%-7.5rem)]">
+                        <div className="overflow-y-auto ">
                           {chats.map(chat => (
                             <button
                               key={chat.id}

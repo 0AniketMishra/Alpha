@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import { db, auth } from '@/firebaseConfig';
 import { signOut } from 'firebase/auth';
 import Link from 'next/link';
@@ -7,77 +8,198 @@ const Sidebar = () => {
     function logout() {
          document.cookie = 'jwt=; Max-Age=0; path=/'; 
     }
+
+
+      const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedRatings, setSelectedRatings] = useState([]);
+  const [expandedSections, setExpandedSections] = useState({
+    categories: true,
+    price: true,
+    brands: true,
+    ratings: true
+  });
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [selectedSort, setSelectedSort] = useState('Newest');
+    const categories = ['All', 'Electronics', 'Fashion', 'Home & Living', 'Sports'];
+    const sortOptions = ['Newest', 'Price: Low to High', 'Price: High to Low', 'Most Popular'];
+    const brands = ['Apple', 'Samsung', 'Sony', 'LG', 'Nike', 'Adidas'];
+    const ratings = [5, 4, 3, 2, 1];
+
+  const toggleSection = () => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  const handleBrandToggle = () => {
+    setSelectedBrands(prev =>
+      prev.includes(brand)
+        ? prev.filter(b => b !== brand)
+        : [...prev, brand]
+    );
+  };
+
+  const handleRatingToggle = () => {
+    setSelectedRatings(prev =>
+      prev.includes(rating)
+        ? prev.filter(r => r !== rating)
+        : [...prev, rating]
+    );
+  };
+
+
+  
      return (
-        <div className="fixed bg-black  top-20 h-full hidden lg:flex xl:flex 2xl:flex  flex-col bg-clip-border  text-gray-700  w-[60%] max-w-[18rem] pr-0 pl-1 pt-2 pb-2 shadow-xl shadow-blue-gray-900/5">
-            <div className="mb-2 p-2">
-                {/* <h5 className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">Shop By Category</h5> */}
-            </div>
-            <nav className="flex flex-col gap-3 min-w-[240px]  font-sans text-base font-normal text-white">
-                 <Link href="/" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none ">
-                     <div className="grid place-items-center mr-4">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                             <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                         </svg>
-
-
+       <div>
+             <div className="w-full md:w-64 lg:w-72 space-y-6  dark:bg-def p-4 rounded-lg shadow-sm">
+                 <div
+                     
+                     isOpen={expandedSections.categories}
+                     onToggle={() => toggleSection('categories')}
+                 >
+                     <div className="space-y-2">
+                         {categories.map(category => (
+                             <label
+                                 key={category}
+                                 className="flex items-center space-x-2 cursor-pointer"
+                             >
+                                 <input
+                                     type="radio"
+                                     name="category"
+                                     checked={selectedCategory === category}
+                                     onChange={() => setSelectedCategory(category)}
+                                     className="text-indigo-600 focus:ring-indigo-500"
+                                 />
+                                 <span className="text-gray-700 dark:text-gray-300">{category}</span>
+                             </label>
+                         ))}
                      </div>
-                     <h1 className='text-lg'>Home</h1>
-                 </Link>
-                 <Link href="/sell" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none ">
-                    <div className="grid place-items-center mr-4">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                         </svg>
+                 </div>
 
-                    </div>
-                    <h1 className='text-lg'>Sell</h1>
-                </Link>
-                <div role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
-                    <div className="grid place-items-center mr-4">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                         </svg>
+                 <div
+                     
+                     isOpen={expandedSections.price}
+                     onToggle={() => toggleSection('price')}
+                 >
+                     <div className="space-y-4">
+                         <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                             <span>${priceRange[0]}</span>
+                             <span>${priceRange[1]}</span>
+                         </div>
+                         <input
+                             type="range"
+                             min="0"
+                             max="1000"
+                             value={priceRange[0]}
+                             onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                             className="w-full"
+                         />
+                         <input
+                             type="range"
+                             min="0"
+                             max="1000"
+                             value={priceRange[1]}
+                             onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                             className="w-full"
+                         />
+                         <div className="flex gap-2">
+                             <input
+                                 type="number"
+                                 value={priceRange[0]}
+                                 onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                                 className="w-full px-2 py-1 border rounded dark:bg-gray-700 dark:border-gray-600"
+                             />
+                             <input
+                                 type="number"
+                                 value={priceRange[1]}
+                                 onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                                 className="w-full px-2 py-1 border rounded dark:bg-gray-700 dark:border-gray-600"
+                             />
+                         </div>
+                     </div>
+                 </div>
 
-                    </div>Orders
-                </div>
-                <div role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
-                    <div className="grid place-items-center mr-4">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-                         </svg>
+                 <div
+                     
+                     isOpen={expandedSections.brands}
+                     onToggle={() => toggleSection('brands')}
+                 >
+                     <div className="space-y-2">
+                         {brands.map(brand => (
+                             <label
+                                 key={brand}
+                                 className="flex items-center space-x-2 cursor-pointer"
+                             >
+                                 <input
+                                     type="checkbox"
+                                     checked={selectedBrands.includes(brand)}
+                                     onChange={() => handleBrandToggle(brand)}
+                                     className="text-indigo-600 focus:ring-indigo-500"
+                                 />
+                                 <span className="text-gray-700 dark:text-gray-300">{brand}</span>
+                             </label>
+                         ))}
+                     </div>
+                 </div>
 
-                    </div>Notifications <div className="grid place-items-center ml-auto justify-self-end">
-                        <div className="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-red-500 text-white py-1 px-2 text-xs rounded-full" >
-                            <span className="">14</span>
-                        </div>
-                    </div>
-                </div>
-                <div role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
-                    <div className="grid place-items-center mr-4">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                         </svg>
+                 <div
+                     
+                     isOpen={expandedSections.ratings}
+                     onToggle={() => toggleSection('ratings')}
+                 >
+                     <div className="space-y-2">
+                         {ratings.map(rating => (
+                             <label
+                                 key={rating}
+                                 className="flex items-center space-x-2 cursor-pointer"
+                             >
+                                 <input
+                                     type="checkbox"
+                                     checked={selectedRatings.includes(rating)}
+                                     onChange={() => handleRatingToggle(rating)}
+                                     className="text-indigo-600 focus:ring-indigo-500"
+                                 />
+                                 <div className="flex items-center">
+                                     {Array.from({ length: rating }).map((_, i) => (
+                                         <svg key={i}
+                                             className="h-4 w-4 text-yellow-400 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
+                                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                         </svg>
 
-                    </div>Profile
-                </div>
-                <div role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
-                    <div className="grid place-items-center mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
-                        </svg>
+                                     ))}
+                                     {Array.from({ length: 5 - rating }).map((_, i) => (
+                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" h-4 w-4 text-gray-300">
+                                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                                         </svg>
 
-                    </div>Settings
-                </div>
-                <div onClick={() => logout()} role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-start leading-tight transition-all hover:bg-gray-900 outline-none">
-                    <div className="grid place-items-center mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
+                                     ))}
+                                     <span className="ml-1 text-gray-700 dark:text-gray-300">& Up</span>
+                                 </div>
+                             </label>
+                         ))}
+                     </div>
+                 </div>
 
-                    </div>Log Out
-                </div>
-            </nav>
-        </div>
+                 <div className="flex gap-2 pt-4 border-t dark:border-gray-700">
+                     <button
+                         onClick={() => {
+                             setSelectedCategory('All');
+                             setPriceRange([0, 1000]);
+                             setSelectedBrands([]);
+                             setSelectedRatings([]);
+                         }}
+                         className="flex-1 px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700"
+                     >
+                         Clear All
+                     </button>
+                     <button className="flex-1 px-4 py-2 text-sm text-white bg-indigo-600 rounded-lg hover:bg-indigo-700">
+                         Apply Filters
+                     </button>
+                 </div>
+             </div>
+       </div>
 
     )
 }
