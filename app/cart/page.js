@@ -46,11 +46,18 @@ const Page = () => {
     if (!token && !loading)
         router.push("/login")
 
-    const increaseQuantity = (id) => {
-        setItemss(prev => prev.map(i =>
-            i.id === id ? { ...i, quantity: i.quantity + 1 } : i
-        ));
-    };
+    const increaseQuantity = (index) => {
+        console.log(index)
+        // Directly modify the original cartItems array
+        if (cartItems[index]) { cartItems[index].quantity += 1;
+             console.log('Updated Cart Items:', cartItems);
+             }
+              else { 
+                console.error('Item not found at the provided index');
+             }
+      
+
+}
     const decreaseQuantity = (id) => {
         setItemss(prev => prev.map(i =>
             i.id === id ? { ...i, quantity: i.quantity - 1 } : i
@@ -159,7 +166,7 @@ const Page = () => {
                                 {/* Cart Items */}
                                 <div className="bg-white dark:bg-def rounded-lg shadow">
                                     <div className="p-6 space-y-6">
-                                        {cartItems.map(item => (
+                                        {cartItems.map((item,index) => (
                                             <div key={item.id}>
                                              <div  className="flex items-center gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
                                                 <img
@@ -185,7 +192,7 @@ const Page = () => {
 
                                                             </button>
                                                             <span className="w-12 text-center">{item.quantity}</span>
-                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-lg">
+                                                            <button onClick={() => increaseQuantity(item.index)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-lg">
 
 
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">

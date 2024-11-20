@@ -32,16 +32,15 @@ function LoginForm() {
                 
                   const data = await response.json()
 
-                  console.log(data)
+            
                    const status = response.status
                 
                       document.cookie = `jwt=${data.token}; path=/`;
 
             if (status == 200){
                 router.push('/shop')
-            }else{
-                setErr(true)
             }
+            
                 } catch (error) {
                  
          }

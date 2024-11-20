@@ -31,21 +31,21 @@ function SellerForm() {
                   Your Alias
                 </label>
                 <input type="text" name="name" id="name" placeholder="Enter your preferred Alias"
-                  className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                  className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
               </div>
               <div className="mb-5">
                 <label for="phone" className="mb-3 block text-base font-medium text-base">
                   Phone 
                 </label>
                 <input type="text" name="phone" id="phone" placeholder="Enter your phone number"
-                  className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                  className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
               </div>
               <div className="mb-5">
                 <label for="email" className="mb-3 block text-base font-medium text-base">
                   Email Address
                 </label>
                 <input type="email" name="email" id="email" placeholder="Enter your email"
-                  className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                  className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
               </div>
               <div className="-mx-3 flex flex-wrap">
                 <div className="w-full px-3 sm:w-1/2 ">
@@ -54,8 +54,8 @@ function SellerForm() {
                       Do You Offer Cross-broder shipment?
                     </label>
                     {/* <input type="number" placeholder="Enter Shipping Distance (in Kilometers)"
-                      className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  " /> */}
-                    <select onChange={handleSelectChange} className='w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium'>
+                      className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  " /> */}
+                    <select onChange={handleSelectChange} className='w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium'>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
                      </select>
@@ -69,8 +69,8 @@ function SellerForm() {
                       </label>
                      <div className='flex'>
                         <input type="number" placeholder="Enter Shipping Distance"
-                          className="w-full rounded-l-md outline-none bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  " />
-                        <select className='rounded-r-md bg-gray-900 py-3  text-base font-medium'>
+                          className="w-full rounded-l-md outline-none bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  " />
+                        <select className='rounded-r-md bg-def outline-none py-3  text-base font-medium'>
                           <option>Miles</option>
                           <option>Kilometers</option>
                         </select>  
@@ -90,25 +90,25 @@ function SellerForm() {
                   <div className="w-full px-3 sm:w-1/2">
                     <div className="mb-5">
                       <input type="text" name="country"  placeholder="Enter Country"
-                        className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                        className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
                     </div>
                   </div>
                   <div className="w-full px-3 sm:w-1/2">
                     <div className="mb-5">
                       <input type="text" name="city" id="city" placeholder="Enter city"
-                        className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                        className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
                     </div>
                   </div>
                   <div className="w-full px-3 sm:w-1/2">
                     <div className="mb-5">
                       <input type="text" name="state" id="state" placeholder="Enter state"
-                        className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                        className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
                     </div>
                   </div>
                   <div className="w-full px-3 sm:w-1/2">
                     <div className="mb-5">
                       <input type="text" name="post-code" id="post-code" placeholder="Post Code"
-                        className="w-full rounded-md  bg-gray-900 py-3 px-6 text-base font-medium text-whiteoutline-none  " />
+                        className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
                     </div>
                   </div>
                 </div>

@@ -15,8 +15,9 @@ const Grid = () => {
     const featuredProducts = [
         {
             id: 1,
-            title: "Premium Wireless Headphones",
+            title: "Premium Wireless Headphones with true noice cancellation and more advanced features",
             price: 299.99,
+            originalPrice: 300,
             sellerId: "@Assasin123",
             sellerName: "The Assasin",
             rating: 4,

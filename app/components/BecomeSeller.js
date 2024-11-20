@@ -12,8 +12,8 @@ function BecomeSeller() {
     return (
      <div>
          {!enroll ?(
-                <section className="text-gray-400 lg:ml-[18rem] bg-black body-font ">
-                    <div className="container mx-auto flex px-5 lg:py-24 py-32 md:flex-row flex-col items-center" bis_skin_checked="1">
+                <section className="text-gray-400  mx-auto max-w-7xl my-32 body-font ">
+                    <div className=" flex px-5 lg:py-24 py-32 md:flex-row flex-col items-center" bis_skin_checked="1">
                         <div className="lg:max-w-lg lg:w-full md:mb-0 mb-10" bis_skin_checked="1">
                             <img className="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600" />
                         </div>

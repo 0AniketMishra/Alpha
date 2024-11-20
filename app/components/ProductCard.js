@@ -38,14 +38,7 @@ export default function ProductCard({
             <div className="mt-4 p-4">
                 <div className="flex justify-between items-start">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">{title}</h3>
-                    <div className="flex flex-col items-end">
-                        {originalPrice && (
-                            <span className="text-sm text-gray-500 line-through dark:text-gray-400">
-                                ${originalPrice}
-                            </span>
-                        )}
-                       
-                    </div>
+                   
                     
                 </div>
 
@@ -73,9 +66,17 @@ export default function ProductCard({
                     )}
                     
                 </div>
-                <span className="text-xl  font-bold text-indigo-600 dark:text-indigo-400">
-                    ${price}
-                </span>
+                <div className="flex  items-center space-x-2 ">
+                    {originalPrice && (
+                        <span className="text-md text-gray-500 line-through dark:text-gray-400">
+                            ${originalPrice}
+                        </span>
+                    )}
+                    <span className="text-xl  font-bold  dark:text-green-200">
+                        ${price}
+                    </span>
+                </div>
+               
             </div>
 
             <div className="pl-4 pr-4 pb-4 pt-2 space-y-2">
