@@ -165,18 +165,17 @@ const Page = () => {
                             <div className="flex-1 space-y-8">
                                 {/* Cart Items */}
                                 <div className="bg-white dark:bg-def rounded-lg shadow">
-                                    <div className="p-6 space-y-6">
-                                        {cartItems.map((item,index) => (
-                                            <div key={item.id}>
-                                             <div  className="flex items-center gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
+                                    <div className="p-4 sm:p-6 space-y-6">
+                                        {cartItems.map(item => (
+                                            <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
                                                 <img
                                                     src={item.image}
                                                     alt={item.title}
-                                                    className="w-24 h-24 object-cover rounded-lg"
+                                                    className="w-full sm:w-24 h-48 sm:h-24 object-cover rounded-lg"
                                                 />
 
-                                                <div className="flex-1">
-                                                    <h3 className="font-medium text-gray-900 dark:text-white">{item.title}</h3>
+                                                <div className="flex-1 min-w-0">
+                                                    <h3 className="font-medium text-gray-900 dark:text-white break-words">{item.title}</h3>
                                                     <div className="mt-1 text-sm text-gray-500 space-y-1">
                                                         <p>Color: {item.color}</p>
                                                         <p>Size: {item.size}</p>
@@ -184,26 +183,25 @@ const Page = () => {
 
                                                     <div className="mt-4 flex items-center gap-4">
                                                         <div className="flex items-center border rounded-lg">
-                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-l-lg">
-
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                                {/* <Minus className="h-4 w-4" /> */}
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                                                                 </svg>
 
                                                             </button>
                                                             <span className="w-12 text-center">{item.quantity}</span>
-                                                            <button onClick={() => increaseQuantity(item.index)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-lg">
-
-
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                                {/* <Plus className="h-4 w-4" /> */}
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                                                 </svg>
 
                                                             </button>
                                                         </div>
-                                                        <button className="text-red-500 hover:text-red-600 dark:hover:text-red-400">
-
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
+                                                        <button className="text-red-500 hover:text-red-600">
+                                                            {/* <Trash2 className="h-5 w-5" /> */}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                                             </svg>
 
@@ -211,15 +209,13 @@ const Page = () => {
                                                     </div>
                                                 </div>
 
-                                                    <div className="text-right mr-4">
-                                                        <p className="lg:text-lg md:text-md sm:text-sm  font-medium text-gray-900 dark:text-white">
-                                                            ${(item.price * item.quantity).toFixed(2)}
-                                                        </p>
-                                                        <p className="text-sm md:text-xm sm:text-xm text-gray-500">${item.price} each</p>
-                                                    </div>
+                                                <div className="text-right">
+                                                    <p className="text-lg font-medium text-gray-900 dark:text-white">
+                                                        ${(item.price * item.quantity).toFixed(2)}
+                                                    </p>
+                                                    <p className="text-sm text-gray-500">${item.price} each</p>
                                                 </div>
                                             </div>
-                                            
                                         ))}
                                     </div>
                                 </div>
