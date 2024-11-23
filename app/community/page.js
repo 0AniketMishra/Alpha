@@ -49,17 +49,18 @@ import ComSidebar from '../components/ComSidebar';
         }
     ]
     return (
-        <><Header /><div className="lg:max-w-custom flex mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+        <div className='bg-defl dark:bg-black'>
+            <Header /><div className="lg:max-w-custom  flex mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
             <div className='mr-12 hidden w-[18%] lg:flex'>
                 <ComSidebar/>
             </div>
             <div className=' lg:w-[40%] '>
                <div className="mb-8">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Community</h1>
-                <div className=" bg-def rounded-lg shadow-md p-4">
+                <div className=" dark:bg-def bg-white rounded-lg shadow-md p-4">
                     <textarea
                         placeholder="Share your thoughts..."
-                        className="w-full p-2    rounded-lg outline-none  dark:bg-gray-900 dark:text-white"
+                        className="w-full p-2    rounded-lg outline-none text-black dark:bg-def dark:text-white"
                         rows={3} />
                     <div className="mt-3 flex justify-end">
                         <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
@@ -75,7 +76,7 @@ import ComSidebar from '../components/ComSidebar';
 
                         );
                         return (
-                            <div key={post.id} className="bg-def rounded-lg shadow-md overflow-hidden">
+                            <div key={post.id} className="dark:bg-def bg-white  rounded-xl shadow-md overflow-hidden">
                                 <div className="p-4">
                                     <div className="flex items-center mb-4">
                                         <img
@@ -120,7 +121,7 @@ import ComSidebar from '../components/ComSidebar';
                     })}
                 </div></div>
 
-        </div></>
+        </div></div>
     );
 };
 

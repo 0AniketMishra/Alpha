@@ -497,7 +497,7 @@ export default function SellerDashboard() {
     return (
         <div className="pt-16">
             <Header/>
-            <div className="md:hidden fixed bottom-0 left-0 right-0  bg-def z-10 border-t dark:border-gray-700 px-4 py-2">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-defl  dark:bg-def z-10 border-t dark:border-gray-700 px-4 py-2">
                 <div className="flex justify-around items-center">
                     {tabs.map((tab) => {
                         const Icon = tab.icon;

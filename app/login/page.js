@@ -39,7 +39,7 @@ function Page() {
     <div>
       {!loading && token ==null ?
       (
-      <div>
+      <div className='bg-black'>
         <Header />
         <LoginForm/>
         </div>

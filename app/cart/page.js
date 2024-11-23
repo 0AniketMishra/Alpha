@@ -151,11 +151,11 @@ const Page = () => {
     return (
        <div>
         {!loading && token ?(
-                <div>
+                <div className='bg-defl dark:bg-black'>
                     <Header />
                     <div className="pt-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                         <div className="flex items-center justify-between mb-8">
-                            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shopping Cart</h1>
+                            <h1 className="text-2xl font-bold text-gray-900 text-black dark:text-white">Shopping Cart</h1>
                             <div className="text-sm text-gray-500">
                                 <span className="font-medium text-indigo-600">{cartItems.length} items</span> in your cart
                             </div>
@@ -185,15 +185,15 @@ const Page = () => {
                                                         <div className="flex items-center border rounded-lg">
                                                             <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
                                                                 {/* <Minus className="h-4 w-4" /> */}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-black dark:text-white">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                                                                 </svg>
 
                                                             </button>
-                                                            <span className="w-12 text-center">{item.quantity}</span>
+                                                            <span className="w-12 text-center text-black darK:text-white">{item.quantity}</span>
                                                             <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
                                                                 {/* <Plus className="h-4 w-4" /> */}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-black dark:text-white">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                                                 </svg>
 

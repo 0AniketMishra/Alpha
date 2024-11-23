@@ -20,8 +20,32 @@ const [sidebar,setSidebar] = useState(false)
       const handleMouseLeave = () => { // Delay hiding the menu
          setTimeout(() => { setIsMenuOpen(false); }, 1000); // Adjust the delay duration as needed 
          };
+
+    const [darkMode, setDarkMode] = useState(false); useEffect(() => { 
+        // Check the user's preference in localStorage
+         const savedTheme = localStorage.getItem('theme');
+          if (savedTheme === 'dark') {
+             document.documentElement.classList.add('dark');
+              setDarkMode(true);
+             } else {
+                 document.documentElement.classList.remove('dark');
+                  setDarkMode(false);
+                 }
+                 }, []); 
+        const toggleDarkMode = () => {
+             if (darkMode) { 
+                document.documentElement.classList.remove('dark');
+                 localStorage.setItem('theme', 'light');
+                 } else {
+                     document.documentElement.classList.add('dark');
+                      localStorage.setItem('theme', 'dark');
+                     }
+             setDarkMode(!darkMode); 
+             console.log("i ran")
+        };
+         
     return (
-        <nav className="fixed top-0 w-full z-50 shadow-sm  bg-def">
+        <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-def">
             {sidebar &&(
                 <Sidebarsm/>
             ) }
@@ -39,26 +63,32 @@ const [sidebar,setSidebar] = useState(false)
 
                        )}
 
-                        <span className="text-xl font-bold text-white">ShadowTrade</span>
+                        <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">ShadowTrade</span>
                     </div>
 
                     <div className="hidden lg:flex items-center space-x-8">
-                        <Link href="/" className="text-white hover:text-indigo-600">Home</Link>
+                        <Link href="/" className="text-black dark:text-white hover:text-indigo-600">Home</Link>
 
-                        <Link href="/shop" className="text-white hover:text-indigo-600">Shop</Link>
+                        <Link href="/shop" className="text-black dark:text-white hover:text-indigo-600">Shop</Link>
                         
-                        <Link href="/messages" className="text-white hover:text-indigo-600">Messages</Link>
-                        <Link href="/community" className="text-white hover:text-indigo-600">Community</Link>
+                        <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Messages</Link>
+                        <Link href="/community" className="text-black dark:text-white hover:text-indigo-600">Community</Link>
                        
 
                     </div>
 
                     <div className="flex items-center space-x-4 ">
-                        <button className="lg:p-2 p-1 hover:bg-gray-800 rounded-full">
+                        <button onClick={toggleDarkMode} className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full">
                             
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-5 text-gray-600">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
+                           {darkMode ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-5 ">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                           ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" className="size-5 ">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                    </svg>
+                           )}
 
                         </button>
                        

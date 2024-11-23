@@ -53,7 +53,7 @@ const Sidebar = () => {
   
      return (
        <div>
-             <div className="w-full md:w-64 lg:w-72 space-y-6  dark:bg-def p-4 rounded-lg shadow-sm">
+             <div className="w-full md:w-64 lg:w-80 space-y-6 bg-white  dark:bg-def p-4 rounded-lg shadow-sm">
                  <div
                      
                      isOpen={expandedSections.categories}

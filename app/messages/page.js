@@ -148,16 +148,16 @@ const Page = () => {
   return (
    <div>
     {!loading && token ? (
-      <div>
+      <div className='bg-defl dark:bg-black'>
         <Header/>
         <div className="pt-20">
           <div className="lg:max-w-custom mx-auto px-2 lg:px-8 ">
             <div className="  rounded-lg  shadow-lg h-[calc(100vh-6rem)] flex">
               {/* Sidebar */}
-                <div className="mx-auto lg:flex hidden lg:w-96 w-[97%] lg:border-r border-gray-600 lg:rounded-l-xl dark:bg-def">
+                <div className="mx-auto lg:flex hidden lg:w-96 w-[97%] lg:border-r border-gray-300 lg:rounded-l-xl bg-white dark:bg-def">
                   <div>
                     <div className="p-4 border-b dark:border-gray-700 flex items-center justify-between">
-                      <h2 className="text-lg font-semibold">Messages</h2>
+                      <h2 className="text-lg text-black dark:text-white font-semibold">Messages</h2>
                       <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -227,7 +227,7 @@ const Page = () => {
 
               {/* Chat Area */}
               {activeChat ? (
-                  <div className="hidden flex-1 lg:rounded-r-xl dark:bg-def   lg:flex flex-col">
+                  <div className="hidden flex-1 lg:rounded-r-xl dark:bg-def bg-white  lg:flex flex-col">
                     <div className="p-4 border-b dark:border-gray-700 flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <img
@@ -277,7 +277,7 @@ const Page = () => {
                             <div className={`flex flex-col ${message.user === 'You' ? 'items-end' : 'items-start'}`}>
                               <div className={`rounded-2xl px-4 py-2 ${message.user === 'You'
                                 ? 'bg-indigo-600 text-white'
-                                : 'bg-gray-100 dark:bg-gray-700'
+                                : 'bg-gray-100 dark:bg-gray-700 text-black dark:text-white'
                                 }`}>
                                 {message.content}
                               </div>
@@ -339,9 +339,9 @@ const Page = () => {
                     </div>
                   </div>
               ): (
-                    <div className="hidden flex-1 lg:rounded-r-xl dark:bg-def  lg:flex flex-col">
+                    <div className="hidden flex-1 lg:rounded-r-xl dark:bg-def bg-white lg:flex flex-col">
                       <div className="p-4 border-b dark:border-gray-700 flex items-center justify-between">
-                  <h1 className='text-white'>Please select a chat to continue</h1>
+                  <h1 className='dark:text-white text-black'>Please select a chat to continue</h1>
                 </div>
                 </div>
               )}
@@ -464,7 +464,7 @@ const Page = () => {
                     </div>
                   </div>
 ) : (
-                    <div className="mx-auto  lg:hidden lg:w-96 w-[97%] lg:border-r border-gray-600 lg:rounded-l-xl dark:bg-def">
+                    <div className="mx-auto  lg:hidden lg:w-96 w-[97%] lg:border-r lg:border-gray-300 lg:rounded-l-xl dark:bg-def">
                       <div>
                         <div className="p-4 border-b dark:border-gray-700 flex items-center justify-between">
                           <h2 className="text-lg font-semibold">Messages</h2>
@@ -537,7 +537,7 @@ const Page = () => {
 )}
               {/* Info Sidebar */}
               {showInfo && (
-                <div className="w-80 border-l dark:border-gray-700">
+                <div className="w-80 ">
                   <div className="p-4 border-b dark:border-gray-700 flex items-center justify-between">
                     <h3 className="font-medium">Details</h3>
                     <button

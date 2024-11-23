@@ -3,9 +3,9 @@ import { Home, Bell, Bookmark, MessageSquare, User, MoreHorizontal } from 'lucid
 
 const ComSidebar = () => {
     return (
-        <div className="sticky top-0 h-screen w-64 bg-gray-100 dark:bg-gray-900 p-5 flex flex-col justify-between">
+        <div className="sticky top-0 rounded-xl w-72 bg-white shadow-md dark:bg-def p-5 flex flex-col justify-between">
             <div>
-                <div className="text-xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">MyApp</div>
+                <div className="text-xl font-bold mb-6 text-indigo-600 dark:text-white">MyApp</div>
                 <div className="space-y-4">
                     <SidebarItem icon={Home} text="Home" />
                     <SidebarItem icon={Bell} text="Notifications" />

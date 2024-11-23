@@ -62,7 +62,7 @@ export default function Hero() {
 
 
     return (
-        <div className='bg-def'>
+        <div className='dark:bg-def bg-defl'>
             <div className="relative pt-16">
                 <div className="absolute inset-0">
                     <img
@@ -96,9 +96,9 @@ export default function Hero() {
 
 {/* Hero */}
 
-            <div className="max-w-custom  mt-12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {/* <div className="max-w-custom  mt-12 mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Shop by Category</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-indigo-600">Shop by Category</h2>
                     <button className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center">
                         View All
                         
@@ -121,13 +121,13 @@ export default function Hero() {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
 
 
             {/* Shop By Category */}
 
 
-            <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-12">
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Products</h2>
                     <button className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center">
@@ -178,39 +178,39 @@ export default function Hero() {
             {/* Footer */}
 
 
-            <footer className="bg-gray-900 dark:bg-def">
+            <footer className="bg-defl dark:bg-def">
                 <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div>
-                            <h3 className="text-white font-semibold mb-4">Shop</h3>
+                            <h3 className="dark:text-white text-black font-semibold mb-4">Shop</h3>
                             <ul className="space-y-2">
-                                <li><a href="#" className="text-gray-400 hover:text-white">New Arrivals</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Best Sellers</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Sale</a></li>
+                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">New Arrivals</a></li>
+                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">Best Sellers</a></li>
+                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">Sale</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-white font-semibold mb-4">Support</h3>
+                            <h3 className="dark:text-white text-black font-semibold mb-4">Support</h3>
                             <ul className="space-y-2">
-                                <li><a href="#" className="text-gray-400 hover:text-white">Contact Us</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">FAQs</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Shipping</a></li>
+                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">Contact Us</a></li>
+                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">FAQs</a></li>
+                                <li><a href="#" className="text-black dark:text-gray-400  hover:text-white">Shipping</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-white font-semibold mb-4">Company</h3>
+                            <h3 className="dark:text-white text-black font-semibold mb-4">Company</h3>
                             <ul className="space-y-2">
-                                <li><a href="#" className="text-gray-400 hover:text-white">About Us</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Careers</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Blog</a></li>
+                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">About Us</a></li>
+                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Careers</a></li>
+                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Blog</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-white font-semibold mb-4">Legal</h3>
+                            <h3 className="dark:text-white text-black font-semibold mb-4">Legal</h3>
                             <ul className="space-y-2">
-                                <li><a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Terms of Service</a></li>
-                                <li><a href="#" className="text-gray-400 hover:text-white">Returns</a></li>
+                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Privacy Policy</a></li>
+                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Terms of Service</a></li>
+                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Returns</a></li>
                             </ul>
                         </div>
                     </div>

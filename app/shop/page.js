@@ -67,15 +67,16 @@ function Page() {
 
 
   return (
-    <div>
+      <div className='bg-defl dark:bg-black flex-1'>
           <div>
               {!loading && token ? (
-                  <div>
+                  <div className=''>
                       <Header />
 
-                      <div className="pt-20 px-2 sm:px-6 lg:px-8 max-w-custom mx-auto">
+                      <div className="pt-20 px-2 h-full sm:px-6 lg:px-8 max-w-custom mx-auto">
                           <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4">
-                              <h1 className='text-white text-xl uppercase font-bold mb-8 mr-0 ml-0'>Available Items</h1>
+
+                              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop All Products</h1>
 
 
                               <div className="flex items-center space-x-4 mt-4 md:mt-0">
@@ -84,21 +85,21 @@ function Page() {
                                       className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600"
                                   >
                              
-                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 dark:text-white text-black">
                                           <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
                                       </svg>
 
-                                      <span>Filters</span>
+                                      <span className='text-black dark:text-white'>Filters</span>
                                   </button>
 
                                   <div className="relative">
                                       <select
                                           value={selectedSort}
                                           onChange={(e) => setSelectedSort(e.target.value)}
-                                          className="appearance-none px-4 py-2 border border-gray-300 rounded-lg pr-8 dark:bg-gray-800 dark:border-gray-600"
+                                          className="appearance-none px-4 text-black dark:text-white py-2 border border-gray-300 rounded-lg pr-8 outline-none dark:bg-gray-800 dark:border-gray-600"
                                       >
                                           {sortOptions.map(option => (
-                                              <option key={option} value={option}>{option}</option>
+                                              <option key={option} value={option} className='text-black dark:text-white'>{option}</option>
                                           ))}
                                       </select>
                                   

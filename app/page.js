@@ -32,8 +32,8 @@ const Home = () => {
 
   return (
 
-    <div>
-
+    <div className='flex-1 h-full'>
+ 
       <Header />
       <Hero />
     </div>

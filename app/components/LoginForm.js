@@ -67,19 +67,19 @@ function LoginForm() {
 
 
     return (
-        <div>
+        <div className='bg-defl dark:bg-black h-screen'>
 
 
-            <div className="mx-auto max-w-screen-xl px-4 py-[15vh] sm:px-6 lg:px-4 flex h-full  w-full" >
-                <div className="hidden lg:w-1/2 lg:flex mx-8">
+            <div className="mx-auto px-4 py-[20vh] sm:px-6 lg:px-4 flex h-full  w-full" >
+                {/* <div className="hidden lg:w-1/2 lg:flex mx-8">
                     <img alt="ecommerce" layout="fill" className=" object-fill w-full h-[30rem] rounded-lg" src="https://quotefancy.com/media/wallpaper/3840x2160/1246546-Colleen-Houck-Quote-Bad-things-sometimes-happen-to-good-people-the.jpg" />
-                </div>
+                </div> */}
                 <div className=' mx-auto' >
 
 
-                    <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
-                        <div className="  max-w-lg ">
-                            <h1 className="text-2xl font-bold sm:text-3xl">Login</h1>
+                    <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4 bg-white dark:bg-def rounded-lg p-8">
+                        <div className="">
+                            <h1 className="text-2xl text-black dark:text-white font-bold sm:text-3xl">Login</h1>
 
                             <p className="mt-4 text-gray-500">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque
