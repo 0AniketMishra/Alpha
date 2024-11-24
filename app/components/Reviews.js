@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Reviews = () => {
-    const reviews = [{name:"The Great Khali",image: "yes"},{name: "Aurondhoti Ghosh",image: null},{name:"Anish das", image: null}]
+    const reviews = [{id: 1,name:"The Great Khali",image: "yes"},{id:2,name: "Aurondhoti Ghosh",image: null},{name:"Anish das", image: null}]
   return (
     <div>
           <section className="text-gray-600 body-font overflow-hidden">
@@ -15,7 +15,7 @@ const Reviews = () => {
                       
                       
                          {reviews.map((review) => (
-                             <div className="py-8 flex flex-wrap md:flex-nowrap" bis_skin_checked="1">
+                             <div key={review.id} className="py-8 flex flex-wrap md:flex-nowrap" bis_skin_checked="1">
                                  <div className="md:w-1/6 md:mb-0  flex-shrink-0 flex flex-col" bis_skin_checked="1">
                                      <div className='flex items-center'>
                                          <h1 className="font-semibold  text-xl dark:text-gray-200 text-black">{review.name}</h1>

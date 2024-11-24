@@ -44,7 +44,7 @@ const About = ({info}) => {
                   <div className="flex flex-wrap -m-4" bis_skin_checked="1">
                     {data.map((feature) => (
                         
-                        <div className="p-4 md:p-2  md:w-1/3" bis_skin_checked="1">
+                        <div key={feature.title} className="p-4 md:p-2  md:w-1/3" bis_skin_checked="1">
                             <div className="flex rounded-lg h-full dark:bg-def bg-white p-8 flex-col" bis_skin_checked="1">
                                 <div className="flex items-center mb-3" bis_skin_checked="1">
                                     <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0" bis_skin_checked="1">
