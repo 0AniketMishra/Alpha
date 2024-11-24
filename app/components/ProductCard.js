@@ -58,15 +58,15 @@ export default function ProductCard({
                    
                 </div>
 
-                <div className="mt-2 pb-4 text-sm text-gray-500 dark:text-gray-400">
+                {/* <div className="mt-2 pb-4 text-sm text-gray-500 dark:text-gray-400">
                     {stock < 10 ? (
                         <span className="text-orange-500">Only {stock} left in stock</span>
                     ) : (
                         <span>In Stock ({stock} available)</span>
                     )}
                     
-                </div>
-                <div className="flex  items-center space-x-2 ">
+                </div> */}
+                <div className="flex mt-4 items-center space-x-2 ">
                     {originalPrice && (
                         <span className="text-md text-gray-500 line-through dark:text-gray-400">
                             ${originalPrice}
@@ -83,6 +83,7 @@ export default function ProductCard({
                 <button className="w-full bg-indigo-600 text-white py-2 rounded-xl hover:bg-indigo-700 transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600">
                     Add to Cart
                 </button>
+             
                 {/* <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl hover:bg-gray-200 transition-colors dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
                     Quick View
                 </button> */}

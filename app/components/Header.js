@@ -53,11 +53,11 @@ const [sidebar,setSidebar] = useState(false)
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center">
                        {!sidebar ? (
-                            <svg onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6 mr-4 lg:hidden">
+                            <svg onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6 mr-4 lg:hidden text-black dark:text-white">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                        ) : (
-                                <svg onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6 mr-4 lg:hidden">
+                                <svg onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6 mr-4 lg:hidden text-black dark:text-white">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>
 

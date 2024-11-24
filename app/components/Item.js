@@ -5,13 +5,13 @@ const Item = ({info}) => {
     const [show,setShow] = useState(false)
   return (
     <div>
-          <section className="text-white body-font "> 
+          <section className="darK:text-white text-black body-font "> 
               <div className="container max-w-custom pt-32 px-4 mx-auto" bis_skin_checked="1">
                   <div className="  flex flex-wrap" bis_skin_checked="1">
                       <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={info.image}/>
                           <div className="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" bis_skin_checked="1">
-                              <h2 className="text-sm title-font text-gray-200 tracking-widest">BRAND NAME</h2>
-                          <h1 className="text-white text-3xl title-font font-medium mb-1">{info.title}</h1>
+                              <h2 className="text-sm title-font dark:text-gray-200 text-black  tracking-widest">BRAND NAME</h2>
+                          <h1 className="dark:text-white text-black  text-3xl title-font font-medium mb-1">{info.title}</h1>
                               <div className="flex mb-4" bis_skin_checked="1">
                                   <span className="flex items-center">
                                       <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
@@ -29,9 +29,9 @@ const Item = ({info}) => {
                                       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
                                           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                                       </svg>
-                                      <span className="text-gray-200 ml-3">{info.reviews} Reviews</span>
+                                      <span className="dark:text-gray-200 text-black ml-3">{info.reviews} Reviews</span>
                                   </span>
-                                  <span className="flex ml-4 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
+                                  {/* <span className="flex ml-4 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                                       <a className="text-white">
                                           <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
                                               <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
@@ -47,10 +47,13 @@ const Item = ({info}) => {
                                               <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
                                           </svg>
                                       </a>
-                                  </span>
+                                  </span> */}
                               </div>
                           <div className="flex items-center mb-6" bis_skin_checked="1">
-                              <span className="title-font font-medium text-2xl ">$58.00</span>
+                              <span className="text-xl mr-2 text-gray-500  line-through dark:text-gray-400">
+                                  ${info.originalPrice}
+                              </span>
+                              <span className="title-font text-black dark:text-white font-medium text-2xl ">${info.price}</span>
                              
                               <button className="rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center text-white ml-4">
                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -63,8 +66,8 @@ const Item = ({info}) => {
                               <div>
                               {show==false &&(
                                 <div>
-                                      <p className="leading-relaxed max-h-40 line-clamp-4 ">{info.description}</p>
-                                      <p onClick={() => setShow(true)} className="leading-relaxed max-h-40 text-blue-400 ">Read More.</p>
+                                      <p className="leading-relaxed max-h-40 line-clamp-4 text-black dark:text-white">{info.description}</p>
+                                      <p onClick={() => setShow(true)} className="leading-relaxed max-h-40 dark:text-blue-400 text-blue-600">Read More.</p>
                                 </div>
                               )}
                               {show==true &&(

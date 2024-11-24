@@ -67,7 +67,7 @@ function Page() {
 
 
   return (
-      <div className='bg-defl dark:bg-black flex-1'>
+      <div className='bg-defl dark:bg-black min-h-screen'>
           <div>
               {!loading && token ? (
                   <div className=''>
