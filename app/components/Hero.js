@@ -64,7 +64,7 @@ export default function Hero() {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await fetch('http://localhost:3001/listings');
+                const response = await fetch('https://alpha-backend-v7bb.vercel.app/listings');
                 const data = await response.json();
                 setListings(data);
             } catch (error) {

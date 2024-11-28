@@ -26,7 +26,7 @@ function SellerForm() {
     try {
       if(isOptionSelected)
           setDistance(-1)
-      const response = await fetch('http://localhost:3001/registerseller', {
+      const response = await fetch('https://alpha-backend-v7bb.vercel.app/registerseller', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           sellerName: alias, 
