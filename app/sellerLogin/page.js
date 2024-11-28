@@ -25,7 +25,7 @@ function Page() {
 
 
     async function login(alias, password) {        
-            const response = await fetch('http://localhost:3001/sellerlogin', {
+        const response = await fetch('https://alpha-backend-v7bb.vercel.app/sellerlogin', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ sellerName: alias, password: password }),
                 credentials: 'include'
