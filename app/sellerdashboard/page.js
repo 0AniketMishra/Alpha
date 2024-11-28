@@ -145,7 +145,7 @@ export default function SellerDashboard() {
         if (!loading && !token) {
             router.push('/sellerLogin');
         }
-    }, []);
+    }, [loading, token]);
 
 
     const data =

@@ -145,7 +145,7 @@ console.log(error)
                     </div>
                   </div>
 {!af && !sf &&(
-                    <h1 className='mx-3'>Don't get High on your own Supply.. At least choose one option!</h1>
+                    <h1 className='mx-3'>Do not get High on your own Supply.. At least choose one option!</h1>
 
 )}                  
                   
