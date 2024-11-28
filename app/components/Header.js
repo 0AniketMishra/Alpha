@@ -11,38 +11,61 @@ import Sidebarsm from './Sidebarsm';
 const Header = () => {
  
 
-const [sidebar,setSidebar] = useState(false)
-
+    const [sidebar,setSidebar] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-     const handleMouseEnter = () => { 
+    const [token,setToken] = useState(null)
+    const [loading,setLoading] = useState(true)
+    const handleMouseEnter = () => { 
         setIsMenuOpen(true);
       }; 
       const handleMouseLeave = () => { // Delay hiding the menu
          setTimeout(() => { setIsMenuOpen(false); }, 1000); // Adjust the delay duration as needed 
-         };
+       };
 
-    const [darkMode, setDarkMode] = useState(false); useEffect(() => { 
+    const [darkMode, setDarkMode] = useState(false); 
+    
+    useEffect(() => { 
         // Check the user's preference in localStorage
          const savedTheme = localStorage.getItem('theme');
           if (savedTheme === 'dark') {
              document.documentElement.classList.add('dark');
               setDarkMode(true);
-             } else {
-                 document.documentElement.classList.remove('dark');
-                  setDarkMode(false);
-                 }
-                 }, []); 
-        const toggleDarkMode = () => {
-             if (darkMode) { 
-                document.documentElement.classList.remove('dark');
-                 localStorage.setItem('theme', 'light');
-                 } else {
-                     document.documentElement.classList.add('dark');
-                      localStorage.setItem('theme', 'dark');
-                     }
-             setDarkMode(!darkMode); 
-             console.log("i ran")
+         } else {
+           document.documentElement.classList.remove('dark');
+           setDarkMode(false);
+          }
+      
+    }, []); 
+     
+    useEffect(() => {
+        const getTokenFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const jwtCookie = cookies.find(cookie =>
+                cookie.startsWith('sjwt='));
+            if (jwtCookie) {
+                return jwtCookie.split('=')[1];
+            } return null;
         };
+        const jwtToken = getTokenFromCookie();
+        setToken(jwtToken)
+        setLoading(false)
+    },[])
+        
+        
+  const logout = () => {
+    console.log("logged out.")
+  }    
+
+ const toggleDarkMode = () => {
+          if (darkMode) { 
+              document.documentElement.classList.remove('dark');
+              localStorage.setItem('theme', 'light');
+              } else {
+               document.documentElement.classList.add('dark');
+               localStorage.setItem('theme', 'dark');
+               }
+               setDarkMode(!darkMode); 
+};
          
     return (
         <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-def">
@@ -71,7 +94,13 @@ const [sidebar,setSidebar] = useState(false)
 
                         <Link href="/shop" className="text-black dark:text-white hover:text-indigo-600">Shop</Link>
                         
-                        <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Messages</Link>
+                         {!token && !loading && ( <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Messages</Link>)}
+                        {!token && !loading ? (
+                            <Link href="/sell" className="text-black dark:text-white hover:text-indigo-600">Sell</Link>
+
+                        ) : (
+                                <Link href="/sellerdashboard" className="text-black dark:text-white hover:text-indigo-600">Dashboard</Link>
+                        )}
                         <Link href="/community" className="text-black dark:text-white hover:text-indigo-600">Community</Link>
                        
 
@@ -106,24 +135,26 @@ const [sidebar,setSidebar] = useState(false)
                                 </svg>
                             </button>
                               {isMenuOpen && (
-                                <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg transition-opacity duration-500" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+                                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-def rounded-md shadow-lg transition-opacity duration-500" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
                                     <div className="py-2" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                         <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Item 1</a>
-                                          <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Item 2</a>
-                                          <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Item 3</a> 
+                                         <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 dark:text-white">Item 1</a>
+                                          <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 dark:text-white">Item 2</a>
+                                          <a href="#" onClick={logout} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 dark:text-white">Logout</a> 
                                           </div> 
                                           </div>
                                         )} 
                                     </div>
 
                   
-                        <Link href="/cart" className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full relative">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-black dark:text-white">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                            </svg>
+                       {!token && !loading &&(
+                            <Link href="/cart" className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-black dark:text-white">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                </svg>
 
-                            <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full size-4 md:size-4 sm:size-4 flex items-center justify-center">3</span>
-                        </Link>
+                                <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full size-4 md:size-4 sm:size-4 flex items-center justify-center">3</span>
+                            </Link>
+                       )}
                     </div>
                 </div>
             </div>

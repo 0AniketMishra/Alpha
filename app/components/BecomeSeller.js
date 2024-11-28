@@ -38,7 +38,7 @@ function BecomeSeller() {
                     </div>
                 </section>
          ):(
-                   <div className='lg:ml-[18rem] py-24'>
+                   <div className='mt-32'>
                     <SellerForm/>
                    </div>
          )}

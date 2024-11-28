@@ -32,7 +32,7 @@ const Home = () => {
 
   return (
 
-    <div className='flex-1 h-full'>
+    <div className='h-full'>
  
       <Header />
       <Hero />

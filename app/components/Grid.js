@@ -22,9 +22,7 @@ const Grid = () => {
                  fetchListings(); 
         }, []);
 
-listings.map(prod => {
-  console.log(prod.highlightFeatures)
-})
+
 
     const featuredProducts = [
         {

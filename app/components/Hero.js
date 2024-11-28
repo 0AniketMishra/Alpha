@@ -1,5 +1,7 @@
+"use client"
 import Link from 'next/link'
 import ProductCard from './ProductCard';
+import { useEffect, useState } from 'react';
 
 export default function Hero() {
     const categories = [
@@ -8,6 +10,69 @@ export default function Hero() {
         { name: "Home & Living", count: "250" },
         { name: "Sports", count: "180" }
     ];
+
+    const [listings, setListings] = useState([{
+        id: 1,
+        title: "Loading Please wait...",
+        price: 299.99,
+        originalPrice: 399.99,
+        rating: 4,
+        reviews: 128,
+        image: "https://dummyimage.com/16:9x1080",
+        description: "The content is currently Loading.",
+        stock: 8,
+        badge: "limited"
+    },
+        {
+            id: 2,
+            title: "Loading Please wait...",
+            price: 299.99,
+            originalPrice: 399.99,
+            rating: 4,
+            reviews: 128,
+            image: "https://dummyimage.com/16:9x1080",
+            description: "The content is currently Loading.",
+            stock: 8,
+            badge: "limited"
+        },
+        {
+            id: 3,
+            title: "Loading Please wait...",
+            price: 299.99,
+            originalPrice: 399.99,
+            rating: 4,
+            reviews: 128,
+            image: "https://dummyimage.com/16:9x1080",
+            description: "The content is currently Loading.",
+            stock: 8,
+            badge: "limited"
+        },
+        {
+            id: 4,
+            title: "Loading Please wait...",
+            price: 299.99,
+            originalPrice: 399.99,
+            rating: 4,
+            reviews: 128,
+            image: "https://dummyimage.com/16:9x1080",
+            description: "The content is currently Loading.",
+            stock: 8,
+            badge: "sale"
+        },
+]);
+
+    useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                const response = await fetch('http://localhost:3001/listings');
+                const data = await response.json();
+                setListings(data);
+            } catch (error) {
+                console.error('Error fetching listings:', error);
+            }
+        };
+        fetchListings();
+    }, []);
 
 
     const featuredProducts = [
@@ -62,7 +127,7 @@ export default function Hero() {
 
 
     return (
-        <div className='dark:bg-def bg-defl'>
+        <div className='dark:bg-black bg-defl'>
             <div className="relative pt-16">
                 <div className="absolute inset-0">
                     <img
@@ -139,7 +204,7 @@ export default function Hero() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {featuredProducts.map((product) => (
+                    {listings.map((product) => (
                         <ProductCard
                             key={product.id}
                             {...product}
@@ -178,7 +243,7 @@ export default function Hero() {
             {/* Footer */}
 
 
-            <footer className="bg-defl dark:bg-def">
+            <footer className="bg-defl dark:bg-black">
                 <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div>

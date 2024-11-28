@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { auth } from '@/firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
-
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
@@ -23,7 +23,7 @@ function Page() {
     const [showFilters, setShowFilters] = useState(false);
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null)
-
+    const [prompt,setPrompt] = useState(false)
 
     useEffect(() => { // Function to get JWT from cookies 
 
@@ -31,15 +31,22 @@ function Page() {
             const cookies = document.cookie.split('; ');
             const jwtCookie = cookies.find(cookie =>
                 cookie.startsWith('jwt='));
-            if (jwtCookie) {
+            const jwtCookie2 = cookies.find(cookie =>
+                cookie.startsWith('sjwt='));
+            if (jwtCookie ) {
                 return jwtCookie.split('=')[1];
-            } return null;
+            }
+            if(jwtCookie2){
+                setPrompt(true)
+                return jwtCookie2.split('='[1]);
+            }
+            return null;
         };
         const jwtToken = getTokenFromCookie();
         setToken(jwtToken)
         setLoading(false);
     
-    });
+    },[]);
 
 
     const categories = ['All', 'Electronics', 'Fashion', 'Home & Living', 'Sports'];
@@ -77,8 +84,9 @@ function Page() {
                           <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4">
 
                               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop All Products</h1>
-
-
+                                {prompt &&(
+                                  <h1 className='font-bold text-red-900 '>NOTE: Sellers can only view listings but cannot buy them.</h1>
+                                )}
                               <div className="flex items-center space-x-4 mt-4 md:mt-0">
                                   <button
                                       onClick={() => setShowFilters(!showFilters)}
@@ -91,7 +99,7 @@ function Page() {
 
                                       <span className='text-black dark:text-white'>Filters</span>
                                   </button>
-
+                                 
                                   <div className="relative">
                                       <select
                                           value={selectedSort}

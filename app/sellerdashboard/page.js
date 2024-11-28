@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     LineChart, Line, AreaChart, Area, BarChart, Bar,
     XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -13,6 +13,13 @@ import {
     CheckCircle, XCircle, AlertCircle
 } from 'lucide-react';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
+import { useRouter } from 'next/navigation';
+import AddProduct from '../components/AddProduct';
+import { Button, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import ProductCard from '../components/ProductCard';
+
+
 
 const revenueData = [
     { name: 'Jan', value: 4000 },
@@ -98,17 +105,64 @@ const tabs = [
     { id: 'settings', name: 'Settings', icon: Settings }
 ];
 
+
+
+
+
+
+
 export default function SellerDashboard() {
+
     const [activeTab, setActiveTab] = useState('dashboard');
     const [activeOrdersTab, setActiveOrdersTab] = useState('pending');
     const [showNotifications, setShowNotifications] = useState(false);
-
+    const [token, setToken] = useState(null)
+    const [loading, setLoading] = useState(true)
     const totalRevenue = revenueData.reduce((acc, item) => acc + item.value, 0);
     const totalImpressions = productPerformance.reduce((acc, item) => acc + item.impressions, 0);
     const averageConversion = productPerformance.reduce((acc, item) => acc + item.conversion, 0) / productPerformance.length;
+    const [isOpen, SetIsOpen] = useState(false)
+
+    const router = useRouter()
+    useEffect(() => { // Function to get JWT from cookies 
+
+        const getTokenFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const jwtCookie = cookies.find(cookie =>
+                cookie.startsWith('sjwt='));
+            if (jwtCookie) {
+                return jwtCookie.split('=')[1];
+            } return null;
+        };
+        const jwtToken = getTokenFromCookie();
+        setToken(jwtToken)
+
+        setLoading(false);
+
+    });
+
+    useEffect(() => {
+        if (!loading && !token) {
+            router.push('/sellerLogin');
+        }
+    }, [loading, token]);
 
 
-    
+    const data =
+    {
+        id: 4,
+        title: "Product Name.",
+        price: 159.99,
+        rating: 5,
+        reviews: 167,
+        sellerId: "@Assasin123",
+        sellerName: "The Assasin",
+        image: "https://dummyimage.com/16:9x1080",
+        description: "Your product description here!",
+        stock: 12,
+        badge: "new"
+    }
+
     const StatCard = ({ icon: Icon, title, value, trend, trendValue }) => (
         <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
             <div className="flex items-center justify-between">
@@ -132,8 +186,8 @@ export default function SellerDashboard() {
 
     const renderDashboard = () => (
         <>
-        
-            <div className="grid grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+            <div>  <div className="grid grid-cols-1 grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <StatCard
                     icon={DollarSign}
                     title="Total Revenue"
@@ -164,109 +218,110 @@ export default function SellerDashboard() {
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
-                    <h2 className="text-lg font-semibold mb-4">Revenue Trend</h2>
-                    <div className="h-80">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={revenueData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip />
-                                <Area
-                                    type="monotone"
-                                    dataKey="value"
-                                    stroke="#4F46E5"
-                                    fill="#4F46E5"
-                                    fillOpacity={0.1}
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
+                        <h2 className="text-lg font-semibold mb-4">Revenue Trend</h2>
+                        <div className="h-80">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={revenueData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Area
+                                        type="monotone"
+                                        dataKey="value"
+                                        stroke="#4F46E5"
+                                        fill="#4F46E5"
+                                        fillOpacity={0.1}
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
+                        <h2 className="text-lg font-semibold mb-4">Category Distribution</h2>
+                        <div className="h-80">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={categoryDistribution}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={60}
+                                        outerRadius={100}
+                                        fill="#8884d8"
+                                        paddingAngle={5}
+                                        dataKey="value"
+                                    >
+                                        {categoryDistribution.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div className="mt-4 grid grid-cols-2 gap-4">
+                            {categoryDistribution.map((item, index) => (
+                                <div key={item.name} className="flex items-center">
+                                    <div
+                                        className="w-3 h-3 rounded-full mr-2"
+                                        style={{ backgroundColor: COLORS[index] }}
+                                    />
+                                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                                        {item.name} ({item.value}%)
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
-                    <h2 className="text-lg font-semibold mb-4">Category Distribution</h2>
-                    <div className="h-80">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                                <Pie
-                                    data={categoryDistribution}
-                                    cx="50%"
-                                    cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={100}
-                                    fill="#8884d8"
-                                    paddingAngle={5}
-                                    dataKey="value"
-                                >
-                                    {categoryDistribution.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                    ))}
-                                </Pie>
-                                <Tooltip />
-                            </PieChart>
-                        </ResponsiveContainer>
-                    </div>
-                    <div className="mt-4 grid grid-cols-2 gap-4">
-                        {categoryDistribution.map((item, index) => (
-                            <div key={item.name} className="flex items-center">
-                                <div
-                                    className="w-3 h-3 rounded-full mr-2"
-                                    style={{ backgroundColor: COLORS[index] }}
-                                />
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
-                                    {item.name} ({item.value}%)
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="bg-white dark:bg-def rounded-lg shadow-sm overflow-hidden">
-                <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-lg font-semibold">Recent Orders</h2>
-                        <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                            View All
-                        </button>
-                    </div>
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="text-left border-b dark:border-gray-700">
-                                    <th className="pb-4 font-medium text-gray-500">Order ID</th>
-                                    <th className="pb-4 font-medium text-gray-500">Customer</th>
-                                    <th className="pb-4 font-medium text-gray-500">Items</th>
-                                    <th className="pb-4 font-medium text-gray-500">Total</th>
-                                    <th className="pb-4 font-medium text-gray-500">Status</th>
-                                    <th className="pb-4 font-medium text-gray-500">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {pendingOrders.map((order) => (
-                                    <tr key={order.id} className="border-b dark:border-gray-700 last:border-0">
-                                        <td className="py-4">{order.id}</td>
-                                        <td className="py-4">{order.customer}</td>
-                                        <td className="py-4">{order.items.join(', ')}</td>
-                                        <td className="py-4">${order.total}</td>
-                                        <td className="py-4">
-                                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
-                                                {order.status}
-                                            </span>
-                                        </td>
-                                        <td className="py-4">
-                                            <button className="text-indigo-600 hover:text-indigo-700">View Details</button>
-                                        </td>
+                <div className="bg-white dark:bg-def rounded-lg shadow-sm overflow-hidden">
+                    <div className="p-6">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-lg font-semibold">Recent Orders</h2>
+                            <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                                View All
+                            </button>
+                        </div>
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="text-left border-b dark:border-gray-700">
+                                        <th className="pb-4 font-medium text-gray-500">Order ID</th>
+                                        <th className="pb-4 font-medium text-gray-500">Customer</th>
+                                        <th className="pb-4 font-medium text-gray-500">Items</th>
+                                        <th className="pb-4 font-medium text-gray-500">Total</th>
+                                        <th className="pb-4 font-medium text-gray-500">Status</th>
+                                        <th className="pb-4 font-medium text-gray-500">Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {pendingOrders.map((order) => (
+                                        <tr key={order.id} className="border-b dark:border-gray-700 last:border-0">
+                                            <td className="py-4">{order.id}</td>
+                                            <td className="py-4">{order.customer}</td>
+                                            <td className="py-4">{order.items.join(', ')}</td>
+                                            <td className="py-4">${order.total}</td>
+                                            <td className="py-4">
+                                                <span className="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+                                                    {order.status}
+                                                </span>
+                                            </td>
+                                            <td className="py-4">
+                                                <button className="text-indigo-600 hover:text-indigo-700">View Details</button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div></div>
+
         </>
     );
 
@@ -276,8 +331,8 @@ export default function SellerDashboard() {
                 <div className="flex space-x-4 mb-6">
                     <button
                         className={`px-4 py-2 rounded-lg ${activeOrdersTab === 'pending'
-                                ? 'bg-indigo-600 text-white'
-                                : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                            ? 'bg-indigo-600 text-white'
+                            : 'dark:text-gray-600 text-black hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveOrdersTab('pending')}
                     >
@@ -285,8 +340,8 @@ export default function SellerDashboard() {
                     </button>
                     <button
                         className={`px-4 py-2 rounded-lg ${activeOrdersTab === 'ongoing'
-                                ? 'bg-indigo-600 text-white'
-                                : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                            ? 'bg-indigo-600 text-white '
+                            : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveOrdersTab('ongoing')}
                     >
@@ -294,8 +349,8 @@ export default function SellerDashboard() {
                     </button>
                     <button
                         className={`px-4 py-2 rounded-lg ${activeOrdersTab === 'completed'
-                                ? 'bg-indigo-600 text-white'
-                                : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                            ? 'bg-indigo-600 text-white'
+                            : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveOrdersTab('completed')}
                     >
@@ -309,7 +364,7 @@ export default function SellerDashboard() {
                             <div key={order.id} className="border dark:border-gray-700 rounded-lg p-4">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
-                                        <h3 className="font-medium">{order.id}</h3>
+                                        <h3 className="font-medium text-black dark:text-white">{order.id}</h3>
                                         <p className="text-sm text-gray-500">{order.date}</p>
                                     </div>
                                     <div className="flex space-x-2">
@@ -322,9 +377,9 @@ export default function SellerDashboard() {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <p><span className="text-gray-500">Customer:</span> {order.customer}</p>
-                                    <p><span className="text-gray-500">Items:</span> {order.items.join(', ')}</p>
-                                    <p><span className="text-gray-500">Total:</span> ${order.total}</p>
+                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Customer:</span> {order.customer}</p>
+                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Items:</span> {order.items.join(', ')}</p>
+                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Total:</span> ${order.total}</p>
                                 </div>
                             </div>
                         ))}
@@ -337,7 +392,7 @@ export default function SellerDashboard() {
                             <div key={order.id} className="border dark:border-gray-700 rounded-lg p-4">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
-                                        <h3 className="font-medium">{order.id}</h3>
+                                        <h3 className="font-medium text-black dark:text-white">{order.id}</h3>
                                         <p className="text-sm text-gray-500">{order.date}</p>
                                     </div>
                                     <button className="px-3 py-1 bg-indigo-600 text-white rounded-lg text-sm">
@@ -345,16 +400,16 @@ export default function SellerDashboard() {
                                     </button>
                                 </div>
                                 <div className="space-y-2">
-                                    <p><span className="text-gray-500">Customer:</span> {order.customer}</p>
-                                    <p><span className="text-gray-500">Items:</span> {order.items.join(', ')}</p>
-                                    <p><span className="text-gray-500">Total:</span> ${order.total}</p>
+                                    <p className='text-black dark:text-white'><span className="text-gray-500">Customer:</span> {order.customer}</p>
+                                    <p className='text-black dark:text-white'><span className="text-gray-500">Items:</span> {order.items.join(', ')}</p>
+                                    <p className='text-black dark:text-white'><span className="text-gray-500">Total:</span> ${order.total}</p>
                                     <div className="mt-4">
                                         <h4 className="font-medium mb-2">Shipping Updates</h4>
                                         <div className="space-y-2">
                                             {order.shippingUpdates.map((update, index) => (
                                                 <div key={index} className="flex items-center space-x-2">
                                                     <CheckCircle className="h-4 w-4 text-green-500" />
-                                                    <span className="text-sm">{update.status}</span>
+                                                    <span className="text-sm text-black dark:text-white">{update.status}</span>
                                                     <span className="text-sm text-gray-500">- {update.date}</span>
                                                 </div>
                                             ))}
@@ -385,12 +440,36 @@ export default function SellerDashboard() {
                         <Filter className="h-5 w-5" />
                     </button>
                 </div>
-                <button className="flex items-center space-x-2 bg-indigo-600 text-white w-fit p-2 border-2 border-indigo-600 rounded-lg hover:bg-indigo-700">
+                <button onClick={() => SetIsOpen(true)} className="flex items-center space-x-2 bg-indigo-600 text-white w-fit p-2 border-2 border-indigo-600 rounded-lg hover:bg-indigo-700">
                     <Plus className="h-5 w-5" />
                     <span className='hidden lg:flex'>Add Product</span>
                 </button>
             </div>
-            
+
+
+            <Dialog open={isOpen} as="div" className="relative z-10 focus:outline-none" onClose={() => SetIsOpen(false)}>
+                <DialogBackdrop className="fixed inset-0 bg-black/30" />
+                <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                    <div className="flex min-h-full items-center justify-center p-4">
+                        <DialogPanel
+                            transition
+                            className="w-full max-w-7xl rounded-xl p-8 dark:bg-def bg-defl  duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+                        >
+                            <DialogTitle as="h3" className="text-xl font-medium  text-white">
+                                Add New Listing
+                            </DialogTitle>
+                            <div className='flex mt-12 '>
+                              <div className="max-w-sm border-r border-gray-400 pr-6">
+                                    <ProductCard {...data} />
+                              </div>
+                                <div className='ml-6'>
+                                    <h1>Your Product Name.</h1>
+                                </div>
+                            </div>
+                        </DialogPanel>
+                    </div>
+                </div>
+            </Dialog>
 
             <div className="bg-white dark:bg-def  rounded-lg shadow-sm overflow-x-scroll w-full">
                 <div className="p-6">
@@ -412,20 +491,20 @@ export default function SellerDashboard() {
                                         <div className="flex items-center space-x-3">
                                             <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gray-100" />
                                             <div>
-                                                <p className="font-medium">{product.name}</p>
+                                                <p className="font-medium text-black dark:text-white">{product.name}</p>
                                                 <p className="text-sm text-gray-500">SKU: PRD-{Math.random().toString(36).substr(2, 9)}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="py-4 px-4">{product.stock} units</td>
-                                    <td className="py-4 px-4">${(product.revenue / 100).toFixed(2)}</td>
-                                    <td className="py-4 px-4">{Math.floor(Math.random() * 100)} units</td>
-                                    <td className="py-4 px-4">
+                                    <td className="py-4 px-4 dark:text-white text-black">{product.stock} units</td>
+                                    <td className="py-4 px-4 dark:text-white text-black">${(product.revenue / 100).toFixed(2)}</td>
+                                    <td className="py-4 px-4 dark:text-white text-black">{Math.floor(Math.random() * 100)} units</td>
+                                    <td className="py-4 px-4 dark:text-white text-black">
                                         <span className={`px-2 py-1  text-xs font-medium rounded-full ${product.stock > 20
-                                                ? 'bg-green-100 text-green-800'
-                                                : product.stock > 10
-                                                    ? 'bg-yellow-100 text-yellow-800'
-                                                    : 'bg-red-100 text-red-800'
+                                            ? 'bg-green-100 text-green-800'
+                                            : product.stock > 10
+                                                ? 'bg-yellow-100 text-yellow-800'
+                                                : 'bg-red-100 text-red-800'
                                             }`}>
                                             {product.stock > 20 ? 'In Stock' : product.stock > 10 ? 'Low Stock' : 'Critical Stock'}
                                         </span>
@@ -448,14 +527,14 @@ export default function SellerDashboard() {
     const renderTransactions = () => (
         <div className="space-y-6">
             <div className="bg-white dark:bg-def rounded-lg shadow-sm p-6">
-                <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
+                <h2 className="text-lg font-semibold mb-4 text-black dark:text-white">Recent Transactions</h2>
                 <div className="space-y-4">
                     {recentTransactions.map((transaction) => (
                         <div key={transaction.id} className="flex items-center justify-between p-4 border dark:border-gray-700 rounded-lg">
                             <div className="flex items-center space-x-4">
                                 <div className={`p-2 rounded-full ${transaction.status === 'completed'
-                                        ? 'bg-green-100 text-green-600'
-                                        : 'bg-yellow-100 text-yellow-600'
+                                    ? 'bg-green-100 text-green-600'
+                                    : 'bg-yellow-100 text-yellow-600'
                                     }`}>
                                     {transaction.status === 'completed' ? (
                                         <CheckCircle className="h-6 w-6" />
@@ -464,12 +543,12 @@ export default function SellerDashboard() {
                                     )}
                                 </div>
                                 <div>
-                                    <p className="font-medium">{transaction.id}</p>
+                                    <p className="font-medium text-black dark:text-white">{transaction.id}</p>
                                     <p className="text-sm text-gray-500">{transaction.customer}</p>
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="font-medium">${transaction.amount}</p>
+                                <p className="font-medium text-black dark:text-white">${transaction.amount}</p>
                                 <p className="text-sm text-gray-500">{transaction.date}</p>
                             </div>
                         </div>
@@ -495,106 +574,112 @@ export default function SellerDashboard() {
     };
 
     return (
-        <div className="pt-16">
-            <Header/>
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-defl  dark:bg-def z-10 border-t dark:border-gray-700 px-4 py-2">
-                <div className="flex justify-around items-center">
-                    {tabs.map((tab) => {
-                        const Icon = tab.icon;
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`p-3 rounded-lg ${activeTab === tab.id
-                                        ? 'bg-indigo-100 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400'
-                                        : 'text-gray-600 dark:text-gray-400'
-                                    }`}
-                            >
-                                <Icon className="h-6 w-6" />
-                            </button>
-                        );
-                    })}
-                </div>
-            </div>
-            <div className="flex h-[calc(100vh-4rem)]">
-                {/* Sidebar */}
-                <div className="w-64 hidden md:flex bg-white dark:bg-def border-r dark:border-gray-700  flex-col">
-                    <div className="p-4">
-                        <h2 className="text-xl font-bold text-gray-900 dark:text-white"></h2>
-                    </div>
-
-                    <nav className="flex-1 px-2 py-4 space-y-1">
-                        {tabs.map((tab) => {
-                            const Icon = tab.icon;
-                            return (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm ${activeTab === tab.id
-                                            ? 'bg-indigo-600 text-white'
-                                            : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
-                                        }`}
-                                >
-                                    <Icon className="h-5 w-5" />
-                                    <span>{tab.name}</span>
-                                </button>
-                            );
-                        })}
-                    </nav>
-
-                    <div className="p-4 border-t dark:border-gray-700">
-                        <button className="w-full flex items-center space-x-3 px-3 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
-                            <LogOut className="h-5 w-5" />
-                            <span>Logout</span>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Main Content */}
-                <div className="flex-1 overflow-auto bg-gray-50 dark:bg-black">
-                    <div className="lg:p-8 p-4">
-                        <div className="flex items-center justify-between mb-8">
-                            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                                {tabs.find(tab => tab.id === activeTab)?.name}
-                            </h1>
-
-                            <div className="flex items-center space-x-4">
-                                <div className="relative">
+        <div>
+            {token && !loading ? (
+                <div className="pt-16">
+                    <Header />
+                    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-defl  dark:bg-def z-10 border-t dark:border-gray-700 px-4 py-2">
+                        <div className="flex justify-around items-center">
+                            {tabs.map((tab) => {
+                                const Icon = tab.icon;
+                                return (
                                     <button
-                                        onClick={() => setShowNotifications(!showNotifications)}
-                                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full relative"
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`p-3 rounded-lg ${activeTab === tab.id
+                                            ? 'bg-indigo-100 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400'
+                                            : 'text-gray-600 dark:text-gray-400'
+                                            }`}
                                     >
-                                        <Bell className="h-6 w-6" />
-                                        <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
+                                        <Icon className="h-6 w-6" />
                                     </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="flex h-[calc(100vh-4rem)]">
+                        {/* Sidebar */}
+                        <div className="w-64 hidden md:flex bg-white dark:bg-def border-r dark:border-gray-700  flex-col">
+                            <div className="p-4">
+                                <h2 className="text-xl font-bold text-gray-900 dark:text-white"></h2>
+                            </div>
 
-                                    {showNotifications && (
-                                        <div className="absolute right-0  mt-2 w-80 bg-white dark:bg-def rounded-lg shadow-lg border dark:border-gray-700 py-2">
-                                            <div className="px-4 py-2 border-b dark:border-gray-700">
-                                                <h3 className="font-medium">Notifications</h3>
-                                            </div>
-                                            <div className="max-h-64 overflow-y-auto">
-                                                <div className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                                    <p className="text-sm">New order received</p>
-                                                    <p className="text-xs text-gray-500">2 minutes ago</p>
-                                                </div>
-                                                <div className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                                    <p className="text-sm">Low stock alert: Wireless Headphones</p>
-                                                    <p className="text-xs text-gray-500">1 hour ago</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
+                            <nav className="flex-1 px-2 py-4 space-y-1">
+                                {tabs.map((tab) => {
+                                    const Icon = tab.icon;
+                                    return (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => setActiveTab(tab.id)}
+                                            className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm ${activeTab === tab.id
+                                                ? 'bg-indigo-600 text-white'
+                                                : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                                                }`}
+                                        >
+                                            <Icon className="h-5 w-5" />
+                                            <span>{tab.name}</span>
+                                        </button>
+                                    );
+                                })}
+                            </nav>
 
-                                <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700" />
+                            <div className="p-4 border-t dark:border-gray-700">
+                                <button className="w-full flex items-center space-x-3 px-3 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
+                                    <LogOut className="h-5 w-5" />
+                                    <span>Logout</span>
+                                </button>
                             </div>
                         </div>
 
-                        {renderContent()}
+                        {/* Main Content */}
+                        <div className="flex-1 overflow-auto bg-gray-50 dark:bg-black">
+                            <div className="lg:p-8 p-4">
+                                <div className="flex items-center justify-between mb-8">
+                                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                        {tabs.find(tab => tab.id === activeTab)?.name}
+                                    </h1>
+
+                                    <div className="flex items-center space-x-4">
+                                        <div className="relative">
+                                            <button
+                                                onClick={() => setShowNotifications(!showNotifications)}
+                                                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full relative"
+                                            >
+                                                <Bell className="h-6 w-6" />
+                                                <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
+                                            </button>
+
+                                            {showNotifications && (
+                                                <div className="absolute right-0  mt-2 w-80 bg-white dark:bg-def rounded-lg shadow-lg border dark:border-gray-700 py-2">
+                                                    <div className="px-4 py-2 border-b dark:border-gray-700">
+                                                        <h3 className="font-medium">Notifications</h3>
+                                                    </div>
+                                                    <div className="max-h-64 overflow-y-auto">
+                                                        <div className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                            <p className="text-sm">New order received</p>
+                                                            <p className="text-xs text-gray-500">2 minutes ago</p>
+                                                        </div>
+                                                        <div className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                            <p className="text-sm">Low stock alert: Wireless Headphones</p>
+                                                            <p className="text-xs text-gray-500">1 hour ago</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700" />
+                                    </div>
+                                </div>
+
+                                {renderContent()}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <Loading />
+            )}
         </div>
     );
 }
