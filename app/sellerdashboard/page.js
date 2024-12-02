@@ -10,7 +10,9 @@ import {
     Eye, ShoppingCart, Star, LayoutDashboard, ClipboardList,
     CreditCard, Truck, Settings, LogOut, Bell, Search,
     Plus, Filter, ArrowUpRight, ArrowDownRight, Clock,
-    CheckCircle, XCircle, AlertCircle
+    CheckCircle, XCircle, AlertCircle,
+    X,
+    Upload
 } from 'lucide-react';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
@@ -18,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import AddProduct from '../components/AddProduct';
 import { Button, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import ProductCard from '../components/ProductCard';
+import AddListingModal from '../components/AddListingModal';
 
 
 
@@ -122,7 +125,10 @@ export default function SellerDashboard() {
     const totalImpressions = productPerformance.reduce((acc, item) => acc + item.impressions, 0);
     const averageConversion = productPerformance.reduce((acc, item) => acc + item.conversion, 0) / productPerformance.length;
     const [isOpen, SetIsOpen] = useState(false)
-
+    const [price,setPrice] = useState(0)
+    const [description,setDescription] = useState("")
+    const [title,setTitle] = useState("")
+    const [category,setCategory] = useState("")
     const router = useRouter()
     useEffect(() => { // Function to get JWT from cookies 
 
@@ -161,6 +167,10 @@ export default function SellerDashboard() {
         description: "Your product description here!",
         stock: 12,
         badge: "new"
+    }
+
+    const handleAddListing = () => {
+        
     }
 
     const StatCard = ({ icon: Icon, title, value, trend, trendValue }) => (
@@ -220,7 +230,7 @@ export default function SellerDashboard() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                     <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
-                        <h2 className="text-lg font-semibold mb-4">Revenue Trend</h2>
+                        <h2 className="text-lg font-semibold mb-4 text-black dark:text-white mb-16">Revenue Trend</h2>
                         <div className="h-80">
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={revenueData}>
@@ -241,7 +251,7 @@ export default function SellerDashboard() {
                     </div>
 
                     <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
-                        <h2 className="text-lg font-semibold mb-4">Category Distribution</h2>
+                        <h2 className="text-lg font-semibold mb-4 text-black dark:text-white">Category Distribution</h2>
                         <div className="h-80">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
@@ -281,8 +291,8 @@ export default function SellerDashboard() {
 
                 <div className="bg-white dark:bg-def rounded-lg shadow-sm overflow-hidden">
                     <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-semibold">Recent Orders</h2>
+                        <div className="flex items-center justify-between mb-8">
+                            <h2 className="text-lg font-semibold text-black dark:text-white">Recent Orders</h2>
                             <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
                                 View All
                             </button>
@@ -302,11 +312,11 @@ export default function SellerDashboard() {
                                 <tbody>
                                     {pendingOrders.map((order) => (
                                         <tr key={order.id} className="border-b dark:border-gray-700 last:border-0">
-                                            <td className="py-4">{order.id}</td>
-                                            <td className="py-4">{order.customer}</td>
-                                            <td className="py-4">{order.items.join(', ')}</td>
-                                            <td className="py-4">${order.total}</td>
-                                            <td className="py-4">
+                                            <td className="py-4 text-black dark:text-white">{order.id}</td>
+                                            <td className="py-4 text-black dark:text-white">{order.customer}</td>
+                                            <td className="py-4 text-black dark:text-white">{order.items.join(', ')}</td>
+                                            <td className="py-4 text-black dark:text-white">${order.total}</td>
+                                            <td className="py-4 text-black dark:text-white">
                                                 <span className="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
                                                     {order.status}
                                                 </span>
@@ -447,29 +457,12 @@ export default function SellerDashboard() {
             </div>
 
 
-            <Dialog open={isOpen} as="div" className="relative z-10 focus:outline-none" onClose={() => SetIsOpen(false)}>
-                <DialogBackdrop className="fixed inset-0 bg-black/30" />
-                <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4">
-                        <DialogPanel
-                            transition
-                            className="w-full max-w-7xl rounded-xl p-8 dark:bg-def bg-defl  duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
-                        >
-                            <DialogTitle as="h3" className="text-xl font-medium  text-white">
-                                Add New Listing
-                            </DialogTitle>
-                            <div className='flex mt-12 '>
-                              <div className="max-w-sm border-r border-gray-400 pr-6">
-                                    <ProductCard {...data} />
-                              </div>
-                                <div className='ml-6'>
-                                    <h1>Your Product Name.</h1>
-                                </div>
-                            </div>
-                        </DialogPanel>
-                    </div>
-                </div>
-            </Dialog>
+              <AddListingModal
+                isOpen={isOpen}
+                onClose={() => SetIsOpen(false)}
+                onAdd={handleAddListing}
+                token2 = {token}
+            />
 
             <div className="bg-white dark:bg-def  rounded-lg shadow-sm overflow-x-scroll w-full">
                 <div className="p-6">
@@ -645,22 +638,22 @@ export default function SellerDashboard() {
                                                 onClick={() => setShowNotifications(!showNotifications)}
                                                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full relative"
                                             >
-                                                <Bell className="h-6 w-6" />
+                                                <Bell className="h-6 w-6 text-black dark:text-white" />
                                                 <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" />
                                             </button>
 
                                             {showNotifications && (
                                                 <div className="absolute right-0  mt-2 w-80 bg-white dark:bg-def rounded-lg shadow-lg border dark:border-gray-700 py-2">
                                                     <div className="px-4 py-2 border-b dark:border-gray-700">
-                                                        <h3 className="font-medium">Notifications</h3>
+                                                        <h3 className="font-medium text-black dark:text-white">Notifications</h3>
                                                     </div>
                                                     <div className="max-h-64 overflow-y-auto">
                                                         <div className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                                            <p className="text-sm">New order received</p>
+                                                            <p className="text-sm  text-black dark:text-white">New order received</p>
                                                             <p className="text-xs text-gray-500">2 minutes ago</p>
                                                         </div>
                                                         <div className="px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                                            <p className="text-sm">Low stock alert: Wireless Headphones</p>
+                                                            <p className="text-sm text-black dark:text-white">Low stock alert: Wireless Headphones</p>
                                                             <p className="text-xs text-gray-500">1 hour ago</p>
                                                         </div>
                                                     </div>
@@ -668,7 +661,7 @@ export default function SellerDashboard() {
                                             )}
                                         </div>
 
-                                        <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700" />
+                                        <img src='https://avatars.githubusercontent.com/u/111168015?s=400&u=c792e1faad704240a512e69125f777454e997371&v=4' className="h-8 w-8 rounded-full " />
                                     </div>
                                 </div>
 

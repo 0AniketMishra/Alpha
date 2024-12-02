@@ -4,12 +4,13 @@ import {getFirestore} from 'firebase/firestore'
 import {getAuth} from 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCp_Bx-V1bnm6_tGm19Hb21bVo6FUaLtLQ",
-    authDomain: "shadow-trade-17aaa.firebaseapp.com",
-    projectId: "shadow-trade-17aaa",
-    storageBucket: "shadow-trade-17aaa.appspot.com",
-    messagingSenderId: "410331685267",
-    appId: "1:410331685267:web:23e84278aea9e0eb934866"
+    apiKey: "AIzaSyC1EXT4exheSKY-lJW_zaA3M2clyfS2TeY",
+    authDomain: "techsparks-32cab.firebaseapp.com",
+    projectId: "techsparks-32cab",
+    storageBucket: "techsparks-32cab.appspot.com",
+    messagingSenderId: "108607861956",
+    appId: "1:108607861956:web:569af3978d43caf1238591",
+    measurementId: "G-9HM3LDXP0R"
 };
 
 const app = initializeApp(firebaseConfig);

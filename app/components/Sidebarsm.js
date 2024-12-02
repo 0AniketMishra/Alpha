@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { db, auth } from '@/firebaseConfig';
 import { signOut } from 'firebase/auth';
 import Link from 'next/link';
 
 const Sidebarsm = () => {
+    
     async function logout() {
         await signOut(auth)
     }
+    
+     const [token,setToken] = useState(null)
+     const [loading,setLoading] = useState(true)
+
+       useEffect(() => {
+        const getTokenFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const jwtCookie = cookies.find(cookie =>
+                cookie.startsWith('sjwt='));
+            if (jwtCookie) {
+                return jwtCookie.split('=')[1];
+            } return null;
+        };
+        const jwtToken = getTokenFromCookie();
+        setToken(jwtToken)
+        setLoading(false)
+    },[])
+
+
+
     return (
         <div className="fixed dark:bg-def bg-white z-1 top-16  h-full animate-slideIn  w-full max-w-[20rem] pr-0 pl-4 pt-2 pb-2  ">
             <div className="mb-2 p-2 mt-8">
@@ -65,15 +86,17 @@ const Sidebarsm = () => {
                         </div>
                     </div>
                 </div>
-                <Link href="/sellerdashboard" role="button" tabindex="0" className="flex items-center w-[90%] text-black dark:text-white p-3 rounded-lg text-start leading-tight transition-all dark:hover:bg-gray-900 hover:bg-defl outline-none">
-                    <div className="grid place-items-center mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
+              {!loading && token &&(
+                    <Link href="/sellerdashboard" role="button" tabindex="0" className="flex items-center w-[90%] text-black dark:text-white p-3 rounded-lg text-start leading-tight transition-all dark:hover:bg-gray-900 hover:bg-defl outline-none">
+                        <div className="grid place-items-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
 
 
-                    </div>Seller Dashboard
-                </Link>
+                        </div>Seller Dashboard
+                    </Link>
+              )}
                 <div role="button" tabindex="0" className="flex items-center w-[90%] p-3 rounded-lg text-black dark:text-white text-start leading-tight transition-all dark:hover:bg-gray-900 hover:bg-defl outline-none">
                     <div className="grid place-items-center mr-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-7">

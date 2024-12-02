@@ -38,6 +38,8 @@ module.exports = {
       colors:{
         def: "#0E0E0E",
         defl: "#f9fafb",
+        defl2: "#2A2A2A",
+
       }
     },
   },

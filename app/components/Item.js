@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
 
 const Item = ({info}) => {
-    
+
     const [show,setShow] = useState(false)
+    const images = info.image
+    
   return (
     <div>
           <section className="darK:text-white text-black body-font "> 
               <div className="container max-w-custom pt-32 px-4 mx-auto" bis_skin_checked="1">
                   <div className="  flex flex-wrap" bis_skin_checked="1">
-                      <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={info.image}/>
+                      {typeof images == 'string' ? (
+                          <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={info.image} />
+                      ) : (
+                            <div>
+                                  {images?.map((image) => (
+                                      <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={image} />
+                                  ))}
+                            </div>
+                      )}
                           <div className="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" bis_skin_checked="1">
                               <h2 className="text-sm title-font dark:text-gray-200 text-black  tracking-widest">BRAND NAME</h2>
                           <h1 className="dark:text-white text-black  text-3xl title-font font-medium mb-1">{info.title}</h1>
