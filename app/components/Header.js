@@ -86,7 +86,7 @@ const Header = () => {
 
                        )}
 
-                        <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">ShadowTrade</span>
+                        <span className="text-xl font-bold text-indigo-600 dark:text-yellow-300">ShadowTrade</span>
                     </div>
 
                     <div className="hidden lg:flex items-center space-x-8">

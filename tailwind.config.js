@@ -33,7 +33,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       aspectRatio: {
-        '16/10': '16 / 11',
+        '16/10': '16 / 10',
       },
       colors:{
         def: "#0E0E0E",

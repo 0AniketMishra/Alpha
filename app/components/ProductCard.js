@@ -1,3 +1,5 @@
+
+
 export default function ProductCard({
     image,
     title,
@@ -6,6 +8,7 @@ export default function ProductCard({
     originalPrice,
     badge,
     description,
+    variants,
     stock,
     reviews
 }) {
