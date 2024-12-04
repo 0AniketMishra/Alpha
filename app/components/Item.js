@@ -15,7 +15,7 @@ const Item = ({info}) => {
                       ) : (
                             <div>
                                   {images?.map((image) => (
-                                      <img alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={image} />
+                                      <img key={image} alt="ecommerce" className="lg:w-2/5 w-full  object-cover object-center rounded-lg" src={image} />
                                   ))}
                             </div>
                       )}
