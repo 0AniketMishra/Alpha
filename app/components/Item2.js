@@ -141,7 +141,7 @@ console.log(product)
                     </div>
 
                     {data?.map((info) => (
-                        <div className="mt-8">
+                        <div key={info.name} className="mt-8">
                             <h2 className="font-semibold mb-2 text-black dark:text-white">{info.name}</h2>
                             <div className="flex gap-4">
                                 {info?.options?.map(option => (
