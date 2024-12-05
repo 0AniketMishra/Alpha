@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Star, ChevronLeft, ChevronRight, Heart, Share2, ShoppingCart, DollarSign } from 'lucide-react';
+import Link from 'next/link'
 
 const colors = ['Stone Gray', 'Midnight Black', 'Ocean Blue'];
 const specs = [
@@ -46,13 +47,13 @@ console.log(product)
 
     return (
         <div className="pt-24 px-4 sm:px-6 lg:px-8 max-w-custom mx-auto">
-            <button
+            <Link href='/shop'
 
                 className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
             >
                 <ChevronLeft className="h-5 w-5 mr-1" />
                 Back to Shop
-            </button>
+            </Link>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 ">
                 <div className="space-y-4">
@@ -122,23 +123,7 @@ console.log(product)
                         )}
                     </div>
 
-                    <div className="mt-8">
-                        <h2 className="font-semibold mb-2 text-black dark:text-white">Color</h2>
-                        <div className="flex gap-4">
-                            {colors.map(color => (
-                                <button
-                                    key={color}
-                                    onClick={() => setSelectedColor(color)}
-                                    className={`px-4 py-2 text-sm md:text-md rounded-full border ${selectedColor === color
-                                        ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                                        : 'text-black dark:text-white border-gray-300 hover:border-gray-400'
-                                        }`}
-                                >
-                                    {color}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+                  
 
                     {data?.map((info) => (
                         <div key={info.name} className="mt-8">

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { db, auth } from '@/firebaseConfig';
 import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -17,7 +18,7 @@ function LoginForm() {
     const [processing,setProcessing] = useState(false); 
 
 
-
+    const notify = () => toast('Here is your toast.');
     
 
 
@@ -38,6 +39,7 @@ function LoginForm() {
                       document.cookie = `jwt=${data.token}; path=/`;
 
             if (status == 200){
+                
                 router.push('/shop')
             }
             
@@ -69,7 +71,7 @@ function LoginForm() {
     return (
         <div className='bg-defl dark:bg-black h-screen'>
 
-
+          
             <div className="mx-auto px-4 py-[20vh] sm:px-6 lg:px-4 flex h-full  w-full" >
                 {/* <div className="hidden lg:w-1/2 lg:flex mx-8">
                     <img alt="ecommerce" layout="fill" className=" object-fill w-full h-[30rem] rounded-lg" src="https://quotefancy.com/media/wallpaper/3840x2160/1246546-Colleen-Houck-Quote-Bad-things-sometimes-happen-to-good-people-the.jpg" />

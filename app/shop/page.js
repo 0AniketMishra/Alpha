@@ -12,6 +12,7 @@ import Sidebar from '../components/Sidebar'
 import Grid from '../components/Grid'
 import Loading from '../components/Loading'
 import { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 function Page() {
@@ -24,6 +25,11 @@ function Page() {
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null)
     const [prompt,setPrompt] = useState(false)
+
+
+    const notify = () => toast('❗ Sellers can only view listings but cannot buy them.',{className:"mt-16 px-6 dark:bg-def text-black dark:text-white", position: "top-center"});
+
+
 
     useEffect(() => { // Function to get JWT from cookies 
 
@@ -39,6 +45,7 @@ function Page() {
             if(jwtCookie2){
                 setPrompt(true)
                 return jwtCookie2.split('='[1]);
+               
             }
             return null;
         };
@@ -47,6 +54,11 @@ function Page() {
         setLoading(false);
     
     },[]);
+
+    useEffect(() => {
+        if(prompt)
+            notify()
+    },[prompt])
 
 
     const categories = ['All', 'Electronics', 'Fashion', 'Home & Living', 'Sports'];
@@ -79,14 +91,12 @@ function Page() {
               {!loading && token ? (
                   <div className=''>
                       <Header />
-
+                      <Toaster/>
                       <div className="pt-20 px-2 h-full sm:px-6 lg:px-8 max-w-custom mx-auto">
                           <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4">
 
                               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop All Products</h1>
-                                {prompt &&(
-                                  <h1 className='font-bold text-red-900 '>NOTE: Sellers can only view listings but cannot buy them.</h1>
-                                )}
+                               
                               <div className="flex items-center space-x-4 mt-4 md:mt-0">
                                   <button
                                       onClick={() => setShowFilters(!showFilters)}

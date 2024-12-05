@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { X, Upload, Plus, Minus, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
@@ -63,6 +64,12 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
         }
     };
 
+    const notify = () => toast('❗ Sellers can only view listings but cannot buy them.', { className: "mt-16 px-6 dark:bg-def text-black dark:text-white", position: "top-center" });
+
+
+
+
+
     const handleNext = async () => {
         
         if(wizard == 0)
@@ -71,7 +78,7 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
             setWizard(2)
         if (wizard == 2){
             try {
-                console.log(token)
+
                 const response = await fetch('https://alpha-backend-v7bb.vercel.app/createListing', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -86,7 +93,6 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                          token: token,
                          badge: "Limited",
                          highlightFeatures: features,
-                         variants: variants, 
 
 
                     }),
@@ -94,10 +100,7 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                 });
 
                 const data = await response.json()
-                  console.log(data)
-
-                const status = response.status
-
+           
                 
 
             } catch (error) {
@@ -161,6 +164,7 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
+            <Toaster/>
             <Dialog as="div" className="relative z-50" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}

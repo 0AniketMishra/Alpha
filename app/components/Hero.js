@@ -205,10 +205,13 @@ export default function Hero() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {listings.map((product) => (
+                        <Link href={{ pathname: '/items/' + product._id, query: { title: product.title, id: product._id, image: product.image, price: product.price, reviews: product.reviews, sellerName: product.sellerName, sellerId: product.sellerId, description: product.description, originalPrice: product.originalPrice, variants: product.variants, highlightFeatures: product.highlightFeatures } }} >
+
                         <ProductCard
                             key={product.id}
                             {...product}
                         />
+                  </Link>
                     ))}
                 </div>
             </div>

@@ -40,7 +40,7 @@ export default function ProductCard({
             </div>
             <div className="mt-4 p-4">
                 <div className="flex justify-between items-start">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">{title}</h3>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white line-clamp-1">{title}</h3>
                    
                     
                 </div>
@@ -69,7 +69,7 @@ export default function ProductCard({
                     )}
                     
                 </div> */}
-                <div className="flex mt-4 items-center space-x-2 ">
+                <div className="flex mt-2 items-center space-x-2 ">
                     {originalPrice && (
                         <span className="text-md text-gray-500 line-through dark:text-gray-400">
                             ${originalPrice}
@@ -82,14 +82,15 @@ export default function ProductCard({
                
             </div>
 
-            <div className="pl-4 pr-4 pb-4 pt-2 space-y-2">
+            <div className=" pl-4 pr-4 pb-4  space-y-2">
+                <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl hover:bg-gray-200 transition-colors dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                    Buy Now
+                </button>
+
                 <button className="w-full bg-indigo-600 text-white py-2 rounded-xl hover:bg-indigo-700 transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600">
                     Add to Cart
                 </button>
-             
-                {/* <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl hover:bg-gray-200 transition-colors dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
-                    Quick View
-                </button> */}
+               
             </div>
 
 
