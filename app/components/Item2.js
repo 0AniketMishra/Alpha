@@ -27,7 +27,7 @@ export default function ProductDetails({ product, }) {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const query = "https://alpha-backend-v7bb.vercel.app/listing/" + product.id
+                const query =  `${process.env.NEXT_PUBLIC_SERVER_URL}/listing/` + product.id
                 const response = await fetch(query);
                 const res = await response.json();
                 setData(res.variants)

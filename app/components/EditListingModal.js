@@ -4,7 +4,7 @@ import { X, Upload, Plus, Minus, AlertCircle, Image as ImageIcon } from 'lucide-
 import toast, { Toaster } from 'react-hot-toast';
 
 
-export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
+export default function EditListingModal({ isOpen, onClose, onAdd, token2, info }) {
     const [title, setTitle] = useState('');
     const [basePrice, setBasePrice] = useState(10);
     const [discountPrice, setDiscountPrice] = useState(10);
@@ -19,16 +19,26 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
     const [selectedOption, setSelectedOption] = useState(null);
     const [stock, setStock] = useState('');
     const [variantPrice, setVariantPrice] = useState('');
-    const [wizard,setWizard] = useState(0)
-    const [url,setURL] = useState("")
-    const [token,setToken] = useState(token2)
+    const [wizard, setWizard] = useState(0)
+    const [url, setURL] = useState("")
+    const [token, setToken] = useState(token2)
 
+
+    useState(() => {
+        console.log(info)
+    setTitle(info.title)
+    setBasePrice(info.originalPrice)
+    setDiscountPrice(info.price)
+    setDescription(info.description)
+    
+    setMainImages(info.image)
+    },[])
 
     const handleMainImageUpload = async (value) => {
         setMainImages((mainImages) => [...mainImages, value]);
         setURL("")
     };
-   
+
     const handleVariantImageUpload = () => {
         if (e.target.files) {
             const updatedVariants = [...variants];
@@ -68,28 +78,28 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
 
 
     const handleNext = async () => {
-        
-        if(wizard == 0)
-        setWizard(1)
+
+        if (wizard == 0)
+            setWizard(1)
         if (wizard == 1)
             setWizard(2)
-        if (wizard == 2){
+        if (wizard == 2) {
             try {
 
                 const response = await fetch('https://alpha-backend-v7bb.vercel.app/createListing', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                         image: mainImages, 
-                         title: title,
-                         rating: 3.9,
-                         price: discountPrice,
-                         originalPrice: basePrice, 
-                         description: description,
-                         reviews: 100,
-                         stock: 40,
-                         token: token,
-                         badge: "Limited",
-                         highlightFeatures: features,
+                        image: mainImages,
+                        title: title,
+                        rating: 3.9,
+                        price: discountPrice,
+                        originalPrice: basePrice,
+                        description: description,
+                        reviews: 100,
+                        stock: 40,
+                        token: token,
+                        badge: "Limited",
+                        highlightFeatures: features,
 
 
                     }),
@@ -97,23 +107,23 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                 });
 
                 const data = await response.json()
-           
-                
+
+
 
             } catch (error) {
-                  console.log(error)
+                console.log(error)
             }
         }
+
         
-        console.log(wizard)
     }
     const handlePrevious = () => {
         if (wizard == 2)
             setWizard(1)
         if (wizard == 1)
             setWizard(0)
-        
-        
+
+
     }
 
 
@@ -134,7 +144,7 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
         }
     };
 
-    const handleUpdateFeature = (index,field, value) => {
+    const handleUpdateFeature = (index, field, value) => {
         const updatedFeatures = [...features];
         updatedFeatures[index][field] = value;
         setFeatures(updatedFeatures);
@@ -161,7 +171,7 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
-            <Toaster/>
+            <Toaster />
             <Dialog as="div" className="relative z-50" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
@@ -192,7 +202,7 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                     className="flex justify-between items-center mb-6"
                                 >
                                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                                        Add New Listing
+                                        Edit Listing
                                     </h2>
                                     <button
                                         onClick={onClose}
@@ -203,8 +213,45 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                 </Dialog.Title>
 
                                 <div className="space-y-8">
-                                    {/* Basic Information */}
+
+                                {/* Edit Basic Details */}
                                    {wizard == 0 &&(
+                                    <div>
+                                         <h3 className="text-lg font-medium border-b border-gray-500 text-black dark:text-white pb-2">Minor Information</h3>
+                                                <div className='mt-6 flex space-x-4 w-full'>
+                                                  <div className='w-[50%]'>
+                                                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                                        Stock
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        required
+                                                        value={title}
+                                                        placeholder='Enter Stock Available..'
+                                                        onChange={(e) => setTitle(e.target.value)}
+                                                        className="mt-1 block p-2 outline-none bg-gray-100 text-black w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-defl2 dark:border-gray-600 dark:text-white"
+                                                    />
+                                                  </div>
+
+
+                                                  <div className='w-[50%] '>
+                                                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                                        Status
+                                                    </label>
+                                                    <select  className='mt-1 w-full rounded-md  bg-gray-100 dark:bg-defl2 outline-none p-2 text-base font-medium'>
+                                                        <option value="In Stock">In Stock</option>
+                                                        <option value="Limited">Limited</option>
+                                                        <option value="Low Stock">Low Stock</option>
+                                                    </select>
+
+                                                  </div>
+
+                                                </div>
+                                    </div>
+                                   )}
+                                
+                                    {/* Basic Information */}
+                                    {wizard == 1 && (
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="space-y-4">
                                                 <h3 className="text-lg font-medium border-b border-gray-500 text-black dark:text-white pb-2">Basic Information</h3>
@@ -294,8 +341,8 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
 
                                             <div className="space-y-4">
                                                 <h3 className="text-lg font-medium border-b border-gray-500 pb-2 text-black dark:text-white">Main Product Images</h3>
-                                                {mainImages.length < 4 && (
-                                                    <div className='flex items-center bg-defl2 rounded-md'>
+                                              
+                                                    <div className='flex items-center dark:bg-defl2 bg-gray-100 rounded-md'>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10  rounded-md p-2">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
                                                         </svg>
@@ -313,9 +360,9 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                                         </svg>
 
                                                     </div>
-                                                )}
+                                                
                                                 <div className="grid grid-cols-2 gap-4">
-                                                    {mainImages.map((file, index) => (
+                                                    {mainImages?.map((file, index) => (
                                                         <div key={index} className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-defl2">
                                                             <img
                                                                 src={file}
@@ -331,15 +378,15 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                                             </button>
                                                         </div>
                                                     ))}
-                                                  
+
                                                 </div>
                                             </div>
                                         </div>
-                                   )}
+                                    )}
 
                                     {/* Product Variants */}
-                                   
-                                   {wizard == 1 &&(
+
+                                    {wizard == 2 && (
                                         <div className="space-y-4">
                                             <div className="flex items-center justify-between border-b border-gray-500 pb-2">
                                                 <h3 className="text-lg font-medium text-black dark:text-white">Product Variants</h3>
@@ -488,10 +535,10 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                                 </div>
                                             ))}
                                         </div>
-                                   )}
+                                    )}
 
                                     {/* Key Features */}
-                                   {wizard == 2 &&(
+                                    {wizard == 3 && (
                                         <div className="space-y-4">
                                             <div className="flex items-center justify-between border-b border-gray-500 pb-2">
                                                 <h3 className="text-lg font-medium text-black dark:text-white">Key Features</h3>
@@ -541,10 +588,10 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                                 ))}
                                             </div>
                                         </div>
-                                   )}
+                                    )}
 
                                     <div className="flex gap-4 pt-4 ">
-                                       {wizard != 0 &&(
+                                        {wizard != 0 && (
                                             <button
                                                 type="button"
                                                 onClick={handlePrevious}
@@ -552,12 +599,22 @@ export default function AddListingModal({ isOpen, onClose, onAdd, token2 }) {
                                             >
                                                 Previous
                                             </button>)}
+                                     
                                         <button
                                             onClick={handleNext}
                                             className="flex-1 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         >
-                                            Next
+                                            {wizard == 0 ? "Edit Other Details" : "Next"}
                                         </button>
+                                        {wizard == 0 && (
+                                            <button
+                                                type="button"
+                                                onClick={handlePrevious}
+                                                className="flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-defl2"
+                                            >
+                                                Update
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </Dialog.Panel>

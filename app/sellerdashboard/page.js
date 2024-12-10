@@ -21,6 +21,8 @@ import AddProduct from '../components/AddProduct';
 import { Button, Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import ProductCard from '../components/ProductCard';
 import AddListingModal from '../components/AddListingModal';
+import EditListingModal from '../components/EditListingModal';
+import { setIndexConfiguration } from 'firebase/firestore';
 
 
 
@@ -33,11 +35,11 @@ const revenueData = [
     { name: 'Jun', value: 5500 }
 ];
 
-const productPerformance = [
-    { name: 'Wireless Headphones', revenue: 2500, impressions: 12000, conversion: 3.2, stock: 45 },
-    { name: 'Smart Watch', revenue: 3500, impressions: 15000, conversion: 4.1, stock: 28 },
-    { name: 'Backpack', revenue: 1800, impressions: 8000, conversion: 2.8, stock: 12 }
-];
+// const productPerformance = [
+//     { name: 'Wireless Headphones', revenue: 2500, impressions: 12000, conversion: 3.2, stock: 45 },
+//     { name: 'Smart Watch', revenue: 3500, impressions: 15000, conversion: 4.1, stock: 28 },
+//     { name: 'Backpack', revenue: 1800, impressions: 8000, conversion: 2.8, stock: 12 }
+// ];
 
 const categoryDistribution = [
     { name: 'Electronics', value: 45 },
@@ -122,13 +124,17 @@ export default function SellerDashboard() {
     const [token, setToken] = useState(null)
     const [loading, setLoading] = useState(true)
     const totalRevenue = revenueData.reduce((acc, item) => acc + item.value, 0);
-    const totalImpressions = productPerformance.reduce((acc, item) => acc + item.impressions, 0);
-    const averageConversion = productPerformance.reduce((acc, item) => acc + item.conversion, 0) / productPerformance.length;
+    const totalImpressions = 100
+    const averageConversion = 2.4;
     const [isOpen, SetIsOpen] = useState(false)
+    const [isEditOpen,setIsEditOpen] = useState(false)
     const [price,setPrice] = useState(0)
     const [description,setDescription] = useState("")
     const [title,setTitle] = useState("")
+    const [finfo,setfInfo] = useState(null)
     const [category,setCategory] = useState("")
+    const [sellerProducts,setSellerProducts] = useState([])
+
     const router = useRouter()
     useEffect(() => { // Function to get JWT from cookies 
 
@@ -142,10 +148,29 @@ export default function SellerDashboard() {
         };
         const jwtToken = getTokenFromCookie();
         setToken(jwtToken)
-
+        
         setLoading(false);
+        if(!loading && token){
+            fun();
+        }
 
     });
+
+  
+        const fun = async () => {
+            const response = await fetch('https://alpha-backend-v7bb.vercel.app/sellerlistings', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    token: token,
+                }),
+                credentials: 'include'
+            });
+
+            const data = await response.json()
+            setSellerProducts(data)
+        }
+        
+    
 
     useEffect(() => {
         if (!loading && !token) {
@@ -153,7 +178,12 @@ export default function SellerDashboard() {
         }
     }, [loading, token]);
 
-
+const handleEdit = (info) => {
+  if(info){
+      setfInfo(info);
+      setIsEditOpen(true);
+  }
+}
     const data =
     {
         id: 4,
@@ -463,6 +493,7 @@ export default function SellerDashboard() {
                 onAdd={handleAddListing}
                 token2 = {token}
             />
+           
 
             <div className="bg-white dark:bg-def  rounded-lg shadow-sm overflow-x-scroll w-full">
                 <div className="p-6">
@@ -478,36 +509,46 @@ export default function SellerDashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {productPerformance.map((product) => (
+                            {sellerProducts.map((product) => (
                                 <tr key={product.name} className="border-b  dark:border-gray-700 last:border-0">
                                     <td className="py-4">
                                         <div className="flex items-center space-x-3">
-                                            <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gray-100" />
+                                            <img src={product.image} className="flex-shrink-0 h-10 w-10 rounded-lg bg-gray-100" />
                                             <div>
-                                                <p className="font-medium text-black dark:text-white">{product.name}</p>
-                                                <p className="text-sm text-gray-500">SKU: PRD-{Math.random().toString(36).substr(2, 9)}</p>
+                                                <p className="font-medium text-black dark:text-white">{product.title}</p>
+                                                <p className="text-sm text-gray-500">{product._id}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="py-4 px-4 dark:text-white text-black">{product.stock} units</td>
-                                    <td className="py-4 px-4 dark:text-white text-black">${(product.revenue / 100).toFixed(2)}</td>
-                                    <td className="py-4 px-4 dark:text-white text-black">{Math.floor(Math.random() * 100)} units</td>
+                                    <td className="py-4 px-4 dark:text-white text-black">${product.price}</td>
+                                    <td className="py-4 px-4 dark:text-white text-black">{product.stock - 10} units</td>
                                     <td className="py-4 px-4 dark:text-white text-black">
-                                        <span className={`px-2 py-1  text-xs font-medium rounded-full ${product.stock > 20
+                                        <span className={`px-2 py-1  text-xs font-medium rounded-full ${product.badge == "In stock"
                                             ? 'bg-green-100 text-green-800'
-                                            : product.stock > 10
+                                            : product.badge == "Limited"
                                                 ? 'bg-yellow-100 text-yellow-800'
                                                 : 'bg-red-100 text-red-800'
                                             }`}>
-                                            {product.stock > 20 ? 'In Stock' : product.stock > 10 ? 'Low Stock' : 'Critical Stock'}
+                                            {product.badge}
                                         </span>
                                     </td>
                                     <td className="py-4">
                                         <div className="flex space-x-2 pr-4">
-                                            <button className="text-indigo-600 hover:text-indigo-700">Edit</button>
+                                            <button onClick={() => handleEdit(product)} className="text-indigo-600 hover:text-indigo-700">Edit</button>
                                             <button className="text-red-600 hover:text-red-700">Delete</button>
                                         </div>
+
                                     </td>
+                                   {finfo &&(
+                                        <EditListingModal
+                                            isOpen={isEditOpen}
+                                            onClose={() => {setfInfo(null); setIsEditOpen(false)}}
+                                            onAdd={() => console.log("edit Opened")}
+                                            token2={token}
+                                            info={finfo}
+                                        />
+                                   )}
                                 </tr>
                             ))}
                         </tbody>
