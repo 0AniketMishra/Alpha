@@ -159,7 +159,7 @@ export default function SellerDashboard() {
   useEffect(() => {
     
         const fun = async () => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/sellerlistings`, {
+            const response = await fetch("https://alpha-backend-v7bb.vercel.app/sellerlistings", {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     token: token,

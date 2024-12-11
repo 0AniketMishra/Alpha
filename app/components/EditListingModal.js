@@ -91,7 +91,7 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
         if (wizard == 3) {
             try {
                    console.log(token)
-                const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/editlisting`, {
+                const response = await fetch("https://alpha-backend-v7bb.vercel.app/editlisting", {
                     method: 'PUT', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         image: mainImages,
