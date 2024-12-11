@@ -122,6 +122,7 @@ export default function SellerDashboard() {
     const [activeOrdersTab, setActiveOrdersTab] = useState('pending');
     const [showNotifications, setShowNotifications] = useState(false);
     const [token, setToken] = useState(null)
+    const [isDeleteOpen,setIsDeleteOpen] =  useState(false)
     const [loading, setLoading] = useState(true)
     const totalRevenue = revenueData.reduce((acc, item) => acc + item.value, 0);
     const totalImpressions = 100
@@ -150,15 +151,15 @@ export default function SellerDashboard() {
         setToken(jwtToken)
         
         setLoading(false);
-        if(!loading && token){
-            fun();
-        }
+      
 
     });
 
   
+  useEffect(() => {
+    
         const fun = async () => {
-            const response = await fetch('https://alpha-backend-v7bb.vercel.app/sellerlistings', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/sellerlistings`, {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     token: token,
@@ -169,6 +170,10 @@ export default function SellerDashboard() {
             const data = await response.json()
             setSellerProducts(data)
         }
+      if (!loading && token) {
+          fun()
+      }
+  },[loading,token,isOpen])
         
     
 
@@ -465,7 +470,36 @@ const handleEdit = (info) => {
     );
 
     const renderProducts = () => (
+
+        
         <div className="space-y-6">
+            <Dialog open={isDeleteOpen} as="div" className="relative z-10 focus:outline-none" onClose={() => setIsDeleteOpen(false)}>
+                <DialogBackdrop className="fixed inset-0 bg-black/30" />
+                <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                    <div className="flex min-h-full items-center justify-center p-4">
+                        <DialogPanel
+                            transition
+                            className="w-full max-w-md rounded-xl bg-white dark:bg-def p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+                        >
+                            <DialogTitle as="h3" className="text-base/7 font-medium text-white">
+                                Payment successful
+                            </DialogTitle>
+                            <p className="mt-2 text-sm/6 dark:text-white/50 text-black">
+                                Your payment has been successfully submitted. We have sent you an email with all of the details of your
+                                order.
+                            </p>
+                            <div className="mt-4">
+                                <Button
+                                    className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                                    onClick={close}
+                                >
+                                    Got it, thanks!
+                                </Button>
+                            </div>
+                        </DialogPanel>
+                    </div>
+                </div>
+            </Dialog>
             <div className="flex justify-between items-center">
                 <div className="flex space-x-4">
                     <div className="relative">
@@ -536,7 +570,7 @@ const handleEdit = (info) => {
                                     <td className="py-4">
                                         <div className="flex space-x-2 pr-4">
                                             <button onClick={() => handleEdit(product)} className="text-indigo-600 hover:text-indigo-700">Edit</button>
-                                            <button className="text-red-600 hover:text-red-700">Delete</button>
+                                            <button onClick={() => setIsDeleteOpen(true)} className="text-red-600 hover:text-red-700">Delete</button>
                                         </div>
 
                                     </td>

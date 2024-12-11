@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { X, Upload, Plus, Minus, AlertCircle, Image as ImageIcon } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { productionBrowserSourceMaps } from '@/next.config';
 
 
 export default function EditListingModal({ isOpen, onClose, onAdd, token2, info }) {
@@ -25,11 +26,13 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
 
 
     useState(() => {
-        console.log(info)
+    
     setTitle(info.title)
     setBasePrice(info.originalPrice)
     setDiscountPrice(info.price)
     setDescription(info.description)
+    setVariants(info.variants)
+    setFeatures(info.highlightFeatures)
     
     setMainImages(info.image)
     },[])
@@ -83,15 +86,18 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
             setWizard(1)
         if (wizard == 1)
             setWizard(2)
-        if (wizard == 2) {
+        if(wizard ==2)
+            setWizard(3)
+        if (wizard == 3) {
             try {
-
-                const response = await fetch('https://alpha-backend-v7bb.vercel.app/createListing', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                   console.log(token)
+                const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/editlisting`, {
+                    method: 'PUT', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         image: mainImages,
                         title: title,
                         rating: 3.9,
+                        id: info._id,
                         price: discountPrice,
                         originalPrice: basePrice,
                         description: description,
@@ -100,16 +106,15 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
                         token: token,
                         badge: "Limited",
                         highlightFeatures: features,
-
-
+                        variants: variants,
                     }),
                     credentials: 'include'
                 });
 
-                const data = await response.json()
-
-
-
+                const data = await response.status
+                if(data==200){
+                    onClose()
+                }
             } catch (error) {
                 console.log(error)
             }
@@ -118,6 +123,8 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
         
     }
     const handlePrevious = () => {
+        if(wizard == 3)
+            setWizard(2)
         if (wizard == 2)
             setWizard(1)
         if (wizard == 1)
@@ -427,7 +434,7 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
                                                         </button>
                                                     </div>
 
-                                                    {variant.options.length < 5 && (
+                                                    {variant?.options?.length < 5 && (
                                                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                                                             <input
                                                                 type="text"
@@ -463,7 +470,7 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
                                                     )}
 
                                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                        {variant.options.map((option, optionIndex) => (
+                                                        {variant?.options?.map((option, optionIndex) => (
                                                             <div
                                                                 key={optionIndex}
                                                                 className="border rounded-lg p-4 space-y-2"
@@ -543,11 +550,11 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
                                             <div className="flex items-center justify-between border-b border-gray-500 pb-2">
                                                 <h3 className="text-lg font-medium text-black dark:text-white">Key Features</h3>
                                                 <div className="text-sm text-gray-500">
-                                                    {features.length}/4 features
+                                                    {features?.length}/4 features
                                                 </div>
                                             </div>
 
-                                            {features.length < 4 && (
+                                            {features?.length < 4 && (
                                                 <button
                                                     type="button"
                                                     onClick={handleAddFeature}
@@ -559,7 +566,7 @@ export default function EditListingModal({ isOpen, onClose, onAdd, token2, info 
                                             )}
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {features.map((feature, index) => (
+                                                {features?.map((feature, index) => (
                                                     <div key={index} className=" border rounded-xl p-4 space-y-4">
                                                         <div className="flex items-center justify-between">
                                                             <input
