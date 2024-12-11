@@ -10,7 +10,7 @@ import Loading from './components/Loading'
 import Hero from './components/Hero'
 import { useEffect, useState } from 'react'
 
-import { SpeedInsights } from "@vercel/speed-insights/next"
+
 
 
 
