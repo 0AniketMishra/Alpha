@@ -13,7 +13,7 @@ const Grid = () => {
      useEffect(() => {
          const fetchListings = async () => {
          try {
-             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/listings`);
+             const response = await fetch("https://alpha-backend-v7bb.vercel.app//listings");
               const data = await response.json();
                setListings(data);
              } catch (error) {

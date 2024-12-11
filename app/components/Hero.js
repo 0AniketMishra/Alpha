@@ -64,7 +64,7 @@ export default function Hero() {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const url = process.env.NEXT_PUBLIC_SERVER_URL+"/listings";
+                const url = "https://alpha-backend-v7bb.vercel.app//listings";
 
                 const response = await fetch(url);
                 const data = await response.json();
