@@ -137,7 +137,7 @@ export default function Hero() {
             <section className="relative pt-32 overflow-hidden">
                 <BackgroundGraphics />
                 <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2  items-center">
                         <HeroContent />
                         <HeroImage />
                     </div>
