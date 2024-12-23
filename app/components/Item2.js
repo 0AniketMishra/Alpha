@@ -153,13 +153,13 @@ export default function ProductDetails({ product, }) {
 
                  <div className='mt-4 flex space-x-4'>
                         {data?.map((info) => (
-                            <div>
+                            <div key={info.name}>
                                 <h1 className='ml-2 text-black dark:text-white'>{info.name}</h1>
                                 <div className='flex space-x-2 mb-2 mt-2 pr-2 bg-gray-100 dark:bg-def rounded-full'>
                                     <select className='rounded-full bg-gray-100 dark:bg-def text-black dark:text-white outline-none  py-2 px-3 text-base font-medium'>
 
                                     {info.options.map((option) => (
-                                        <option className='bg-gray-300 px-4 py-2 rounded-full '>
+                                        <option key={option.value} className='bg-gray-300 px-4 py-2 rounded-full '>
                                             {option.value}
                                         </option>
                                     ))}
