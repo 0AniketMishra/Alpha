@@ -39,6 +39,7 @@ module.exports = {
         def: "#0E0E0E",
         defl: "#f9fafb",
         defl2: "#2A2A2A",
+        sr: "#161725",
 
       }
     },

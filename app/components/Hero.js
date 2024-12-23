@@ -2,6 +2,10 @@
 import Link from 'next/link'
 import ProductCard from './ProductCard';
 import { useEffect, useState } from 'react';
+import { ArrowRight, Send } from 'lucide-react';
+import { HeroContent } from './HeroContent';
+import { HeroImage } from './HeroImage';
+import { BackgroundGraphics } from './BackgroundGraphics';
 
 export default function Hero() {
     const categories = [
@@ -129,37 +133,16 @@ export default function Hero() {
 
 
     return (
-        <div className='dark:bg-black bg-defl'>
-            <div className="relative pt-16">
-                <div className="absolute inset-0">
-                    <img
-                        className="w-full h-[600px] object-cover"
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80"
-                        alt="Hero background"
-                    />
-                    <div className="absolute inset-0 bg-gray-900/70 mix-blend-multiply" />
-                </div>
-
-                <div className="relative max-w-custom mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-                    <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                        The Only Marketplace You Need
-                    </h1>
-                    <p className="mt-6 max-w-3xl text-xl text-gray-300">
-                        Discover our latest collection of premium products curated just for you.
-                        Shop the latest trends and get exclusive deals.
-                    </p>
-                    <div className="mt-10">
-                        <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">
-                            Shop Now
-
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="ml-2 h-5 w-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-
-                        </button>
+        <div className='dark:bg-black bg-defl h-full'>
+            <section className="relative pt-32 overflow-hidden">
+                <BackgroundGraphics />
+                <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 relative">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <HeroContent />
+                        <HeroImage />
                     </div>
                 </div>
-            </div>
+            </section>
 
 {/* Hero */}
 
@@ -222,26 +205,31 @@ export default function Hero() {
 
             {/* Newsletter */}
 
-            <div className="bg-indigo-600 dark:bg-indigo-900">
-                <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-bold text-white">Subscribe to our newsletter</h2>
-                        <p className="mt-4 text-lg text-indigo-100">
-                            Get the latest updates on new products and upcoming sales
-                        </p>
-                        <div className="mt-8 flex max-w-md mx-auto items-center">
+            <section className="bg-gray-100 dark:bg-def py-16 max-w-custom mx-auto rounded-lg ">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Stay Updated</h2>
+                    <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Subscribe to our newsletter and get 10% off your first purchase plus exclusive access to new arrivals.
+                    </p>
+
+                    <form className="mt-8 max-w-md mx-auto">
+                        <div className="flex">
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="flex-1 min-w-0 px-4 outline-none py-3 rounded-l-lg text-gray-900 dark:text-white dark:bg-gray-800"
+                                className="flex-1 px-4 py-3 rounded-l-full border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                             />
-                            <button className="bg-gray-900 dark:bg-gray-700 text-white px-6 py-3 rounded-r-lg hover:bg-gray-800 dark:hover:bg-gray-600">
+                            <button
+                                type="submit"
+                                className="bg-blue-600 text-white px-6 py-3 rounded-r-full hover:bg-blue-700 flex items-center"
+                            >
                                 Subscribe
+                                <Send size={20} className="ml-2" />
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
+            </section>
 
 
 

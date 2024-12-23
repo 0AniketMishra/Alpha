@@ -68,7 +68,7 @@ const Header = () => {
 };
          
     return (
-        <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-def">
+        <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-black">
             {sidebar &&(
                 <Sidebarsm/>
             ) }
@@ -86,7 +86,7 @@ const Header = () => {
 
                        )}
 
-                        <span className="text-xl font-bold text-indigo-600 dark:text-yellow-300">ShadowTrade</span>
+                        <span className="text-xl font-bold text-black dark:text-white">ShadowTrade</span>
                     </div>
 
                     <div className="hidden lg:flex items-center space-x-8">
