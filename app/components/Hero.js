@@ -133,11 +133,12 @@ export default function Hero() {
 
 
     return (
-        <div className='dark:bg-black bg-defl h-screen'>
-            <section className="relative pt-24 lg:pt-30 overflow-hidden">
+        <div className='dark:bg-black bg-defl '>
+            
+            <section className="relative pt-24 lg:pt-30 pb-10 overflow-hidden">
                 <BackgroundGraphics />
                 <div className="lg:max-w-custom mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative items-center">
                         <HeroContent />
                         <HeroImage />
                     </div>
@@ -177,7 +178,7 @@ export default function Hero() {
             {/* Shop By Category */}
 
 
-            <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-12">
+            <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-6  dark:bg-black">
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Products</h2>
                     <button className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center">
@@ -235,48 +236,92 @@ export default function Hero() {
 
             {/* Footer */}
 
-
-            <footer className="bg-defl dark:bg-black">
-                <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div>
-                            <h3 className="dark:text-white text-black font-semibold mb-4">Shop</h3>
-                            <ul className="space-y-2">
-                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">New Arrivals</a></li>
-                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">Best Sellers</a></li>
-                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">Sale</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="dark:text-white text-black font-semibold mb-4">Support</h3>
-                            <ul className="space-y-2">
-                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">Contact Us</a></li>
-                                <li><a href="#" className="text-black dark:text-gray-400 hover:text-white">FAQs</a></li>
-                                <li><a href="#" className="text-black dark:text-gray-400  hover:text-white">Shipping</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="dark:text-white text-black font-semibold mb-4">Company</h3>
-                            <ul className="space-y-2">
-                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">About Us</a></li>
-                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Careers</a></li>
-                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Blog</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="dark:text-white text-black font-semibold mb-4">Legal</h3>
-                            <ul className="space-y-2">
-                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Privacy Policy</a></li>
-                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Terms of Service</a></li>
-                                <li><a href="#" className="dark:text-gray-400 text-black hover:text-white">Returns</a></li>
-                            </ul>
-                        </div>
+            <footer class="text-gray-400 bg-white dark:bg-def body-font">
+                <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+                    <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+                        <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                            </svg>
+                            <span class="ml-3 text-xl text-black dark:text-white">Shadow Trade</span>
+                        </a>
+                        <p class="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
                     </div>
-                    <div className="mt-8 pt-8 border-t border-gray-800">
-                        <p className="text-center text-gray-400">© 2024 Shopify. All rights reserved.</p>
+                    <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+                        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                            <h2 class="title-font font-medium text-black dark:text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                            <nav class="list-none mb-10">
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">First Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Second Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Third Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                                </li>
+                            </nav>
+                        </div>
+                        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                            <h2 class="title-font font-medium text-black dark:text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                            <nav class="list-none mb-10">
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">First Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Second Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Third Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                                </li>
+                            </nav>
+                        </div>
+                        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                            <h2 class="title-font font-medium text-black dark:text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                            <nav class="list-none mb-10">
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">First Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Second Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Third Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                                </li>
+                            </nav>
+                        </div>
+                        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                            <h2 class="title-font font-medium text-black dark:text-white tracking-widest text-sm mb-3">CATEGORIES</h2>
+                            <nav class="list-none mb-10">
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">First Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Second Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Third Link</a>
+                                </li>
+                                <li>
+                                    <a class="text-gray-400 hover:text-white">Fourth Link</a>
+                                </li>
+                            </nav>
+                        </div>
                     </div>
                 </div>
+               
             </footer>
+
+
         </div>
  
    

@@ -3,7 +3,7 @@ import { Shield, Lock } from 'lucide-react';
 
 export function HeroImage() {
     return (
-        <div className="relative w-full h-full mt-12 lg:mt-0 overflow-hidden">
+        <div className="relative w-full h-full mt-12 lg:mt-0 overflow-hidden md:hidden block lg:block">
             {/* Main image container with gradient overlay */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40 mix-blend-overlay" />

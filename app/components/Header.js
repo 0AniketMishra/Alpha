@@ -68,7 +68,7 @@ const Header = () => {
 };
          
     return (
-        <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-black">
+        <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-def">
             {sidebar &&(
                 <Sidebarsm/>
             ) }
