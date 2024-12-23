@@ -133,11 +133,11 @@ export default function Hero() {
 
 
     return (
-        <div className='dark:bg-black bg-defl h-full'>
-            <section className="relative pt-32 overflow-hidden">
+        <div className='dark:bg-black bg-defl h-screen'>
+            <section className="relative pt-24 lg:pt-30 overflow-hidden">
                 <BackgroundGraphics />
-                <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div className="grid grid-cols-1 lg:grid-cols-2  items-center">
+                <div className="lg:max-w-custom mx-auto px-4 sm:px-6 lg:px-8 relative">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <HeroContent />
                         <HeroImage />
                     </div>
@@ -205,14 +205,14 @@ export default function Hero() {
 
             {/* Newsletter */}
 
-            <section className="bg-gray-100 dark:bg-def py-16 max-w-custom mx-auto rounded-lg ">
+            {/* <section className="bg-gray-100 dark:bg-def py-16 max-w-custom mx-auto rounded-lg ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Stay Updated</h2>
                     <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Subscribe to our newsletter and get 10% off your first purchase plus exclusive access to new arrivals.
                     </p>
 
-                    <form className="mt-8 max-w-md mx-auto">
+                    <form className="mt-8 max-w-sm mx-auto">
                         <div className="flex">
                             <input
                                 type="email"
@@ -229,7 +229,7 @@ export default function Hero() {
                         </div>
                     </form>
                 </div>
-            </section>
+            </section> */}
 
 
 
