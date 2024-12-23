@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Star, ChevronLeft, ChevronRight, Heart, Share2, ShoppingCart, DollarSign } from 'lucide-react';
 import Link from 'next/link'
 
+
 const colors = ['Stone Gray', 'Midnight Black', 'Ocean Blue'];
 const specs = [
     { name: 'Dimensions', value: '7.8 x 3.6 x 0.3 inches' },
@@ -13,35 +14,35 @@ const specs = [
 export default function ProductDetails({ product, }) {
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const [activeImage, setActiveImage] = useState(0);
+    const [activeVariant, setActiveVariant] = useState(0)
     const [show, setShow] = useState(false)
     const [variants,setVariants] = useState(product.variants)
     const [data,setData] = useState()
+    
     const [variant1, setVariant1] = useState()
 
 
-    const images = [
-        product.image,
-    ];
+
     
 
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const query =  `${process.env.NEXT_PUBLIC_SERVER_URL}/listing/` + product.id
+                const query =  'https://alpha-backend-v7bb.vercel.app/listing/' + product.id
                 const response = await fetch(query);
                 const res = await response.json();
+                console.log(res.variants)
                 setData(res.variants)
 
             } catch (error) {
                 console.error('Error fetching listings:', error);
             }
         };
+        
         fetchListings();
     }, []);
 
-
     
-console.log(product)
 
 
 
@@ -58,19 +59,29 @@ console.log(product)
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 ">
                 <div className="space-y-4">
                     <div className="aspect-16/10 relative overflow-hidden rounded-lg bg-gray-200">
-                        <img
-                            src={images[activeImage]}
-                            alt={product.title}
-                            className="h-full w-full object-cover"
-                        />
+                       
+                           {typeof product.image == "string" ? (
+                            <img
+                                src={product.image}
+                                alt={product.title}
+                                className="h-full w-full object-cover"
+                            />
+                           ) : (
+                                <img
+                                    src={product.image[activeImage]}
+                                    alt={product.title}
+                                    className="h-full w-full object-cover"
+                                />
+                           )}
+
                         <button
-                            onClick={() => setActiveImage((prev) => (prev > 0 ? prev - 1 : images.length - 1))}
+                            onClick={() => setActiveImage((prev) => (prev > 0 ? prev - 1 : product.image.length - 1))}
                             className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white"
                         >
                             <ChevronLeft className="h-5 w-5" />
                         </button>
                         <button
-                            onClick={() => setActiveImage((prev) => (prev < images.length - 1 ? prev + 1 : 0))}
+                            onClick={() => setActiveImage((prev) => (prev < product.image.length - 1 ? prev + 1 : 0))}
                             className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white"
                         >
                             <ChevronRight className="h-5 w-5" />
@@ -78,20 +89,35 @@ console.log(product)
                     </div>
 
                     <div className="hidden md:flex gap-4">
-                        {images.map((img, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => setActiveImage(idx)}
-                                className={`w-20 h-20  rounded-lg overflow-hidden ${activeImage === idx ? 'ring-2 ring-indigo-500' : ''
-                                    }`}
-                            >
-                                <img src={img} alt="" className="h-full w-full object-cover" />
-                            </button>
-                        ))}
+                     {typeof product.image != 'string' ?(
+                            <div className='space-x-4'>
+                                {product.image?.map((img, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setActiveImage(idx)}
+                                        className={`w-20 h-20  rounded-lg overflow-hidden ${activeImage === idx ? 'ring-2 ring-indigo-500' : ''
+                                            }`}
+                                    >
+                                        <img src={img} alt="" className="h-full w-full object-cover" />
+                                    </button>
+                                ))}
+                            </div>
+                     ) : (
+                                <div>
+                                        <button
+                                            
+                                            onClick={() => setActiveImage(idx)}
+                                            className="w-20 h-20  rounded-lg overflow-hidden ring-2 ring-indigo-500 "
+                                        >
+                                            <img src={product.image} alt="" className="h-full w-full object-cover" />
+                                        </button>
+
+                                </div>
+                     )}
                     </div>
                 </div>
 
-                <div className='lg:mt-8'>
+                <div className=''>
                     <h2 className="text-sm title-font dark:text-gray-200 text-black  tracking-widest">BRAND NAME</h2>
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{product.title}</h1>
 
@@ -111,13 +137,13 @@ console.log(product)
                     <div className='mt-2'>
                         {show == false && (
                             <div>
-                                <p className="leading-relaxed max-h-40 line-clamp-4 text-black dark:text-white">{product.description}</p>
+                                <p className="leading-relaxed max-h-40 line-clamp-3 text-black dark:text-white">{product.description}</p>
                                 <p onClick={() => setShow(true)} className="leading-relaxed max-h-40 dark:text-blue-400 text-blue-600">Read More.</p>
                             </div>
                         )}
                         {show == true && (
                             <div>
-                                <p className="leading-relaxed ">{product.description}</p>
+                                <p className="leading-relaxed text-black dark:text-white">{product.description}</p>
                                 <p onClick={() => setShow(false)} className="leading-relaxed text-blue-400 ">Read Less.</p>
                             </div>
                         )}
@@ -125,28 +151,26 @@ console.log(product)
 
                   
 
-                    {data?.map((info) => (
-                        <div key={info.name} className="mt-8">
-                            <h2 className="font-semibold mb-2 text-black dark:text-white">{info.name}</h2>
-                            <div className="flex gap-4">
-                                {info?.options?.map(option => (
-                                    <button
-                                        key={option.name}
-                                        onClick={() => setVariant1(option.value)}
-                                        className={`px-4 py-2 text-sm md:text-md rounded-full border ${data[0]?.options[0]?.value == option.value
-                                            ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                                            : 'text-black dark:text-white border-gray-300 hover:border-gray-400'
-                                            }`}
-                                    >
-                                        {option.value}
-                                    </button>
-                                ))}
+                 <div className='mt-4 flex space-x-4'>
+                        {data?.map((info) => (
+                            <div>
+                                <h1 className='ml-2 text-black dark:text-white'>{info.name}</h1>
+                                <div className='flex space-x-2 mb-2 mt-2 pr-2 bg-gray-100 dark:bg-def rounded-full'>
+                                    <select className='rounded-full bg-gray-100 dark:bg-def text-black dark:text-white outline-none  py-2 px-3 text-base font-medium'>
+
+                                    {info.options.map((option) => (
+                                        <option className='bg-gray-300 px-4 py-2 rounded-full '>
+                                            {option.value}
+                                        </option>
+                                    ))}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                 </div>
+         
 
-
-                    {/* <div className="mt-8">
+                    {/* <div className="">
                         <h2 className="font-semibold mb-4">Specifications</h2>
                         <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
                             {specs.map(spec => (

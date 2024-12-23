@@ -16,7 +16,7 @@ export default function ProductCard({
         <div className="group  relative bg-white dark:bg-def rounded-xl shadow-lg  transition-all hover:shadow-xl">
             <div className="aspect-16/10 w-full overflow-hidden rounded-t-xl bg-gray-200 ">
                 <img
-                    src={image}
+                    src={image[0]}
                     alt={title}
                     className="h-full w-full object-cover object-center group-hover:opacity-75 transition-opacity"
                 />
@@ -75,7 +75,7 @@ export default function ProductCard({
                             ${originalPrice}
                         </span>
                     )}
-                    <span className="text-xl  font-bold  dark:text-green-200">
+                    <span className="text-xl  font-bold text-black dark:text-green-200">
                         ${price}
                     </span>
                 </div>

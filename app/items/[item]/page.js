@@ -12,9 +12,10 @@ const page = ({params, searchParams}) => {
 
 
     return (
-    <div className='bg-defl dark:bg-black'>
+    <div className='bg-white dark:bg-black'>
         <Header/>  
         <Item2 product={searchParams}/>
+        
         <About info={searchParams}/>
         <Seller/>
         <Reviews/>

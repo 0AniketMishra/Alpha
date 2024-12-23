@@ -207,6 +207,10 @@ const handleEdit = (info) => {
     const handleAddListing = () => {
         
     }
+    const handleDelete = () => {
+        console.log("delete function triggered.")
+        setIsDeleteOpen(false)
+    }
 
     const StatCard = ({ icon: Icon, title, value, trend, trendValue }) => (
         <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
@@ -469,7 +473,7 @@ const handleEdit = (info) => {
         </div>
     );
 
-    const renderProducts = () => (
+    const renderProducts = () => ( 
 
         
         <div className="space-y-6">
@@ -482,18 +486,17 @@ const handleEdit = (info) => {
                             className="w-full max-w-md rounded-xl bg-white dark:bg-def p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
                         >
                             <DialogTitle as="h3" className="text-base/7 font-medium text-white">
-                                Payment successful
+                              Delete Listing.
                             </DialogTitle>
                             <p className="mt-2 text-sm/6 dark:text-white/50 text-black">
-                                Your payment has been successfully submitted. We have sent you an email with all of the details of your
-                                order.
+                                You are about to delete this listings/item from the marketplace. Are you sure that you want to continue?
                             </p>
                             <div className="mt-4">
-                                <Button
-                                    className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                                    onClick={close}
+                                <Button 
+                                    className="inline-flex items-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold text-white outline-none bg-yellow-600"
+                                    onClick={handleDelete}
                                 >
-                                    Got it, thanks!
+                                    Delete
                                 </Button>
                             </div>
                         </DialogPanel>
@@ -547,7 +550,7 @@ const handleEdit = (info) => {
                                 <tr key={product.name} className="border-b  dark:border-gray-700 last:border-0">
                                     <td className="py-4">
                                         <div className="flex items-center space-x-3">
-                                            <img src={product.image} className="flex-shrink-0 h-10 w-10 rounded-lg bg-gray-100" />
+                                            <img src={product.image[0]} className="flex-shrink-0 h-10 w-10 rounded-lg bg-gray-100" />
                                             <div>
                                                 <p className="font-medium text-black dark:text-white">{product.title}</p>
                                                 <p className="text-sm text-gray-500">{product._id}</p>

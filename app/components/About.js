@@ -45,7 +45,7 @@ const About = ({info}) => {
                     {data.map((feature) => (
                         
                         <div key={feature.title} className="p-4 md:p-2  md:w-1/3" bis_skin_checked="1">
-                            <div className="flex rounded-lg h-full dark:bg-def bg-white p-8 flex-col" bis_skin_checked="1">
+                            <div className="flex rounded-lg h-full dark:bg-def bg-gray-100 p-8 flex-col" bis_skin_checked="1">
                                 <div className="flex items-center mb-3" bis_skin_checked="1">
                                     <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0" bis_skin_checked="1">
                                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
@@ -67,7 +67,7 @@ const About = ({info}) => {
                     ))}
                       
                       {/* <div className="p-4 md:p-2  md:w-1/3" bis_skin_checked="1">
-                          <div className="flex rounded-lg h-full dark:bg-def bg-white p-8 flex-col" bis_skin_checked="1">
+                          <div className="flex rounded-lg h-full dark:bg-def bg-gray-200 p-8 flex-col" bis_skin_checked="1">
                               <div className="flex items-center mb-3" bis_skin_checked="1">
                                   <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0" bis_skin_checked="1">
                                       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
@@ -88,7 +88,7 @@ const About = ({info}) => {
                           </div>
                       </div> */}
                       {/* <div className="p-4 md:p-2  md:w-1/3" bis_skin_checked="1">
-                          <div className="flex rounded-lg h-full dark:bg-def bg-white p-8 flex-col" bis_skin_checked="1">
+                          <div className="flex rounded-lg h-full dark:bg-def bg-gray-200 p-8 flex-col" bis_skin_checked="1">
                               <div className="flex items-center mb-3" bis_skin_checked="1">
                                   <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0" bis_skin_checked="1">
                                       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-5 h-5" viewBox="0 0 24 24">
