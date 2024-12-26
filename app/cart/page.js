@@ -6,23 +6,25 @@ import { useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '@/firebaseConfig'
 import Loading from '../components/Loading'
+import { useCart } from '../context/cartContext'
+import { Minus, Plus, PlusIcon } from 'lucide-react'
 
 
 
 
 const Page = () => {
-    
-    const [items, setItemss] = useState([{ id: 1, quantity: 1,price: 10 }, { id: 2, quantity: 1, price: 20 }])
+
+    const { addToCart, cartItems, removeFromCart,updateCart } = useCart();
     const [price, setPrice] = useState(0)
     const [discount, setDiscount] = useState(10)
-    
-    
+
+
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null)
 
 
-   
+
 
     useEffect(() => { // Function to get JWT from cookies 
 
@@ -36,64 +38,82 @@ const Page = () => {
         };
         const jwtToken = getTokenFromCookie();
         setToken(jwtToken)
-       
+
         setLoading(false)
-    },[]);
+    }, []);
 
 
+    const increaseQuantity = (id) => {
+        
+         const updatedItems = cartItems.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item);
+         updateCart(updatedItems)
+    };
+
+
+    const decreaseQuantity = (id) => {
+         if(cartItems.find(item => item.id === id).quantity === 1){
+            removeFromCart(id)
+         }
+         else{
+             const updatedItems = cartItems.map(item => item.id === id ? { ...item, quantity: item.quantity - 1 } : item);
+             updateCart(updatedItems)
+         }
+    };
 
 
     if (!token && !loading)
         router.push("/login")
 
-    const increaseQuantity = (index) => {
-        console.log(index)
-        // Directly modify the original cartItems array
-        if (cartItems[index]) { cartItems[index].quantity += 1;
-             console.log('Updated Cart Items:', cartItems);
-             }
-              else { 
-                console.error('Item not found at the provided index');
-             }
-      
-
-}
-    const decreaseQuantity = (id) => {
-        setItemss(prev => prev.map(i =>
-            i.id === id ? { ...i, quantity: i.quantity - 1 } : i
-        ));
-    };
-    useEffect(() => {
-      let sum =0
-        items.map(item => {
-          sum = sum+item.quantity*item.price
-     })
-     setPrice(sum)
+    // const increaseQuantity = (index) => {
+    //     console.log(index)
+    //     // Directly modify the original cartItems array
+    //     if (cartItems[index]) {
+    //         cartItems[index].quantity += 1;
+    //         console.log('Updated Cart Items:', cartItems);
+    //     }
+    //     else {
+    //         console.error('Item not found at the provided index');
+    //     }
 
 
-    }, [items]);
+    // }
+    // const decreaseQuantity = (id) => {
+    //     setItemss(prev => prev.map(i =>
+    //         i.id === id ? { ...i, quantity: i.quantity - 1 } : i
+    //     ));
+    // };
 
-   
-    const cartItems = [
-        {
-            id: 1,
-            title: "Premium Wireless Headphones",
-            price: 299.99,
-            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-            quantity: 1,
-            color: "Black",
-            size: "Standard"
-        },
-        {
-            id: 2,
-            title: "Smart Watch Series 5",
-            price: 399.99,
-            image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
-            quantity: 1,
-            color: "Silver",
-            size: "44mm"
-        }
-    ];
+    // useEffect(() => {
+    //     let sum = 0
+    //     items.map(item => {
+    //         sum = sum + item.quantity * item.price
+    //     })
+    //     setPrice(sum)
+
+
+    // }, [items]);
+
+
+    // const cartItems = [
+    //     {
+    //         id: 1,
+    //         title: "Premium Wireless Headphones",
+    //         price: 299.99,
+    //         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+    //         quantity: 1,
+    //         color: "Black",
+    //         size: "Standard"
+    //     },
+    //     {
+    //         id: 2,
+    //         title: "Smart Watch Series 5",
+    //         price: 399.99,
+    //         image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
+    //         quantity: 1,
+    //         color: "Silver",
+    //         size: "44mm"
+    //     }
+    // ];
 
     const userDetails = {
         name: "John Doe",
@@ -147,12 +167,16 @@ const Page = () => {
     const estimatedDelivery = new Date();
     estimatedDelivery.setDate(estimatedDelivery.getDate() + 3);
 
+    
 
     return (
-       <div>
-        {!loading && token ?(
+        <div>
+            {!loading && token ? (
+                
                 <div className='bg-defl dark:bg-black'>
                     <Header />
+                    {cartItems.length != 0 &&(
+
                     <div className="pt-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                         <div className="flex items-center justify-between mb-8">
                             <h1 className="text-2xl font-bold text-gray-900 text-black dark:text-white">Shopping Cart</h1>
@@ -169,7 +193,7 @@ const Page = () => {
                                         {cartItems.map(item => (
                                             <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pb-6 border-b dark:border-gray-700 last:border-0 last:pb-0">
                                                 <img
-                                                    src={item.image}
+                                                    src={item.image[0]}
                                                     alt={item.title}
                                                     className="w-full sm:w-24 h-48 sm:h-24 object-cover rounded-lg"
                                                 />
@@ -177,29 +201,26 @@ const Page = () => {
                                                 <div className="flex-1 min-w-0">
                                                     <h3 className="font-medium text-gray-900 dark:text-white break-words">{item.title}</h3>
                                                     <div className="mt-1 text-sm text-gray-500 space-y-1">
-                                                        <p>Color: {item.color}</p>
-                                                        <p>Size: {item.size}</p>
+                                                       {item.variants.map((variant) => (
+                                                         <p>{variant.name}: asdf</p>
+                                                        
+                                                       ))}
                                                     </div>
 
                                                     <div className="mt-4 flex items-center gap-4">
                                                         <div className="flex items-center border rounded-lg">
-                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                                {/* <Minus className="h-4 w-4" /> */}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-black dark:text-white">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                                                                </svg>
+                                                            <button onClick={() => decreaseQuantity(item.id)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                                <Minus className="h-4 w-4" />
+                                                           
 
                                                             </button>
-                                                            <span className="w-12 text-center text-black darK:text-white">{item.quantity}</span>
-                                                            <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                                {/* <Plus className="h-4 w-4" /> */}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-black dark:text-white">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                                                </svg>
+                                                            <span className="w-12 text-center text-black dark:text-white">{item.quantity}</span>
+                                                            <button onClick={() => increaseQuantity(item.id)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                                <PlusIcon className="h-4 w-4" />
 
                                                             </button>
                                                         </div>
-                                                        <button className="text-red-500 hover:text-red-600">
+                                                        <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-600">
                                                             {/* <Trash2 className="h-5 w-5" /> */}
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
@@ -348,11 +369,22 @@ const Page = () => {
                             </div>
                         </div>
                     </div>
+                    )}
+
+                    {cartItems.length == 0 &&(
+                        <div className='items-center justify-center flex h-screen'>
+                           <div className='text-black dark:text-white'>
+                                <h1>You don't have any items added to your cart.</h1>
+                                <p>Go to the marketplace section to view products</p>
+                           </div>
+                        </div>
+                    )}
+
                 </div>
-        ):(
-    <Loading/>
-        )}
-       </div>
+            ) : (
+                <Loading />
+            )}
+        </div>
     )
 }
 

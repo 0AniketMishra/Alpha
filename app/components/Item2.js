@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Star, ChevronLeft, ChevronRight, Heart, Share2, ShoppingCart, DollarSign } from 'lucide-react';
 import Link from 'next/link'
+import { useCart } from '../context/cartContext';
 
 
 const colors = ['Stone Gray', 'Midnight Black', 'Ocean Blue'];
@@ -14,6 +15,7 @@ const specs = [
 export default function ProductDetails({ product, }) {
     const [selectedColor, setSelectedColor] = useState(colors[0]);
     const [activeImage, setActiveImage] = useState(0);
+    const { addToCart, cartItems } = useCart();
     const [activeVariant, setActiveVariant] = useState(0)
     const [show, setShow] = useState(false)
     const [variants,setVariants] = useState(product.variants)
@@ -21,9 +23,6 @@ export default function ProductDetails({ product, }) {
     
     const [variant1, setVariant1] = useState()
 
-
-
-    
 
     useEffect(() => {
         const fetchListings = async () => {
@@ -206,7 +205,7 @@ export default function ProductDetails({ product, }) {
                         </div>
 
                         <div className='flex space-x-4'>
-                            <button className="w-full flex items-center justify-center gap-2 bg-yellow-500 text-white py-3 px-8 rounded-lg hover:bg-yellow-600">
+                            <button onClick={() => addToCart(product)} className="w-full flex items-center justify-center gap-2 bg-yellow-500 text-white py-3 px-8 rounded-lg hover:bg-yellow-600">
                                 <ShoppingCart className="h-5 w-5" />
                                 Add to Cart
                             </button>

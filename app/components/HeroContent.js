@@ -9,8 +9,8 @@ export function HeroContent() {
                     New Collection 2024
                 </span>
                 <h1 className="text-5xl font-bold text-gray-900 leading-tight text-black dark:text-white">
-                    Elevate Your Style <br />
-                    <span className="text-blue-600 dark:text-blue-400">With Premium Fashion</span>
+                    The Only Marketplace <br />
+                    <span className="text-blue-600 dark:text-blue-400">You Need</span>
                 </h1>
                 <p className="text-lg text-gray-600 max-w-md">
                     Discover our curated collection of premium fashion items designed to make you stand out.
