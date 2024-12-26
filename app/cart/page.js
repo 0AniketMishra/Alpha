@@ -374,7 +374,7 @@ const Page = () => {
                     {cartItems.length == 0 &&(
                         <div className='items-center justify-center flex h-screen'>
                            <div className='text-black dark:text-white'>
-                                <h1>You don't have any items added to your cart.</h1>
+                                <h1>You do not have any items added to your cart.</h1>
                                 <p>Go to the marketplace section to view products</p>
                            </div>
                         </div>
