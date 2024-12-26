@@ -202,7 +202,7 @@ const Page = () => {
                                                     <h3 className="font-medium text-gray-900 dark:text-white break-words">{item.title}</h3>
                                                     <div className="mt-1 text-sm text-gray-500 space-y-1">
                                                        {item.variants.map((variant) => (
-                                                         <p>{variant.name}: asdf</p>
+                                                         <p key={variant.name}>{variant.name}: asdf</p>
                                                         
                                                        ))}
                                                     </div>
