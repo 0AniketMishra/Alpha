@@ -11,7 +11,7 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 
-const page = ({params, searchParams}) => {
+const Page = ({params, searchParams}) => {
 
   const router = useRouter(); 
   const  id  = useParams().item
@@ -56,4 +56,4 @@ const page = ({params, searchParams}) => {
   )
 }
 
-export default page
+export default Page
