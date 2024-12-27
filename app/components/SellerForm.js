@@ -70,21 +70,21 @@ console.log(error)
 
             <form>
               <div className="mb-5">
-                <label for="name" className="mb-3 block  font-medium text-base">
+                <label htmlFor="name" className="mb-3 block  font-medium text-base">
                   Your Alias
                 </label>
                 <input value={alias} onChange={(e) => setAlias(e.target.value)} type="text" name="name" id="name" placeholder="Enter your preferred Alias"
                   className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
               </div>
               <div className="mb-5">
-                <label for="phone" className="mb-3 block text-base font-medium text-base">
+                <label htmlFor="phone" className="mb-3 block text-base font-medium text-base">
                   Password 
                 </label>
                 <input value={password} onChange={(e) => setPasword(e.target.value)} type="password" name="phone" id="phone" placeholder="Enter your phone number"
                   className="w-full rounded-md  bg-def outline-none py-3 px-6 text-base font-medium text-whiteoutline-none  " />
               </div>
               <div className="mb-5">
-                <label for="email" className="mb-3 block text-base font-medium text-base">
+                <label htmlFor="email" className="mb-3 block text-base font-medium text-base">
                   Email for Getting Order Updates (optional)
                 </label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="Enter your email"
@@ -107,7 +107,7 @@ console.log(error)
                 {!isOptionSelected &&(
                   <div className="flex w-full px-3 sm:w-1/2">
                     <div className="mb-5">
-                      <label for="distance" className="mb-3 block text-base font-medium text-base">
+                      <label htmlFor="distance" className="mb-3 block text-base font-medium text-base">
                         Enter the max. shipping distance
                       </label>
                      <div className='flex'>

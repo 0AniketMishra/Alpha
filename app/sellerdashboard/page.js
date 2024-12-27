@@ -169,6 +169,7 @@ export default function SellerDashboard() {
 
             const data = await response.json()
             setSellerProducts(data)
+            
         }
       if (!loading && token) {
           fun()
@@ -547,7 +548,7 @@ const handleEdit = (info) => {
                         </thead>
                         <tbody>
                             {sellerProducts.map((product) => (
-                                <tr key={product.name} className="border-b  dark:border-gray-700 last:border-0">
+                                <tr key={product._id} className="border-b  dark:border-gray-700 last:border-0">
                                     <td className="py-4">
                                         <div className="flex items-center space-x-3">
                                             <img src={product.image[0]} className="flex-shrink-0 h-10 w-10 rounded-lg bg-gray-100" />
