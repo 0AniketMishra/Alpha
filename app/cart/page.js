@@ -9,10 +9,21 @@ import Loading from '../components/Loading'
 import { useCart } from '../context/cartContext'
 import { Minus, Plus, PlusIcon } from 'lucide-react'
 
+import { Loader2, CheckCircle2, Bitcoin, Wallet, DollarSign, ChevronDown, ArrowLeft } from 'lucide-react';
 
 
 
 const Page = () => {
+
+
+    const CRYPTO_OPTIONS = [
+        { id: 'btc', name: 'Bitcoin (BTC)', icon: Bitcoin, address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', color: 'orange' },
+        { id: 'eth', name: 'Ethereum (ETH)', icon: Wallet, address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e', color: 'blue' },
+        { id: 'usdt', name: 'Tether (USDT)', icon: DollarSign, address: 'TXd1qp9UcyVHvZzHuv8mS9aQKUkBwxDqGM', color: 'green' },
+        { id: 'sol', name: 'Solana (SOL)', icon: Wallet, address: '7ZWZqVcYV3CLFz9P8rVn3E4jooXvp6ZZoxvs6CkTIDw4', color: 'purple' },
+        { id: 'bnb', name: 'BNB (BNB)', icon: DollarSign, address: 'bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23', color: 'yellow' }
+    ];
+
 
     const { addToCart, cartItems, removeFromCart,updateCart } = useCart();
     const [price, setPrice] = useState(0)
@@ -23,7 +34,8 @@ const Page = () => {
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null)
 
-
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedCrypto, setSelectedCrypto] = useState(CRYPTO_OPTIONS[0]);
 
 
     useEffect(() => { // Function to get JWT from cookies 
@@ -167,6 +179,7 @@ const Page = () => {
     const estimatedDelivery = new Date();
     estimatedDelivery.setDate(estimatedDelivery.getDate() + 3);
 
+  
     
 
     return (
@@ -341,7 +354,7 @@ const Page = () => {
                                     </div>
 
                                     <div className="mt-6 space-y-4">
-                                        <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                        {/* <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                                             <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
 
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 mr-2">
@@ -350,8 +363,38 @@ const Page = () => {
 
                                                 <span>Estimated delivery by {estimatedDelivery.toLocaleDateString()}</span>
                                             </div>
-                                        </div>
+                                        </div> */}
+                                            <div className="relative">
+                                                <p className='mb-2'>Select Your Preferred Currency</p>
+                                                <button
+                                                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                                    className="w-full flex items-center justify-between px-4 py-3 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 transition-colors"
+                                                >
+                                                    <div className="flex items-center space-x-3">
+                                                        <selectedCrypto.icon className={`w-6 h-6 text-${selectedCrypto.color}-500`} />
+                                                        <span className="font-medium text-white">{selectedCrypto.name}</span>
+                                                    </div>
+                                                    <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                                </button>
 
+                                                {isDropdownOpen && (
+                                                    <div className="absolute z-10 mt-2 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl">
+                                                        {CRYPTO_OPTIONS.map((crypto) => (
+                                                            <button
+                                                                key={crypto.id}
+                                                                onClick={() => {
+                                                                    setSelectedCrypto(crypto);
+                                                                    setIsDropdownOpen(false);
+                                                                }}
+                                                                className="w-full flex items-center space-x-3 p-4 hover:bg-gray-700 transition-colors"
+                                                            >
+                                                                <crypto.icon className={`w-6 h-6 text-${crypto.color}-500`} />
+                                                                <span className="font-medium text-white">{crypto.name}</span>
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
                                         <button className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 flex items-center justify-center">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 mr-2">
