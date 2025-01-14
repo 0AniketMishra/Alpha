@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useCart } from '../context/cartContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useProduct } from '../context/ProductContext';
 
 export default function ProductCard({
@@ -17,9 +17,18 @@ export default function ProductCard({
     highlightFeatures,
     reviews
 }) {
-    const { addToCart } = useCart();
+    const { addToCart, cartItems, removeFromCart } = useCart();
     const { setCurrentProduct } = useProduct();
     const [added, setAdded] = useState(false);
+    
+    
+
+    useEffect(() => {
+        const elementPresent = cartItems.some(element => element.id === _id);
+        setAdded(elementPresent);
+        
+    },[added,cartItems, removeFromCart])
+    
 
     return (
         <div className="group relative bg-white dark:bg-def rounded-xl shadow-lg transition-all hover:shadow-xl">
@@ -80,10 +89,17 @@ export default function ProductCard({
                 <button className="w-full bg-gray-100 text-gray-800 py-2 rounded-xl hover:bg-gray-200 transition-colors dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
                     Buy Now
                 </button>
+                
+                {added  ?(
+                    <button onClick={() => {removeFromCart(_id); setAdded(false)}} className="w-full bg-red-400 text-white py-2 rounded-xl hover:bg-red-500 transition-colors dark:bg-red-400 dark:hover:bg-red-500">
+                    Remove from Cart
+                    </button>
+                ) : (
                 <button onClick={() => { addToCart({ image, title, price, rating, originalPrice, badge, description, variants, stock, reviews, quantity: 1, id: _id }); setAdded(true); }}
                     className="w-full bg-indigo-600 text-white py-2 rounded-xl hover:bg-indigo-700 transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600">
-                    {added ? "Added To Cart" : "Add to Cart"}
+                    Add to Cart
                 </button>
+                )}
             </div>
         </div>
     );
