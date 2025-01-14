@@ -1,18 +1,23 @@
-"use client"
+"use client";
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cartItems, setCart] = useState(() => {
-        // Retrieve cart state from session storage or return an empty array
-        const savedCart = sessionStorage.getItem('cartItems');
-        return savedCart ? JSON.parse(savedCart) : [];
+        if (typeof window !== 'undefined') {
+            // Retrieve cart state from session storage or return an empty array
+            const savedCart = sessionStorage.getItem('cartItems');
+            return savedCart ? JSON.parse(savedCart) : [];
+        }
+        return [];
     });
 
     useEffect(() => {
-        // Update session storage whenever cartItems state changes
-        sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+        if (typeof window !== 'undefined') {
+            // Update session storage whenever cartItems state changes
+            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
     }, [cartItems]);
 
     const addToCart = (item) => {
