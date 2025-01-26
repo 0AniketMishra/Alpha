@@ -76,7 +76,7 @@ function Page() {
                         </div>
                         <h2 className="text-2xl font-bold mb-4 dark:text-white text-black">Payment Confirmed</h2>
                         <p className="mb-6 dark:text-zinc-400 text-black">
-                             Your payment was completed successfully. Enjoy your nose candy.. And don't forget to leave a feedback!
+                             Your payment was completed successfully. Enjoy your nose candy.. And do not forget to leave a feedback!
                         </p>
                         <div className="mb-8 p-4 rounded-lg dark:bg-black/40 bg-gray-100 border dark:border-zinc-800/50 border-gray-200">
                             <p className="text-sm dark:text-zinc-500 text-black">Transaction ID</p>
