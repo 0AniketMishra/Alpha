@@ -132,6 +132,7 @@ export default function SellerDashboard() {
     const [price,setPrice] = useState(0)
     const [description,setDescription] = useState("")
     const [title,setTitle] = useState("")
+    const [orders,setOrders] = useState(null)
     const [finfo,setfInfo] = useState(null)
     const [category,setCategory] = useState("")
     const [sellerProducts,setSellerProducts] = useState([])
@@ -183,6 +184,26 @@ export default function SellerDashboard() {
             router.push('/sellerLogin');
         }
     }, [loading, token]);
+
+    useEffect(() => {
+      const fetchSellerOrders = async () => {
+       try{
+           const response = await fetch('https://alpha-backend-v7bb.vercel.app/orders',{
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({ token: token })
+           })
+           const data = await response.json()
+           console.log(data)
+       }catch(err){
+         console.log(err)
+       }
+    }
+    
+    fetchSellerOrders();
+    },[loading, token])
 
 const handleEdit = (info) => {
   if(info){
@@ -350,12 +371,12 @@ const handleEdit = (info) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {pendingOrders.map((order) => (
+                                    {orders?.map((order) => (
                                         <tr key={order.id} className="border-b dark:border-gray-700 last:border-0">
-                                            <td className="py-4 text-black dark:text-white">{order.id}</td>
-                                            <td className="py-4 text-black dark:text-white">{order.customer}</td>
-                                            <td className="py-4 text-black dark:text-white">{order.items.join(', ')}</td>
-                                            <td className="py-4 text-black dark:text-white">${order.total}</td>
+                                            <td className="py-4 text-black dark:text-white">This is a heading....</td>
+                                            <td className="py-4 text-black dark:text-white">{order?.customer}</td>
+                                            <td className="py-4 text-black dark:text-white">{order?.items.join(', ')}</td>
+                                            <td className="py-4 text-black dark:text-white">${order?.total}</td>
                                             <td className="py-4 text-black dark:text-white">
                                                 <span className="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
                                                     {order.status}

@@ -180,9 +180,12 @@ const Page = () => {
 
   
     const checkout = async () => {
-
+        
         setCheckoutLoading(true);
+        const sellerlist = cartItems.map(order => order.sellerId);
+        console.log(sellerlist)
         const paymentData = {
+            sellerId: sellerlist,
             data: cartItems,
             token: token,
             shippingAddress: 'A random Shipping address to be added later.',
@@ -191,7 +194,7 @@ const Page = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/create-payment', {
+            const response = await fetch('https://alpha-backend-v7bb.vercel.app/create-payment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -211,6 +214,8 @@ const Page = () => {
             console.error('Error:', error);
         }
     }
+
+    
 
     return (
         <div>

@@ -13,6 +13,7 @@ export default function ProductCard({
     badge,
     description,
     variants,
+    sellerId,
     stock,
     highlightFeatures,
     reviews
@@ -33,7 +34,7 @@ export default function ProductCard({
     return (
         <div className="group relative bg-white dark:bg-def rounded-xl shadow-lg transition-all hover:shadow-xl">
             <Link href={{ pathname: '/items/' + _id  }} 
-            onClick={() => setCurrentProduct({ image, title, price, rating, originalPrice, badge, description, variants, stock, reviews, quantity: 1, _id: _id,highlightFeatures: highlightFeatures })}>
+            onClick={() => setCurrentProduct({ image, title, price, rating, originalPrice, badge, description,sellerId, variants, stock, reviews, quantity: 1, _id: _id,highlightFeatures: highlightFeatures })}>
                 <div className="aspect-16/10 w-full overflow-hidden rounded-t-xl bg-gray-200">
                     <img
                         src={image[0]}
@@ -95,7 +96,7 @@ export default function ProductCard({
                     Remove from Cart
                     </button>
                 ) : (
-                <button onClick={() => { addToCart({ image, title, price, rating, originalPrice, badge, description, variants, stock, reviews, quantity: 1, _id: _id }); setAdded(true); }}
+                <button onClick={() => { addToCart({ image, title,sellerId, price, rating, originalPrice, badge, description, variants, stock, reviews, quantity: 1, _id: _id }); setAdded(true); }}
                     className="w-full bg-indigo-600 text-white py-2 rounded-xl hover:bg-indigo-700 transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600">
                     Add to Cart
                 </button>

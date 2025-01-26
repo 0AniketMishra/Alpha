@@ -37,7 +37,7 @@ function Page() {
                     console.error('Failed to fetch payment status');
                 }
 
-                const response2 = await fetch('http://localhost:3001/verifyPayment', {
+                const response2 = await fetch('https://alpha-backend-v7bb.vercel.app/verifyPayment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
