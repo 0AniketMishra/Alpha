@@ -29,11 +29,10 @@ const Page = () => {
     const [price, setPrice] = useState(0)
     const [discount, setDiscount] = useState(10)
 
-
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null)
-
+    const [checkoutLoading, setCheckoutLoading] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedCrypto, setSelectedCrypto] = useState(CRYPTO_OPTIONS[0]);
 
@@ -180,7 +179,38 @@ const Page = () => {
     estimatedDelivery.setDate(estimatedDelivery.getDate() + 3);
 
   
-    
+    const checkout = async () => {
+
+        setCheckoutLoading(true);
+        const paymentData = {
+            data: cartItems,
+            token: token,
+            shippingAddress: 'A random Shipping address to be added later.',
+            shippingMode: 'Standard',
+            pay_currency: selectedCrypto.id
+        };
+
+        try {
+            const response = await fetch('http://localhost:3001/create-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(paymentData)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                
+                
+                router.push(`/checkout/${result.payment_id}`);
+            } else {
+                console.error('Failed to create payment');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     return (
         <div>
@@ -395,13 +425,18 @@ const Page = () => {
                                                     </div>
                                                 )}
                                             </div>
-                                        <button className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 flex items-center justify-center">
+                                        <button onClick={checkout} className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 flex items-center justify-center">
+                                            {checkoutLoading ? (
+                                                <Loader2 className="w-6 h-6 animate-spin" />
+                                            ) : (
+                                                    <div className="flex items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 mr-2">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                                                        </svg>
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 mr-2">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-                                            </svg>
-
-                                            Proceed to Checkout
+                                                        Proceed to Checkout
+                                                    </div>
+                                            )}
                                         </button>
 
                                         <p className="text-xs text-center text-gray-500">

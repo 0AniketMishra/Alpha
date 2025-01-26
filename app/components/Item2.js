@@ -145,7 +145,6 @@ export default function ProductDetails() {
                         ))}
                     </div>
 
-
                     {/* <div className="">
                         <h2 className="font-semibold mb-4">Specifications</h2>
                         <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
