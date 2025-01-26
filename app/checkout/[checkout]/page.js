@@ -4,7 +4,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { Bitcoin, Check, Copy, Clock, Router } from 'lucide-react';
 import Loading from '../../components/Loading';
 import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation                      ';
+import { useRouter } from 'next/navigation';
 
 function Page() {
     const [isPaid, setIsPaid] = useState(false);
