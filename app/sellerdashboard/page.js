@@ -235,8 +235,8 @@ const handleEdit = (info) => {
     const StatCard = ({ icon: Icon, title, value, trend, trendValue }) => (
         <div className="bg-white dark:bg-def rounded-lg p-6 shadow-sm">
             <div className="flex items-center justify-between">
-                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/20 rounded-lg">
-                    <Icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                <div className="p-2 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
+                    <Icon className="h-6 w-6 text-orange-600 dark:text-orange-400" />
                 </div>
                 <div className={`flex items-center ${trend === 'up' ? 'text-green-500' : 'text-red-500'
                     }`}>
@@ -352,7 +352,7 @@ const handleEdit = (info) => {
                     <div className="p-6">
                         <div className="flex items-center justify-between mb-8">
                             <h2 className="text-lg font-semibold text-black dark:text-white">Recent Orders</h2>
-                            <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                            <button className="text-orange-600 hover:text-orange-700 text-sm font-medium">
                                 View All
                             </button>
                         </div>
@@ -381,7 +381,7 @@ const handleEdit = (info) => {
                                                 </span>
                                             </td>
                                             <td className="py-4">
-                                                <button className="text-indigo-600 hover:text-indigo-700">View Details</button>
+                                                <button className="text-orange-600 hover:text-orange-700">View Details</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -400,7 +400,7 @@ const handleEdit = (info) => {
                 <div className="flex space-x-4 mb-6">
                     <button
                         className={`px-4 py-2 rounded-lg ${activeOrdersTab === 'pending'
-                            ? 'bg-indigo-600 text-white'
+                            ? 'bg-orange-600 text-white'
                             : 'dark:text-gray-600 text-black hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveOrdersTab('pending')}
@@ -409,7 +409,7 @@ const handleEdit = (info) => {
                     </button>
                     <button
                         className={`px-4 py-2 rounded-lg ${activeOrdersTab === 'ongoing'
-                            ? 'bg-indigo-600 text-white '
+                            ? 'bg-orange-600 text-white '
                             : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveOrdersTab('ongoing')}
@@ -418,7 +418,7 @@ const handleEdit = (info) => {
                     </button>
                     <button
                         className={`px-4 py-2 rounded-lg ${activeOrdersTab === 'completed'
-                            ? 'bg-indigo-600 text-white'
+                            ? 'bg-orange-600 text-white'
                             : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveOrdersTab('completed')}
@@ -469,7 +469,7 @@ const handleEdit = (info) => {
                                         <h3 className="font-medium text-black dark:text-white">{order.id}</h3>
                                         <p className="text-sm text-gray-500">{order.date}</p>
                                     </div>
-                                    <button className="px-3 py-1 bg-indigo-600 text-white rounded-lg text-sm">
+                                    <button className="px-3 py-1 bg-orange-600 text-white rounded-lg text-sm">
                                         Update Status
                                     </button>
                                 </div>
@@ -535,14 +535,14 @@ const handleEdit = (info) => {
                         <input
                             type="text"
                             placeholder="Search products..."
-                            className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700"
+                            className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 dark:bg-gray-700"
                         />
                     </div>
                     <button className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg">
                         <Filter className="h-5 w-5" />
                     </button>
                 </div>
-                <button onClick={() => SetIsOpen(true)} className="flex items-center space-x-2 bg-indigo-600 text-white w-fit p-2 border-2 border-indigo-600 rounded-lg hover:bg-indigo-700">
+                <button onClick={() => SetIsOpen(true)} className="flex items-center space-x-2 bg-orange-600 text-white w-fit p-2 border-2 border-orange-600 rounded-lg hover:bg-orange-700">
                     <Plus className="h-5 w-5" />
                     <span className='hidden lg:flex'>Add Product</span>
                 </button>
@@ -597,7 +597,7 @@ const handleEdit = (info) => {
                                     </td>
                                     <td className="py-4">
                                         <div className="flex space-x-2 pr-4">
-                                            <button onClick={() => handleEdit(product)} className="text-indigo-600 hover:text-indigo-700">Edit</button>
+                                            <button onClick={() => handleEdit(product)} className="text-blue-600 hover:text-blue-700">Edit</button>
                                             <button onClick={() => setIsDeleteOpen(true)} className="text-red-600 hover:text-red-700">Delete</button>
                                         </div>
 
@@ -683,7 +683,7 @@ const handleEdit = (info) => {
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id)}
                                         className={`p-3 rounded-lg ${activeTab === tab.id
-                                            ? 'bg-indigo-100 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400'
+                                            ? 'bg-orange-100 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400'
                                             : 'text-gray-600 dark:text-gray-400'
                                             }`}
                                     >
@@ -708,7 +708,7 @@ const handleEdit = (info) => {
                                             key={tab.id}
                                             onClick={() => setActiveTab(tab.id)}
                                             className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm ${activeTab === tab.id
-                                                ? 'bg-indigo-600 text-white'
+                                                ? 'bg-orange-600 text-white'
                                                 : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                                                 }`}
                                         >
