@@ -97,7 +97,7 @@ export default function ProductCard({
                     </button>
                 ) : (
                 <button onClick={() => { addToCart({ image, title,sellerId, price, rating, originalPrice, badge, description, variants, stock, reviews, quantity: 1, _id: _id }); setAdded(true); }}
-                    className="w-full bg-indigo-600 text-white py-2 rounded-xl hover:bg-indigo-700 transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600">
+                    className="w-full bg-orange-600 text-white py-2 rounded-xl hover:bg-orange-400 transition-colors ">
                     Add to Cart
                 </button>
                 )}

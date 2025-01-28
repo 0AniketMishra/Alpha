@@ -48,24 +48,24 @@ const categoryDistribution = [
     { name: 'Sports', value: 10 }
 ];
 
-const pendingOrders = [
-    {
-        id: '#ORD-001',
-        customer: 'John Doe',
-        items: ['Wireless Headphones', 'Smart Watch'],
-        total: 799.98,
-        date: '2024-03-15',
-        status: 'pending'
-    },
-    {
-        id: '#ORD-002',
-        customer: 'Sarah Smith',
-        items: ['Backpack'],
-        total: 79.99,
-        date: '2024-03-15',
-        status: 'pending'
-    }
-];
+// const pendingOrders = [
+//     {
+//         id: '#ORD-001',
+//         customer: 'John Doe',
+//         items: ['Wireless Headphones', 'Smart Watch'],
+//         total: 799.98,
+//         date: '2024-03-15',
+//         status: 'pending'
+//     },
+//     {
+//         id: '#ORD-002',
+//         customer: 'Sarah Smith',
+//         items: ['Backpack'],
+//         total: 79.99,
+//         date: '2024-03-15',
+//         status: 'pending'
+//     }
+// ];
 
 const ongoingOrders = [
     {
@@ -129,9 +129,7 @@ export default function SellerDashboard() {
     const averageConversion = 2.4;
     const [isOpen, SetIsOpen] = useState(false)
     const [isEditOpen,setIsEditOpen] = useState(false)
-    const [price,setPrice] = useState(0)
-    const [description,setDescription] = useState("")
-    const [title,setTitle] = useState("")
+    const [pendingOrders,setPendingOrders] = useState([])
     const [orders,setOrders] = useState(null)
     const [finfo,setfInfo] = useState(null)
     const [category,setCategory] = useState("")
@@ -196,7 +194,7 @@ export default function SellerDashboard() {
                body: JSON.stringify({ token: token })
            })
            const data = await response.json()
-           console.log(data)
+           setPendingOrders(data)
        }catch(err){
          console.log(err)
        }
@@ -431,26 +429,31 @@ const handleEdit = (info) => {
 
                 {activeOrdersTab === 'pending' && (
                     <div className="space-y-4">
-                        {pendingOrders.map((order) => (
+                        {pendingOrders?.map((order) => (
                             <div key={order.id} className="border dark:border-gray-700 rounded-lg p-4">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
-                                        <h3 className="font-medium text-black dark:text-white">{order.id}</h3>
-                                        <p className="text-sm text-gray-500">{order.date}</p>
+                                        <h3 className="font-medium text-black dark:text-white">{order?._id}</h3>
+                                        <p className="text-sm text-gray-500">{order?.date}</p>
                                     </div>
                                     <div className="flex space-x-2">
-                                        <button className="px-3 py-1 bg-green-500 text-white rounded-lg text-sm">
+                                        <button className="px-3 py-1 bg-green-500 text-white rounded-md text-sm">
                                             Accept
                                         </button>
-                                        <button className="px-3 py-1 bg-red-500 text-white rounded-lg text-sm">
+                                        <button className="px-3 py-1 bg-red-500 text-white rounded-md text-sm">
                                             Reject
                                         </button>
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Customer:</span> {order.customer}</p>
-                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Items:</span> {order.items.join(', ')}</p>
-                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Total:</span> ${order.total}</p>
+                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Shipping Address:</span> {order.shippingAddress}</p>
+                                  {order?.data?.map((item) => (
+                              <div className='flex items-center'>
+                                          <p className='dark:text-white text-black'><span className="text-gray-500 ">Items:</span> {item?.title}</p>
+                                          <p className='dark:text-blue-400 text-blue-500 ml-2'>({item?.quantity})</p>
+                              </div>
+                            ))}
+                                    <p className='dark:text-white text-black'><span className="text-gray-500 ">Total:</span> $20</p>
                                 </div>
                             </div>
                         ))}

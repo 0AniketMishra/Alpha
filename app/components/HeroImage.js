@@ -7,11 +7,19 @@ export function HeroImage() {
             {/* Main image container with gradient overlay */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40 mix-blend-overlay" />
-                <img
+                {/* <img
                     src="https://www.forex.academy/wp-content/uploads/2023/04/what-is-forex-in-trading.jpg"
                     alt="Secure crypto payments"
                     className="w-full h-[400px] lg:h-[500px]  object-cover"
-                />
+                /> */}
+
+                <img
+                    src="https://raw.githubusercontent.com/0AniketMishra/GetYourNotes/refs/heads/main/R.jpg"
+                alt="Secure crypto payments"
+                className="w-full h-[400px] lg:h-[500px]  object-cover"
+                /> 
+
+
 
                 {/* Floating security badges */}
                 <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-900/90 p-3 rounded-xl backdrop-blur-sm shadow-lg flex items-center gap-2 animate-float">

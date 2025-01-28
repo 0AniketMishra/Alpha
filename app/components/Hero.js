@@ -6,6 +6,7 @@ import { HeroContent } from './HeroContent';
 import { HeroImage } from './HeroImage';
 import { BackgroundGraphics } from './BackgroundGraphics';
 import Sample from './Sample';
+import Testimonials from './Testimonials';
 
 export default function Hero() {
     const categories = [
@@ -101,15 +102,18 @@ export default function Hero() {
 
 
             <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-6  dark:bg-black">
-                <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Products</h2>
+                {/* <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white justify-center">Featured Products</h2>
                     <button className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 flex items-center">
                         View All
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5 ml-1">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                         </svg>
                     </button>
-                </div>
+                </div> */}
+                <h1 className="text-3xl font-medium title-font text-white mb-12 text-center">Featured Products</h1>
+                
+
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {listings.map((product) => (
@@ -121,21 +125,22 @@ export default function Hero() {
 
 
 
-           
+           <Testimonials/>
 
 
             {/* Footer */}
 
-            <footer className="text-gray-400 bg-white dark:bg-def body-font">
+            <footer className="text-gray-400 bg-gray-100 dark:bg-def body-font">
                 <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
                     <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
                         <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 rounded-full" viewBox="0 0 24 24">
                                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                             </svg>
                             <span className="ml-3 text-xl text-black dark:text-white">Shadow Trade</span>
                         </a>
-                        <p className="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+                        <p className="mt-2 text-sm text-gray-500">Delivering Unconditionally With The Lowest Fees Possible Making It</p>
+                        <p className="text-sm text-orange-600">The Only Marketplace you need!</p>
                     </div>
                     <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                         <div className="lg:w-1/4 md:w-1/2 w-full px-4">

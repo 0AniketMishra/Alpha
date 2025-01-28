@@ -181,7 +181,7 @@ export default function ProductDetails() {
                         </div>
 
                         <div className='flex space-x-4'>
-                            <button onClick={() => addToCart(currentProduct)} className="w-full flex items-center justify-center gap-2 bg-yellow-500 text-white py-3 px-8 rounded-lg hover:bg-yellow-600">
+                            <button onClick={() => addToCart(currentProduct)} className="w-full flex items-center justify-center gap-2 bg-orange-500 text-white py-3 px-8 rounded-lg hover:bg-orange-600">
                                 <ShoppingCart className="h-5 w-5" />
                                 Add to Cart
                             </button>
