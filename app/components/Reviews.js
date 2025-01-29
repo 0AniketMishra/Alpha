@@ -143,7 +143,7 @@ function App() {
                                     <div className="text-sm">
                                         <div className="flex items-center gap-2 text-gray-600">
                                             <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                                            <span>Most mentioned: "sound quality", "comfort"</span>
+                                            <span>Most mentioned: sound quality, comfort</span>
                                         </div>
                                     </div>
                                 </div>
