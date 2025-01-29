@@ -13,6 +13,7 @@ import Grid from '../components/Grid'
 import Loading from '../components/Loading'
 import { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
+import Footer from '../components/Footer'
 
 
 function Page() {
@@ -86,7 +87,7 @@ function Page() {
 
 
   return (
-      <div className='bg-defl dark:bg-black min-h-screen'>
+      <div className='dark:bg-gradient-to-br bg-gray-100 dark:from-black dark:to-[#0E0E0E] min-h-screen'>
           <div>
               {!loading && token ? (
                   <div className=''>
@@ -137,10 +138,12 @@ function Page() {
                               <div className="flex-1">
                                
                                      <Grid/>
-                                  
+
                               </div>
                           </div>
                       </div>
+                      <Footer />
+
                   </div>
               ) : (
                   <Loading />

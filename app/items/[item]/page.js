@@ -1,5 +1,6 @@
 "use client"
 import About from '@/app/components/About'
+import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
 import Item from '@/app/components/Item'
 import Item2 from '@/app/components/Item2'
@@ -48,6 +49,7 @@ const Page = ({params, searchParams}) => {
             <About loading={loading}/>
             <Seller />
             <Reviews />
+            <Footer/>
          </div>
        ):(
     <Loading/>

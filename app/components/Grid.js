@@ -23,7 +23,7 @@ const Grid = () => {
 
     return (
         <div>
-            <section className="text-gray-600 body-font pt-2 pb-4 " >
+            <section className="text-gray-600 body-font pt-2 pb-4 min-h-[90vh]" >
                 <div className=" px-2 pt-3 mx-auto" >
                     <div className="flex flex-wrap -m-2" >                                    
                             {listings.map((product) => (

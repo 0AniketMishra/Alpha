@@ -8,6 +8,9 @@ export function HeroContent() {
                 <span className="px-3 py-1 bg-orange-100 text-black rounded-full text-sm font-medium">
                     Lowest Fees Guaranteed
                 </span>
+                {/* <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-red-500/5 dark:to-orange-500/5 blur-3xl animate-pulse" /> */}
+
+                <div className="absolute -top-80 -left-20 w-[700px] h-[700px] rounded-full bg-gradient-to-r from-blue-400/10 to-cyan-400/10 dark:from-blue-400/5 dark:to-orange-400/5 blur-2xl animate-pulse delay-900" />
                 <h1 className="text-5xl font-bold text-gray-900 leading-tight text-black dark:text-white">
                     The Only Darknet Marketplace <br />
                     <span className="dark:text-orange-500 text-orange-600">You Need To Use!</span>
