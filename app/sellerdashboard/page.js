@@ -448,7 +448,7 @@ const handleEdit = (info) => {
                                 <div className="space-y-2">
                                     <p className='dark:text-white text-black'><span className="text-gray-500 ">Shipping Address:</span> {order.shippingAddress}</p>
                                   {order?.data?.map((item) => (
-                              <div className='flex items-center'>
+                              <div key={item._id} className='flex items-center'>
                                           <p className='dark:text-white text-black'><span className="text-gray-500 ">Items:</span> {item?.title}</p>
                                           <p className='dark:text-blue-400 text-blue-500 ml-2'>({item?.quantity})</p>
                               </div>
