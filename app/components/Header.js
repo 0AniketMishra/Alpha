@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -8,6 +8,7 @@ import { auth } from '@/firebaseConfig';
 import Sidebar from './Sidebar';
 import Sidebarsm from './Sidebarsm';
 import { useCart } from '../context/cartContext';
+import { ThemeContext } from '../context/themeContext';
 
 const Header = () => {
  
@@ -17,6 +18,9 @@ const Header = () => {
     const [token,setToken] = useState(null)
     const { addToCart, cartItems } = useCart();
     const [loading,setLoading] = useState(true)
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
+
     const handleMouseEnter = () => { 
         setIsMenuOpen(true);
       }; 
@@ -24,20 +28,7 @@ const Header = () => {
          setTimeout(() => { setIsMenuOpen(false); }, 1000); // Adjust the delay duration as needed 
        };
 
-    const [darkMode, setDarkMode] = useState(false); 
     
-    useEffect(() => { 
-        // Check the user's preference in localStorage
-         const savedTheme = localStorage.getItem('theme');
-          if (savedTheme === 'dark') {
-             document.documentElement.classList.add('dark');
-              setDarkMode(true);
-         } else {
-           document.documentElement.classList.remove('dark');
-           setDarkMode(false);
-          }
-      
-    }, []); 
      
     useEffect(() => {
         const getTokenFromCookie = () => {
@@ -58,16 +49,7 @@ const Header = () => {
     console.log("logged out.")
   }    
 
- const toggleDarkMode = () => {
-          if (darkMode) { 
-              document.documentElement.classList.remove('dark');
-              localStorage.setItem('theme', 'light');
-              } else {
-               document.documentElement.classList.add('dark');
-               localStorage.setItem('theme', 'dark');
-               }
-               setDarkMode(!darkMode); 
-};
+ 
          
     return (
         <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-def">
@@ -96,22 +78,23 @@ const Header = () => {
 
                         <Link href="/shop" className="text-black dark:text-white hover:text-indigo-600">Shop</Link>
                         
-                         {!token && !loading && ( <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Messages</Link>)}
-                        {!token && !loading ? (
+                         {token && !loading && ( <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Orders</Link>)}
+                        {!token ? (
                             <Link href="/sell" className="text-black dark:text-white hover:text-indigo-600">Sell</Link>
 
                         ) : (
                                 <Link href="/sellerdashboard" className="text-black dark:text-white hover:text-indigo-600">Dashboard</Link>
                         )}
                         <Link href="/community" className="text-black dark:text-white hover:text-indigo-600">Community</Link>
+                        {!token && (<Link href="/login" className="text-black dark:text-white hover:text-indigo-600">Login/Signup</Link>)}
                        
 
                     </div>
 
                     <div className="flex items-center space-x-4 ">
-                        <button onClick={toggleDarkMode} className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full">
+                        <button onClick={toggleTheme} className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full">
                             
-                           {darkMode ? (
+                           {theme == "dark" ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-white">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                                 </svg>
