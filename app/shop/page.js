@@ -94,12 +94,12 @@ function Page() {
                       <Header />
                       <Toaster/>
                       <div className="pt-20 px-2 h-full sm:px-6 lg:px-8 max-w-custom mx-auto">
-                          <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4">
+                          <div className="flex flex-col md:flex-row md:items-center px-2 lg:px-0 md:justify-between py-4 ">
 
                               {/* <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop All Products</h1> */}
 
 
-                             <div className="flex items-center space-x-4 mb-4 md:mt-0">
+                             <div className="flex items-center space-x-4 mb-4 lg:mb-0 md:mt-0">
                                   <button
                                       onClick={() => setShowFilters(!showFilters)}
                                       className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600"
@@ -138,7 +138,7 @@ function Page() {
                                       type="text"
                                       id="Search"
                                       placeholder="Search for..."
-                                      className="w-full  lg:w-96 rounded-full border-gray-200 outline-none text-black  py-3 px-4  pe-10 shadow-sm sm:text-sm"
+                                      className="w-full border border-gray-200  lg:w-96 rounded-full border-gray-200 outline-none text-black  py-3 px-4  pe-10 shadow-sm sm:text-sm"
                                   />
 
                                   <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
