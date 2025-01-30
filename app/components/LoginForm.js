@@ -69,23 +69,22 @@ function LoginForm() {
 
 
     return (
-        <div className='bg-defl dark:bg-black h-screen'>
+        <div className='bg-defl dark:bg-black'>
 
           
-            <div className="mx-auto px-4 py-[20vh] sm:px-6 lg:px-4 flex h-full  w-full" >
+            <div className="px-4 sm:px-6 lg:px-4 flex h-full  w-full" >
                 {/* <div className="hidden lg:w-1/2 lg:flex mx-8">
                     <img alt="ecommerce" layout="fill" className=" object-fill w-full h-[30rem] rounded-lg" src="https://quotefancy.com/media/wallpaper/3840x2160/1246546-Colleen-Houck-Quote-Bad-things-sometimes-happen-to-good-people-the.jpg" />
                 </div> */}
-                <div className=' mx-auto' >
+                <div className='' >
 
 
-                    <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4 bg-white dark:bg-def rounded-lg p-8">
+                    <form action="#" className=" mb-0 mt-4 max-w-md space-y-4 bg-white dark:bg-def rounded-lg p-8">
                         <div className="">
                             <h1 className="text-2xl text-black dark:text-white font-bold sm:text-3xl">Login</h1>
 
                             <p className="mt-4 text-gray-500">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque
-                                ipsa culpa autem, at itaque nostrum!
+                                Please Enter your Username & Password To Login.
                             </p>
                         </div>
                         <div>
@@ -167,7 +166,7 @@ function LoginForm() {
 
                             <button
                                 type="submit"
-                                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white w-[25%]"
+                                className="inline-block rounded-lg bg-orange-500 px-5 py-3 text-sm font-medium text-white w-[25%]"
                                 onClick={handleSubmit}
                             >
                                 

@@ -7,6 +7,10 @@ import { ProductProvider } from './context/ProductContext';
 import Header from './components/Header';
 import { ThemeProvider } from './context/themeContext';
 import { useEffect } from 'react';
+import { ViewTransitions } from 'next-view-transitions';
+import ProgressBar from './components/ProgressBar';
+
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -51,12 +55,15 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <ProductProvider>
-            <CartProvider>
-              <Header />
-              {children}
-            </CartProvider>
-          </ProductProvider>
+         <ViewTransitions>
+            <ProductProvider>
+              <CartProvider>
+                <Header />
+
+                {children}
+              </CartProvider>
+            </ProductProvider>
+        </ViewTransitions>
         </ThemeProvider>
       </body>
     </html>

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Loading from '../components/Loading'
 
 
-function Page() {
+function SellerLogin() {
 
     const [password, setPassword] = useState("")
     const [alias, setalias] = useState("")
@@ -15,7 +15,7 @@ function Page() {
 
     const [token, setToken] = useState(null);
     const [err, setErr] = useState(false)
-    const [loading,setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
     const [processing, setProcessing] = useState(false);
 
 
@@ -24,18 +24,18 @@ function Page() {
 
 
 
-    async function login(alias, password) {        
+    async function login(alias, password) {
         const response = await fetch('https://alpha-backend-v7bb.vercel.app/sellerlogin', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sellerName: alias, password: password }),
-                credentials: 'include'
-            });
-            const data = await response.json()
-            const status = response.status
-            document.cookie = `sjwt=${data.token}; path=/`;
-            if (status == 200) {
-                router.push('/sellerdashboard')
-            }
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ sellerName: alias, password: password }),
+            credentials: 'include'
+        });
+        const data = await response.json()
+        const status = response.status
+        document.cookie = `sjwt=${data.token}; path=/`;
+        if (status == 200) {
+            router.push('/sellerdashboard')
+        }
         setProcessing(false)
     }
 
@@ -57,8 +57,8 @@ function Page() {
             router.push("/sellerdashboard")
         setLoading(false)
     });
-    
-  
+
+
 
 
     const handleSubmit = async (e) => {
@@ -74,21 +74,19 @@ function Page() {
 
 
     return (
-      <div>
-        {!loading && !token ? (
+        <div>
+            {!loading && !token ? (
                 <div>
-                    <Header />
-                    <div className='bg-defl dark:bg-black h-screen'>
+                
+                    <div className='bg-defl dark:bg-black'>
 
 
-                        <div className="mx-auto px-4 py-[20vh] sm:px-6 lg:px-4 flex h-full  w-full" >
-                            {/* <div className="hidden lg:w-1/2 lg:flex mx-8">
-                    <img alt="ecommerce" layout="fill" className=" object-fill w-full h-[30rem] rounded-lg" src="https://quotefancy.com/media/wallpaper/3840x2160/1246546-Colleen-Houck-Quote-Bad-things-sometimes-happen-to-good-people-the.jpg" />
-                </div> */}
-                            <div className=' mx-auto' >
+                        <div className=" px-4  sm:px-6 lg:px-4 flex h-full  w-full" >
+                ``
+                            <div className='' >
 
 
-                                <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4 bg-white dark:bg-def rounded-lg p-8">
+                                <form action="#" className=" mb-0 mt-4 max-w-md space-y-4 bg-white dark:bg-def rounded-lg p-8">
                                     <div className="">
                                         <h1 className="text-2xl text-black dark:text-white font-bold sm:text-3xl">Seller Login</h1>
 
@@ -199,11 +197,11 @@ function Page() {
                         </div>
                     </div>
                 </div>
-        ) : (
-   <Loading/>
-        )}
-      </div>
+            ) : (
+                <Loading />
+            )}
+        </div>
     )
 }
 
-export default Page
+export default SellerLogin

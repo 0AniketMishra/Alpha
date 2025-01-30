@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions';
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Router } from 'next/navigation';
@@ -19,7 +19,7 @@ const Header = () => {
     const { addToCart, cartItems } = useCart();
     const [loading,setLoading] = useState(true)
     const { theme, toggleTheme } = useContext(ThemeContext);
-
+    const [token2, setToken2] = useState(null)   
 
     const handleMouseEnter = () => { 
         setIsMenuOpen(true);
@@ -43,6 +43,20 @@ const Header = () => {
         setToken(jwtToken)
         setLoading(false)
     },[])
+
+    useEffect(() => {
+        const getTokenFromCookie = () => {
+            const cookies = document.cookie.split('; ');
+            const jwtCookie = cookies.find(cookie =>
+                cookie.startsWith('jwt='));
+            if (jwtCookie) {
+                return jwtCookie.split('=')[1];
+            } return null;
+        };
+        const jwtToken = getTokenFromCookie();
+        setToken2(jwtToken)
+        setLoading(false)
+    }, [])
         
         
   const logout = () => {
@@ -78,15 +92,16 @@ const Header = () => {
 
                         <Link href="/shop" className="text-black dark:text-white hover:text-indigo-600">Shop</Link>
                         
-                         {token && !loading && ( <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Orders</Link>)}
-                        {!token ? (
+                         {token2 && ( <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Orders</Link>)}
+                        
+                        {token2 ? (
                             <Link href="/sell" className="text-black dark:text-white hover:text-indigo-600">Sell</Link>
 
                         ) : (
                                 <Link href="/sellerdashboard" className="text-black dark:text-white hover:text-indigo-600">Dashboard</Link>
                         )}
                         <Link href="/community" className="text-black dark:text-white hover:text-indigo-600">Community</Link>
-                        {!token && (<Link href="/login" className="text-black dark:text-white hover:text-indigo-600">Login/Signup</Link>)}
+                        {!token && (<Link href="/login" className="text-black dark:text-white hover:text-indigo-600">Login</Link>)}
                        
 
                     </div>
