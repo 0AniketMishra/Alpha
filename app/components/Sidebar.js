@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { db, auth } from '@/firebaseConfig';
 import { signOut } from 'firebase/auth';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 
 const Sidebar = () => {
     function logout() {

@@ -96,9 +96,10 @@ function Page() {
                       <div className="pt-20 px-2 h-full sm:px-6 lg:px-8 max-w-custom mx-auto">
                           <div className="flex flex-col md:flex-row md:items-center md:justify-between py-4">
 
-                              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop All Products</h1>
-                               
-                              <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                              {/* <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Shop All Products</h1> */}
+
+
+                             <div className="flex items-center space-x-4 mb-4 md:mt-0">
                                   <button
                                       onClick={() => setShowFilters(!showFilters)}
                                       className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg dark:border-gray-600"
@@ -128,6 +129,41 @@ function Page() {
 
                                   </div>
                               </div>
+
+
+                              <div className="relative ">
+                              
+
+                                  <input
+                                      type="text"
+                                      id="Search"
+                                      placeholder="Search for..."
+                                      className="w-full  lg:w-96 rounded-full border-gray-200 outline-none text-black  py-3 px-4  pe-10 shadow-sm sm:text-sm"
+                                  />
+
+                                  <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                                      <button type="button" className="text-gray-600 hover:text-gray-700">
+                                          <span className="sr-only">Search</span>
+
+                                          <svg
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              fill="none"
+                                              viewBox="0 0 24 24"
+                                              strokeWidth="1.5"
+                                              stroke="currentColor"
+                                              className="size-4  text-black"
+                                          >
+                                              <path
+                                                  strokeLinecap="round"
+                                                  strokeLinejoin="round"
+                                                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                              />
+                                          </svg>
+                                      </button>
+                                  </span>
+                              </div>
+
+                              
                           </div>
 
                           <div className="flex  flex-col md:flex-row gap-8">
