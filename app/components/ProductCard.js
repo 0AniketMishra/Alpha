@@ -37,7 +37,7 @@ export default function ProductCard({
             onClick={() => setCurrentProduct({ image, title, price, rating, originalPrice, badge, description,sellerId, variants, stock, reviews, quantity: 1, _id: _id,highlightFeatures: highlightFeatures })}>
                 <div className="aspect-16/10 w-full overflow-hidden rounded-t-xl bg-gray-200">
                     <img
-                        src={image[0]}
+                        src={image== null ? "https://via.placeholder.com/300" : image[0]}
                         alt={title}
                         className="h-full w-full object-cover object-center group-hover:opacity-75 transition-opacity"
                     />
