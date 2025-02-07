@@ -225,11 +225,11 @@ const Page = () => {
                     <Header />
                     {cartItems.length != 0 &&(
 
-                    <div className="pt-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                    <div className="py-32 px-4 sm:px-6 lg:px-8 max-w-[100rem] mx-auto">
                         <div className="flex items-center justify-between mb-8">
                             <h1 className="text-2xl font-bold text-gray-900 text-black dark:text-white">Shopping Cart</h1>
                             <div className="text-sm text-gray-500">
-                                <span className="font-medium text-indigo-600">{cartItems.length} items</span> in your cart
+                                <span className="font-medium text-orange-600">{cartItems.length} items</span> in your cart
                             </div>
                         </div>
 
@@ -300,7 +300,7 @@ const Page = () => {
                                                 <label
                                                     key={option.id}
                                                     className={`flex items-center p-4 border rounded-lg cursor-pointer ${selectedDelivery.id === option.id
-                                                        ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20'
+                                                        ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/20'
                                                         : 'border-gray-200 dark:border-gray-700'
                                                         }`}
                                                 >
@@ -310,7 +310,7 @@ const Page = () => {
                                                         value={option.id}
                                                         checked={selectedDelivery.id === option.id}
                                                         onChange={() => setSelectedDelivery(option)}
-                                                        className="h-4 w-4 text-indigo-600"
+                                                        className="h-4 w-4 text-orange-600"
                                                     />
                                                     <div className="ml-4 flex-1">
                                                         <div className="flex items-center justify-between">
@@ -327,11 +327,11 @@ const Page = () => {
                                 </div>
 
                                 {/* User Details */}
-                                <div className="bg-white dark:bg-def rounded-lg shadow mb-24">
+                                <div className="bg-white dark:bg-def rounded-lg shadow ">
                                     <div className="p-6">
                                         <div className="flex items-center justify-between mb-4">
                                             <h2 className="text-lg font-medium text-gray-900 dark:text-white">Shipping Address</h2>
-                                            <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                                            <button className="text-orange-600 hover:text-orange-700 text-sm font-medium">
                                                 Edit
                                             </button>
                                         </div>
@@ -362,7 +362,7 @@ const Page = () => {
 
                             {/* Order Summary */}
                             <div className="w-full lg:w-96">
-                                <div className="bg-white dark:bg-def rounded-lg shadow p-6 sticky top-24">
+                                <div className="bg-white dark:bg-def rounded-lg shadow p-6 sticky top-32">
                                     <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Order Summary</h2>
 
                                     <div className="space-y-4">
@@ -430,7 +430,7 @@ const Page = () => {
                                                     </div>
                                                 )}
                                             </div>
-                                        <button onClick={checkout} className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 flex items-center justify-center">
+                                        <button onClick={checkout} className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg hover:bg-orange-700 flex items-center justify-center">
                                             {checkoutLoading ? (
                                                 <Loader2 className="w-6 h-6 animate-spin" />
                                             ) : (

@@ -23,7 +23,7 @@ export default function ProductDetails() {
     
 
     return (
-        <div className="pt-24 px-4 sm:px-6 lg:px-8 max-w-custom mx-auto">
+        <div className="lg:pt-32 pt-24 px-4 sm:px-6 lg:px-8 max-w-custom mx-auto">
             <Link href='/shop'
 
                 className="flex items-center text-gray-600 hover:text-gray-900 mb-8"

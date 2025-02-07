@@ -179,7 +179,7 @@ export default function SellerDashboard() {
 
     useEffect(() => {
         if (!loading && !token) {
-            router.push('/sellerLogin');
+            router.push('/login');
         }
     }, [loading, token]);
 
@@ -672,8 +672,8 @@ const handleEdit = (info) => {
     return (
         <div>
             {token && !loading ? (
-                <div className="pt-16">
-                    <Header />
+                <div className="pt-[6.5rem]">
+                    
                     <div className="md:hidden fixed bottom-0 left-0 right-0 bg-defl  dark:bg-def z-10 border-t dark:border-gray-700 px-4 py-2">
                         <div className="flex justify-around items-center">
                             {tabs.map((tab) => {
@@ -693,7 +693,7 @@ const handleEdit = (info) => {
                             })}
                         </div>
                     </div>
-                    <div className="flex h-[calc(100vh-4rem)]">
+                    <div className="flex h-[calc(100vh-6.5rem)]">
                         {/* Sidebar */}
                         <div className="w-64 hidden md:flex bg-white dark:bg-def border-r dark:border-gray-700  flex-col">
                             <div className="p-4">

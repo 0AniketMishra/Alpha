@@ -45,7 +45,7 @@ export default function Hero() {
  
  
                 <div>
-                    <section className="relative pt-24 lg:pt-30 pb-10 overflow-hidden">
+                    <section className="relative pt-32 lg:pt-30 pb-10 overflow-hidden">
                         <BackgroundGraphics />
                         <div className="lg:max-w-custom mx-auto px-4 sm:px-6 lg:px-8 relative">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative items-center">

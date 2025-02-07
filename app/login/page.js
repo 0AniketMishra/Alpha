@@ -41,7 +41,7 @@ function Page() {
     <div>
       {!loading && token ==null ?
       (
-      <div className='bg-black'>
+      <div className='dark:bg-black bg-gray-200'>
         <Header />
         {/* <LoginForm/> */}
         <div className='text-white justify-center items-center h-screen flex'>

@@ -9,6 +9,7 @@ import Sidebar from './Sidebar';
 import Sidebarsm from './Sidebarsm';
 import { useCart } from '../context/cartContext';
 import { ThemeContext } from '../context/themeContext';
+import { DollarSign, Gift, Headphones, Heart, Menu, MessageSquare, Moon, Search, ShoppingBag, ShoppingCart, Sun, Tag, Truck, Users, X, Zap } from 'lucide-react';
 
 const Header = () => {
  
@@ -21,14 +22,17 @@ const Header = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
     const [token2, setToken2] = useState(null)   
 
-    const handleMouseEnter = () => { 
-        setIsMenuOpen(true);
-      }; 
-      const handleMouseLeave = () => { // Delay hiding the menu
-         setTimeout(() => { setIsMenuOpen(false); }, 1000); // Adjust the delay duration as needed 
-       };
+   const navLinks = [
+    { href: 'shop', icon: ShoppingBag, label: 'Shop' },
+    { href: 'Sell', icon: DollarSign, label: 'Become Seller' },
+    { href: 'deals', icon: Heart, label: 'Deals' },
+    { href: 'shipping', icon: Truck, label: 'Shipping' },
+    { href: 'forum', icon: MessageSquare, label: 'Forum' },
+    { href: 'support', icon: Headphones, label: 'Support' },
+    { href: 'login', icon: Users, label: 'Login/Signup' },
+  ]
 
-    
+  
      
     useEffect(() => {
         const getTokenFromCookie = () => {
@@ -66,91 +70,149 @@ const Header = () => {
  
          
     return (
-        <nav className="fixed top-0 w-full z-50 shadow-sm bg-white dark:bg-def">
-            {sidebar &&(
-                <Sidebarsm/>
-            ) }
-            <div className="max-w-custom mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="fixed w-full z-50 bg-white dark:bg-def border-b border-orange-100 dark:border-orange-900 shadow-sm">
+            <div className="max-w-custom mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center h-16">
+                    {/* Mobile menu button */}
+                    <button
+                        onClick={() => setSidebar(true)}
+                        className="md:hidden p-2 text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400"
+                    >
+                        <Menu className="h-6 w-6" />
+                    </button>
+
+                    {/* Logo */}
                     <div className="flex items-center">
-                       {!sidebar ? (
-                            <svg onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6 mr-4 lg:hidden text-black dark:text-white">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-                       ) : (
-                                <svg onClick={() => sidebar ? setSidebar(false) : setSidebar(true)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6 mr-4 lg:hidden text-black dark:text-white">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                </svg>
-
-                       )}
-
-                        <span className="text-xl font-bold text-black dark:text-white">ShadowTrade</span>
-                    </div>
-
-                    <div className="hidden lg:flex items-center space-x-8">
-                        <Link href="/" className="text-black dark:text-white hover:text-indigo-600">Home</Link>
-
-                        <Link href="/shop" className="text-black dark:text-white hover:text-indigo-600">Shop</Link>
-                        
-                         {token2 && ( <Link href="/messages" className="text-black dark:text-white hover:text-indigo-600">Orders</Link>)}
-                        
-                        {token2 ? (
-                            <Link href="/sell" className="text-black dark:text-white hover:text-indigo-600">Sell</Link>
-
-                        ) : (
-                                <Link href="/sellerdashboard" className="text-black dark:text-white hover:text-indigo-600">Dashboard</Link>
-                        )}
-                        <Link href="/community" className="text-black dark:text-white hover:text-indigo-600">Community</Link>
-                        {!token && (<Link href="/login" className="text-black dark:text-white hover:text-indigo-600">Login</Link>)}
-                       
-
-                    </div>
-
-                    <div className="flex items-center space-x-4 ">
-                        <button onClick={toggleTheme} className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full">
+                        <Link href="/"  className="flex items-center">
                             
-                           {theme == "dark" ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-white">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-                                </svg>
+                            <span className="ml-2 text-xl font-bold text-black dark:text-white">Shadow Trade</span>
+                        </Link>
+                    </div>
 
-                           ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-black">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                                    </svg>
+                    {/* Search Bar */}
+                    <div className="hidden md:flex flex-1 max-w-lg mx-8">
+                        <div className="relative w-full">
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                className="w-full px-4 py-2 pl-10 pr-4 rounded-full border border-gray-300 dark:border-gray-700 
+                         bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
+                         focus:outline-none focus:border-orange-500 dark:focus:border-orange-400"
+                            />
+                            <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 dark:text-gray-500" />
+                        </div>
+                    </div>
 
-                           )}
+                    {/* Cart icon */}
+                    <div className="flex items-center space-x-2">
+                        <Link href="/cart" className="p-2 text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400 rounded-full hover:bg-orange-50 dark:hover:bg-orange-900/20">
+                            <ShoppingCart className="h-5 w-5" />
+                        </Link>
+                        <button className="flex p-2 text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400 rounded-full hover:bg-orange-50 dark:hover:bg-orange-900/20">
+                            {theme == "light" ? (
+                                <Sun className="h-5 w-5" onClick={toggleTheme}/>
 
+                            ):(
+                                <Moon className="h-5 w-5" onClick={toggleTheme}/>
+
+                            )}
+                        
                         </button>
-                       
-                            
-                            
-                         
-
-
-                        <div className="relative"  >
-                            <button className="lg:p-2 p-1 hover:bg-defl dark:hover:bg-gray-800  rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 dark:text-white text-black">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
-                            </button>
-                              
-                                    </div>
-
-                  
-                       {!token && !loading &&(
-                            <Link href="/cart" className="lg:p-2 p-1 dark:hover:bg-gray-800 hover:bg-defl rounded-full relative">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-black dark:text-white">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                </svg>
-
-                                <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full size-4 md:size-4 sm:size-4 flex items-center justify-center">{cartItems.length}</span>
-                            </Link>
-                       )}
                     </div>
                 </div>
             </div>
-        </nav>
+
+            {/* Secondary Navigation */}
+            <div className="hidden md:block bg-orange-50 dark:bg-orange-900/20">
+                <div className="max-w-custom mx-auto px-4 sm:px-6">
+                    <nav className="flex items-center justify-between h-10 text-sm">
+                        <div className="flex space-x-8">
+                            {navLinks.slice(0, 4).map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={`/${link.href}`}
+                                    
+                                    className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 flex items-center space-x-1"
+                                >
+                                    <link.icon className="h-4 w-4" />
+                                    <span>{link.label}</span>
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="flex space-x-8">
+                            {navLinks.slice(4).map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={`/${link.href}`}
+                                    
+                                    className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 flex items-center space-x-1"
+                                >
+                                    <link.icon className="h-4 w-4" />
+                                    <span>{link.label}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            {/* Mobile Sidebar */}
+            {sidebar && (
+                <div className="fixed inset-0 z-50 md:hidden">
+                    {/* Backdrop */}
+                    <div
+                        className="fixed inset-0 bg-black/50"
+                        onClick={() => setSidebar(false)}
+                    />
+
+                    {/* Sidebar */}
+                    <div className={`fixed inset-y-0 left-0 w-[70%] bg-white dark:bg-def shadow-xl ${ sidebar ? 'animate-slideIn' : 'animate-slideOut'} translate-x-0 `}>
+                        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center ">
+                            <div className="flex items-center">
+                                
+                                <span className="ml-2 font-bold text-black dark:text-white">Shadow Trade</span>
+                            </div>
+                            <button
+                                onClick={() => setSidebar(false)}
+                                className="p-2 text-gray-700 dark:text-gray-200 hover:text-orange-500 dark:hover:text-orange-400"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                        </div>
+
+                        {/* Mobile Search */}
+                        <div className="p-4 border-b border-gray-200 dark:border-gray-700 ">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    placeholder="Search products..."
+                                    className="w-full px-4 py-2 pl-10 pr-4 rounded-full border border-gray-200 dark:border-gray-600 
+                           bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
+                           focus:outline-none focus:border-orange-500 dark:focus:border-orange-400"
+                                />
+                                <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 dark:text-gray-500" />
+                            </div>
+                        </div>
+
+                        {/* Mobile Navigation */}
+                        <nav className="p-4">
+                            {navLinks.map((link) => (
+                                <Link
+                                    onClick={() => setSidebar(false)}
+                                    key={link.href}
+                                    href={`/${link.href}`}
+                                    className="flex items-center space-x-2 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-lg"
+                                >
+                                    <link.icon className="h-5 w-5" />
+                                    <span>{link.label}</span>
+                                </Link>
+                            ))}
+                        </nav>
+                    </div>
+                </div>
+            )}
+        </header>
+
     )
 }
 
