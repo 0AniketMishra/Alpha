@@ -36,17 +36,6 @@ function Page() {
                 } else {
                     console.error('Failed to fetch payment status');
                 }
-
-                const response2 = await fetch('https://alpha-backend-v7bb.vercel.app/verifyPayment', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ payment_id: paymentID })
-                });
-                
-                const data2 = await response2.json();
-                setX(data2)
             
             } catch (error) {
                 console.error('Error:', error);
@@ -66,7 +55,7 @@ function Page() {
 
   
 
-    if (x?.escrowStatus == "completed") {
+    if (response?.payment_status == "finished") {
         return (
             <div className="min-h-screen bg-gradient-to-br from-blue-100 to-defl dark:from-black dark:to-[#0E0E0E]  flex items-center justify-center p-4">
                 <div className="max-w-4xl w-full">
